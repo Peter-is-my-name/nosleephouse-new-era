@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { ArrowRight, Star, GoogleLogo } from './icons';
 import './Hero.css';

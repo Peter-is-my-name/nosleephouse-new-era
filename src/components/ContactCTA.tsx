@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react';
 import { ArrowRight, Logo } from './icons';
 import './ContactCTA.css';

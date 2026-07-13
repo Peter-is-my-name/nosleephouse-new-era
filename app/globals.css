@@ -32,9 +32,9 @@
   --line-strong: rgba(255, 255, 255, 0.16);
   --ink-line: rgba(0, 0, 0, 0.12);
 
-  /* type families */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  /* type families — next/font variables override these via html class */
+  --font-sans: var(--font-inter, 'Inter'), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-serif-loaded, 'Instrument Serif'), Georgia, 'Times New Roman', serif;
   --font-hel: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-roboto: 'Roboto', 'Inter', sans-serif;
 
@@ -267,4 +267,3 @@ video {
     transform: translateX(-50%);
   }
 }
-

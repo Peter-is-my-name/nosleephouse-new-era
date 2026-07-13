@@ -1,3 +1,4 @@
+'use client'
 import { ArrowRight, GoogleLogo, Star, LinkedInIcon } from './icons';
 import './Footer.css';
 

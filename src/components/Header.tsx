@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowRight, ChevronDown, Logo } from './icons';
@@ -14,6 +15,9 @@ const NAV = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -32,7 +36,7 @@ export default function Header() {
     };
   }, [open]);
 
-  const mobileMenu = createPortal(
+  const mobileMenu = mounted && createPortal(
     <div className={`mobile-menu${open ? ' is-open' : ''}`}>
       <button
         className="mobile-menu-close"
