@@ -1,0 +1,126 @@
+/** Shared inline icons (recreated 1:1 from Figma vectors) */
+
+export function Logo({ height = 44 }: { height?: number }) {
+  return (
+    <svg
+      height={height}
+      viewBox="0 0 40.1639 49.48"
+      fill="currentColor"
+      role="img"
+      aria-label="nosleephouse"
+      style={{ display: 'block', width: 'auto' }}
+    >
+      <path d="M24.8728 49.4686V17.404H33.347V49.4686H24.8728ZM-0.0004 49.4686V0H13.0548V49.4686H-0.0004ZM14.3899 31.7989V19.8023L29.8199 29.268V37.0551L14.3899 31.7989Z" />
+      <path d="M37.8985 21.9274C37.5856 21.9274 37.2913 21.8691 37.0156 21.7524C36.7451 21.6357 36.5065 21.474 36.2996 21.2673C36.0929 21.0604 35.9311 20.8217 35.8145 20.5512C35.6978 20.2755 35.6394 19.9813 35.6394 19.6684C35.6394 19.3555 35.6978 19.0638 35.8145 18.7933C35.9311 18.5175 36.0929 18.2763 36.2996 18.0695C36.5065 17.8626 36.7451 17.7008 37.0156 17.5842C37.2913 17.4675 37.5856 17.4091 37.8985 17.4091C38.2114 17.4091 38.5031 17.4675 38.7736 17.5842C39.0493 17.7008 39.2905 17.8626 39.4974 18.0695C39.7043 18.2763 39.866 18.5175 39.9827 18.7933C40.0993 19.0638 40.1577 19.3555 40.1577 19.6684C40.1577 19.9813 40.0993 20.2755 39.9827 20.5512C39.866 20.8217 39.7043 21.0604 39.4974 21.2673C39.2905 21.474 39.0493 21.6357 38.7736 21.7524C38.5031 21.8691 38.2114 21.9274 37.8985 21.9274ZM37.8985 21.3228C38.2274 21.3228 38.5137 21.254 38.7576 21.1161C39.0069 20.9783 39.1978 20.7847 39.3304 20.5354C39.4683 20.2861 39.5371 19.9971 39.5371 19.6684C39.5371 19.3342 39.4683 19.0452 39.3304 18.8013C39.1978 18.552 39.0069 18.3585 38.7576 18.2206C38.5137 18.0827 38.2274 18.0137 37.8985 18.0137C37.5698 18.0137 37.2807 18.0827 37.0315 18.2206C36.7875 18.3585 36.5967 18.552 36.4588 18.8013C36.3262 19.0452 36.2599 19.3342 36.2599 19.6684C36.2599 19.9971 36.3262 20.2861 36.4588 20.5354C36.5967 20.7847 36.7875 20.9783 37.0315 21.1161C37.2807 21.254 37.5698 21.3228 37.8985 21.3228ZM37.0315 20.7502V18.4354L37.9939 18.4273C38.2592 18.4273 38.474 18.5017 38.6383 18.6502C38.8027 18.7986 38.8849 18.9895 38.8849 19.2228C38.8849 19.3713 38.8478 19.5066 38.7736 19.6285C38.6994 19.7505 38.5985 19.8433 38.4713 19.9069L38.9803 20.7502H38.2804L37.8588 20.0183H37.644V20.7502H37.0315ZM37.644 19.4536H37.9621C38.0417 19.4536 38.108 19.4324 38.1611 19.39C38.2141 19.3475 38.2405 19.2918 38.2405 19.2228C38.2405 19.154 38.2141 19.0983 38.1611 19.0558C38.108 19.0134 38.0417 18.9922 37.9621 18.9922H37.644V19.4536Z" />
+    </svg>
+  );
+}
+
+export function ArrowRight({ size = 12 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ArrowUpRight({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M4.5 11.5 11.5 4.5M5 4.5h6.5V11"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ChevronDown({ size = 12 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M3 4.5 6 7.5l3-3"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function Star({ size = 15, color = 'var(--green)' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
+      <path d="M12 .6l3.09 6.26 6.91 1-5 4.87 1.18 6.88L12 17.27l-6.18 3.25L7 13.73l-5-4.87 6.91-1z" />
+    </svg>
+  );
+}
+
+export function GoogleLogo({ height = 27, white = false }: { height?: number; white?: boolean }) {
+  const c = (brand: string) => white ? '#ffffff' : brand;
+  return (
+    <svg
+      height={height}
+      viewBox="0 0 82 27"
+      fill="none"
+      aria-label="Google"
+      role="img"
+      style={{ display: 'block' }}
+    >
+      <text
+        x="0"
+        y="21"
+        fontFamily="'Inter', sans-serif"
+        fontSize="24"
+        fontWeight="500"
+        letterSpacing="-1"
+      >
+        <tspan fill={c('#4285F4')}>G</tspan>
+        <tspan fill={c('#EA4335')}>o</tspan>
+        <tspan fill={c('#FBBC05')}>o</tspan>
+        <tspan fill={c('#4285F4')}>g</tspan>
+        <tspan fill={c('#34A853')}>l</tspan>
+        <tspan fill={c('#EA4335')}>e</tspan>
+      </text>
+    </svg>
+  );
+}
+
+export function LinkedInIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+    </svg>
+  );
+}

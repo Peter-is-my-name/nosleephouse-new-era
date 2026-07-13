@@ -1,0 +1,137 @@
+.testimonials {
+  background: var(--ink);
+  padding-block: clamp(72px, 9vw, 130px);
+}
+
+.tm-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+
+/* Stretch left column to full row height so the sticky heading has
+   the entire testimonials list height as its containment block. */
+.tm-head-col {
+  align-self: stretch;
+}
+
+.tm-head-sticky {
+  position: sticky;
+  top: 120px;
+}
+.tm-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+.tm-heading .accent {
+  font-size: 1.16em;
+}
+
+.tm-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vw, 64px);
+}
+
+.tm-card {
+  background: var(--white);
+  color: var(--ink);
+  padding: clamp(28px, 3vw, 44px);
+  border-radius: 2px;
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.tm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px -35px rgba(0, 0, 0, 0.7);
+}
+
+.tm-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+.tm-person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.tm-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.tm-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tm-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.tm-role {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.tm-role a {
+  text-decoration: underline;
+  color: var(--grey);
+}
+.tm-role a:hover {
+  color: var(--ink);
+}
+
+.tm-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.tm-logo-img {
+  width: auto;
+  object-fit: contain;
+}
+.tm-logo-img.re {
+  height: 30px;
+}
+.tm-logo-img.aparsia {
+  height: 42px;
+}
+.tm-logo-img.socarrat {
+  height: 30px;
+}
+
+.tm-quote {
+  font-family: var(--font-hel);
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.62;
+  color: #2c2f31;
+}
+
+@media (max-width: 860px) {
+  .tm-grid {
+    grid-template-columns: 1fr;
+  }
+  .tm-head-col {
+    align-self: auto;
+  }
+  .tm-head-sticky {
+    position: static;
+    transform: none;
+  }
+}

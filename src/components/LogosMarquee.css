@@ -1,0 +1,100 @@
+.logos {
+  position: relative;
+  background: var(--teal);
+  padding-block: 44px;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+
+.logos-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(48px, 6vw, 96px);
+  width: max-content;
+  will-change: transform;
+}
+
+.logo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-item img {
+  display: block;
+  height: 36px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  opacity: 0.62;
+  filter: grayscale(1) brightness(1.4);
+  transition: opacity 0.35s var(--ease-out), filter 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+}
+.logo-item img:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.06);
+}
+
+/* ── Per-logo: BOTH height AND width set explicitly so SVGs with
+   width="100%" never stretch to fill the flex container.
+   Widths = height × (viewBox_w / viewBox_h), rounded to nearest px.  ── */
+
+/* coex.svg  51.3×34.5  ratio 1.49 */
+.logo-item img.logo-coex        { height: 32px; width: 49px; }
+
+/* forbes.svg  119×30  ratio 3.97 */
+.logo-item img.logo-forbes      { height: 36px; width: 143px; }
+
+/* eldenea.svg  175×22  ratio 7.95 — very flat; keep height small */
+.logo-item img.logo-eldenea     { height: 22px; width: 175px; }
+
+/* realityexpo.svg  135.9×40  ratio 3.40 */
+.logo-item img.logo-realityexpo { height: 36px; width: 122px; }
+
+/* nosto.svg  170×36  ratio 4.72 */
+.logo-item img.logo-nosto       { height: 30px; width: 142px; }
+
+/* asteria.svg  159×70  ratio 2.27 — taller combined mark */
+.logo-item img.logo-asteria     { height: 44px; width: 100px; }
+
+/* denovo.svg  124.3×24.3  ratio 5.12 — thin flat wordmark */
+.logo-item img.logo-denovo      { height: 22px; width: 113px; }
+
+/* dd.svg  36×38  ratio 0.95 — near-square icon */
+.logo-item img.logo-dd          { height: 34px; width: 32px; }
+
+/* dofe.png  405×144  ratio 2.81 */
+.logo-item img.logo-dofe        { height: 30px; width: 84px; }
+
+/* hastgroup.png  609×167  ratio 3.65 */
+.logo-item img.logo-hastgroup   { height: 26px; width: 95px; }
+
+/* atalian.png  205×99  ratio 2.07 */
+.logo-item img.logo-atalian     { height: 38px; width: 79px; }
+
+/* abra.png  164×54  ratio 3.04 */
+.logo-item img.logo-abra        { height: 28px; width: 85px; }
+
+/* hopi.png  118×117  ratio 1.01 — square icon */
+.logo-item img.logo-hopi        { height: 36px; width: 36px; }
+
+/* edge fades */
+.logos-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(60px, 12vw, 200px);
+  z-index: 2;
+  pointer-events: none;
+}
+.logos-fade-left {
+  left: 0;
+  background: linear-gradient(90deg, var(--teal), transparent);
+}
+.logos-fade-right {
+  right: 0;
+  background: linear-gradient(270deg, var(--teal), transparent);
+}

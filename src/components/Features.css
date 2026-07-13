@@ -1,0 +1,165 @@
+.features {
+  background: var(--teal);
+  padding-top: clamp(72px, 9vw, 128px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+/* ── Sticky heading ──────────────────────────────────────────────────────── */
+/* Sticks just below the fixed site header (88px).
+   teal background ensures it masks any card that scrolls behind it. */
+.features-heading-wrap {
+  position: sticky;
+  top: 88px;
+  z-index: 20;
+  background: var(--teal);
+  padding-top: 16px;
+  padding-bottom: clamp(24px, 3.5vw, 40px);
+  text-align: center;
+  /* JS drives transform directly — no CSS transitions allowed here */
+  transition: none;
+}
+/* When card 3 is fully stacked, JS applies transform: translateY(-scrollDelta)
+   directly on the element style, making the heading scroll off the top at
+   normal page speed. No class needed. */
+
+.features-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+.features-heading .accent {
+  font-size: 1.16em;
+}
+
+/* ── Stacking cards — exact technique from apadore.cz ───────────────────── */
+/* --gap fills the visual space between stuck cards with the section bg.
+   overflow: clip prevents gap-fillers bleeding outside the list without
+   creating a scroll container (which overflow:hidden would do, breaking sticky). */
+.features-cards {
+  --gap: clamp(20px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  /* Scroll runway: heading needs ~(88 + headingHeight) ≈ 220px of scroll
+     after card 3 stacks to fully exit the top. This padding keeps the
+     section tall enough for that natural scroll-off to complete. */
+  padding-bottom: clamp(220px, 28vh, 320px);
+}
+
+/* Each card is sticky; JS sets --feature-card-top = header + heading height */
+.feature-card {
+  position: sticky;
+  top: var(--feature-card-top, 200px);
+  /* ascending z-index so each new card slides OVER the previous one */
+  position: relative; /* needed for ::after containing block */
+  position: sticky;   /* re-applies sticky (last declaration wins) */
+  background: var(--white);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 5vw, 80px);
+  padding: clamp(40px, 6vw, 96px) clamp(32px, 7vw, 130px);
+  border-radius: 2px;
+  transition: box-shadow 0.6s var(--ease-out);
+}
+.feature-card:nth-child(1) { z-index: 1; }
+.feature-card:nth-child(2) { z-index: 2; }
+.feature-card:nth-child(3) { z-index: 3; }
+
+/* Gap-filler: a pseudo-element the same color as the section bg,
+   placed BELOW each card (except last). As a card sticks, the gap above
+   the next card shows as teal, giving the "lifting deck" feel. */
+.feature-card:not(:last-child) {
+  margin-bottom: var(--gap);
+}
+.feature-card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(-1 * var(--gap));
+  height: var(--gap);
+  background: var(--teal);
+  z-index: 2;
+}
+
+.feature-card:hover {
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
+}
+
+.feature-icon {
+  flex-shrink: 0;
+  width: clamp(120px, 15vw, 210px);
+  display: flex;
+  justify-content: center;
+}
+.feature-icon img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s var(--ease-out);
+}
+.feature-card:hover .feature-icon img {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.feature-text {
+  flex: 1;
+  min-width: 0;
+}
+.feature-text h3 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 54px);
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--ink);
+  margin-bottom: clamp(20px, 2.4vw, 40px);
+}
+.feature-body,
+.feature-body p {
+  font-family: var(--font-hel);
+  font-size: clamp(18px, 1.8vw, 27px);
+  line-height: 1.5;
+  color: var(--ink);
+}
+.feature-body p + p {
+  margin-top: 1.2em;
+}
+.feature-body strong {
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  .features-heading-wrap {
+    position: static;
+    padding-top: 0;
+    /* disable the slide-off animation on small screens */
+    transition: none;
+  }
+  /* --released has no effect on position:static, but be explicit */
+  .features-heading-wrap--released {
+    top: auto;
+  }
+  .features-cards {
+    padding-bottom: 0;
+    overflow: visible;
+    /* also undo any inline transform the scroll listener may have set */
+    transform: none;
+  }
+  .feature-card {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .feature-card:not(:last-child)::after {
+    display: none;
+  }
+  .feature-icon {
+    width: 130px;
+    justify-content: flex-start;
+  }
+}

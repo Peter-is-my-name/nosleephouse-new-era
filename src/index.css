@@ -1,0 +1,270 @@
+/* ============================================================
+   nosleephouse™ — design system foundation
+   Rebuilt 1:1 from Figma (node 0-883)
+   ============================================================ */
+
+/* ---------- reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- design tokens ---------- */
+:root {
+  /* brand palette */
+  --teal: #1a2f2f; /* primary dark teal background */
+  --ink: #141414; /* near-black sections (Stratos) */
+  --shark: #2c2f31;
+  --green: #b2fb58; /* Green Yellow accent */
+  --green-hover: #c4ff77;
+  --white: #ffffff;
+  --black: #000000;
+  --cream: #f7f5ee; /* Spring Wood */
+  --red: #e62415;
+  --grey: #6b7280; /* Pale Sky */
+  --iron: #dddedf;
+  --card: #ffffff;
+
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --ink-line: rgba(0, 0, 0, 0.12);
+
+  /* type families */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-hel: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-roboto: 'Roboto', 'Inter', sans-serif;
+
+  /* layout */
+  --container: 1232px;
+  --gutter: clamp(20px, 4.6vw, 48px);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ---------- base ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-hel);
+  background-color: var(--teal);
+  color: var(--white);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--green);
+  color: var(--teal);
+}
+
+/* ---------- layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* the italic serif accent word used across headings */
+.accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* section heading: Inter, tight tracking */
+.h-section {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -1.8px;
+  line-height: 1.06;
+  font-size: clamp(34px, 3.4vw, 54px);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 16px 26px;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn svg {
+  transition: transform 0.4s var(--ease-out);
+}
+.btn:hover svg {
+  transform: translateX(4px);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--teal);
+}
+.btn-primary:hover {
+  background: var(--green-hover);
+}
+
+.btn-outline {
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+.btn-outline:hover {
+  background: var(--white);
+  color: var(--teal);
+  border-color: var(--white);
+}
+
+.btn-outline.on-light {
+  border-color: var(--ink-line);
+  color: var(--ink);
+}
+.btn-outline.on-light:hover {
+  border-color: var(--ink);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+  transition-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+  transition-delay: var(--d, 0s);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* premium image wipe (apadore-style) */
+.reveal-img {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.1s var(--ease-out);
+  transition-delay: var(--d, 0s);
+  will-change: clip-path;
+}
+.reveal-img.is-visible {
+  clip-path: inset(0 0 0% 0);
+}
+.reveal-img img {
+  transform: scale(1.14);
+  transition: transform 1.4s var(--ease-out);
+  transition-delay: var(--d, 0s);
+}
+.reveal-img.is-visible img {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .reveal-img {
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .reveal-img img {
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- keyframes ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
