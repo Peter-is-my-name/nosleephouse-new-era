@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import './Testimonials.css';
 
 type T = {
@@ -81,7 +82,7 @@ export default function Testimonials() {
             >
               <header className="tm-card-head">
                 <div className="tm-person">
-                  <img className="tm-avatar" src={t.avatar} alt={t.name} loading="lazy" />
+                  <Image className="tm-avatar" src={t.avatar} alt={t.name} width={48} height={48} loading="lazy" />
                   <div className="tm-meta">
                     <span className="tm-name">{t.name}</span>
                     <span className="tm-role">

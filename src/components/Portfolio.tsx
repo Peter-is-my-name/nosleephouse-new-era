@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArrowRight } from './icons';
 import './Portfolio.css';
 
@@ -58,7 +59,7 @@ export default function Portfolio() {
               style={{ '--d': `${(i % 2) * 0.1}s` } as React.CSSProperties}
             >
               <div className="pf-media">
-                <img src={p.img} alt={p.title} loading="lazy" />
+                <Image src={p.img} alt={p.title} fill loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" />
                 <span className={`pf-brand${p.brandCls ? ' ' + p.brandCls : ''}`}>{p.brand}</span>
                 <span className="pf-badge">Případová studie</span>
               </div>

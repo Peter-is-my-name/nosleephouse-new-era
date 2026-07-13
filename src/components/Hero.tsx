@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
+import Image from 'next/image';
 import { ArrowRight, Star, GoogleLogo } from './icons';
 import './Hero.css';
 
@@ -163,11 +164,13 @@ export default function Hero() {
             {/* Notch-clipped shape */}
             <div className="hero-shape">
               <div className="hero-img-wrap">
-                <img
+                <Image
                   src={heroVisual}
                   alt="Tým nosleephouse na veletrhu"
-                  loading="eager"
+                  fill
+                  priority
                   className="hero-img"
+                  sizes="(max-width: 980px) 100vw, 54vw"
                 />
               </div>
             </div>

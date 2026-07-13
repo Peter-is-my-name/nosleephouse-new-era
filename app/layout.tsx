@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 import { Inter, Instrument_Serif } from 'next/font/google'
 import './globals.css'
 
@@ -18,16 +19,50 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 })
 
+const SITE_URL = 'https://nosleephouse.com'
+
 export const metadata: Metadata = {
-  title: 'nosleephouse™ — Digitální agentura',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'nosleephouse™ — Digitální agentura',
+    template: '%s | nosleephouse™',
+  },
   description:
     'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding. Spouštíme za 7 dní.',
   icons: { icon: '/favicon.svg' },
+  openGraph: {
+    type: 'website',
+    locale: 'cs_CZ',
+    url: SITE_URL,
+    siteName: 'nosleephouse™',
+    title: 'nosleephouse™ — Digitální agentura',
+    description:
+      'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding. Spouštíme za 7 dní.',
+    images: [
+      {
+        url: '/assets/hero.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'nosleephouse™ — Tým na veletrhu',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'nosleephouse™ — Digitální agentura',
+    description:
+      'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding.',
+    images: ['/assets/hero.jpg'],
+  },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="cs" className={`${inter.variable} ${instrumentSerif.variable}`}>
+    <html
+      lang="cs"
+      className={`${inter.variable} ${instrumentSerif.variable}`}
+      suppressHydrationWarning
+    >
       <body>{children}</body>
     </html>
   )

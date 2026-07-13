@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArrowRight } from './icons';
 import './Services.css';
 
@@ -31,7 +32,7 @@ export default function Services() {
               style={{ '--d': `${(i % 2) * 0.08 + Math.floor(i / 2) * 0.04}s` } as React.CSSProperties}
             >
               <div className="service-media">
-                <img src={s.img} alt={s.title} loading="lazy" />
+                <Image src={s.img} alt={s.title} fill loading="lazy" sizes="(max-width: 720px) 100vw, 50vw" />
               </div>
               <div className="service-body">
                 <h3>{s.title}</h3>

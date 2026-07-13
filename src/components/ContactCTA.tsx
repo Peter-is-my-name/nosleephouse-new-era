@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import Image from 'next/image';
 import { ArrowRight, Logo } from './icons';
 import './ContactCTA.css';
 
@@ -99,7 +100,7 @@ export default function ContactCTA() {
             <div className="founders">
               {FOUNDERS.map((f) => (
                 <div className="founder" key={f.name}>
-                  <img className="founder-photo" src={f.photo} alt={f.name} loading="lazy" />
+                  <Image className="founder-photo" src={f.photo} alt={f.name} width={210} height={245} loading="lazy" />
                   <div className="founder-info">
                     <span className="founder-role">{f.role}</span>
                     <a className="founder-name" href="#">

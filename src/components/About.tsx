@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArrowRight } from './icons';
 import './About.css';
 
@@ -28,7 +29,14 @@ export default function About() {
 
         <div className="about-visual reveal-scale" style={{ '--d': '0.15s' } as React.CSSProperties}>
           <div className="about-photo">
-            <img src="/assets/about/team.jpg" alt="Tým nosleephouse" loading="lazy" />
+            <Image
+              src="/assets/about/team.jpg"
+              alt="Tým nosleephouse"
+              width={920}
+              height={614}
+              loading="lazy"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         </div>
       </div>
