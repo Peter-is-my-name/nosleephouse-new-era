@@ -57,6 +57,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  list-style: none;
 }
 
 .nav-desktop a {

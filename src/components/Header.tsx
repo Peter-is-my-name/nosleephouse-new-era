@@ -1,21 +1,26 @@
 'use client'
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { ArrowRight, ChevronDown, Logo } from './icons';
 import './Header.css';
 
-const NAV = [
-  { label: 'Domů', href: '#top' },
-  { label: 'Naše práce', href: '#portfolio' },
-  { label: 'Služby', href: '#services', dropdown: true },
-  { label: 'O nás', href: '#about' },
-  { label: 'Blog', href: '#' },
+type NavItem = { label: string; hash: string; page: string; dropdown?: true };
+const NAV: NavItem[] = [
+  { label: 'Domů',       hash: '#top',       page: '/'           },
+  { label: 'Naše práce', hash: '#portfolio', page: '/#portfolio'  },
+  { label: 'Služby',     hash: '#services',  page: '/#services',  dropdown: true },
+  { label: 'O nás',      hash: '#about',     page: '/#about'      },
+  { label: 'Blog',       hash: '#',          page: '#'            },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const nh = (item: NavItem) => isHome ? item.hash : item.page;
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -51,14 +56,14 @@ export default function Header() {
         <ul>
           {NAV.map((item, i) => (
             <li key={item.label} style={{ '--i': i } as React.CSSProperties}>
-              <a href={item.href} onClick={() => setOpen(false)}>
+              <a href={nh(item)} onClick={() => setOpen(false)}>
                 {item.label}
               </a>
             </li>
           ))}
         </ul>
       </nav>
-      <a href="#portfolio" className="btn btn-primary mobile-menu-cta" onClick={() => setOpen(false)}>
+      <a href={isHome ? '#portfolio' : '/#portfolio'} className="btn btn-primary mobile-menu-cta" onClick={() => setOpen(false)}>
         Naše práce
         <ArrowRight size={14} />
       </a>
@@ -70,7 +75,7 @@ export default function Header() {
     <>
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
         <div className="container header-inner">
-          <a href="#top" className="logo" aria-label="nosleephouse — domů">
+          <a href={isHome ? '#top' : '/'} className="logo" aria-label="nosleephouse — domů">
             <Logo height={44} />
           </a>
 
@@ -79,7 +84,7 @@ export default function Header() {
               <ul>
                 {NAV.map((item) => (
                   <li key={item.label} className={item.dropdown ? 'has-dropdown' : ''}>
-                    <a href={item.href}>
+                    <a href={nh(item)}>
                       <span>{item.label}</span>
                       {item.dropdown && <ChevronDown size={12} />}
                     </a>
@@ -87,7 +92,7 @@ export default function Header() {
                 ))}
               </ul>
             </nav>
-            <a href="#portfolio" className="btn btn-primary header-cta">
+            <a href={isHome ? '#portfolio' : '/#portfolio'} className="btn btn-primary header-cta">
               Naše práce
               <ArrowRight size={9} />
             </a>

@@ -28,8 +28,7 @@ const HERO_CLIP_PATH =
   'M1 0.98204C1 0.99196 0.99249 1 0.98322 1L0.01678 1C0.00751 1 0 0.99196 0 0.98204L0 0.72931C0 0.72274 0.00336 0.71669 0.00875 0.71354L0.56771 0.38749C0.5731 0.38434 0.57646 0.37829 0.57646 0.37172L0.57646 0.24466C0.57646 0.23808 0.57982 0.23202 0.58522 0.22888L0.97521 0.0022C0.98639 -0.0043 1 0.00437 1 0.01798L1 0.98204Z';
 
 export default function Hero() {
-  const viewportRef  = useRef<HTMLSpanElement>(null);
-  const trackRef     = useRef<HTMLSpanElement>(null);
+  const trackRef = useRef<HTMLSpanElement>(null);
   const [idx, setIdx]         = useState(0);
   const [itemH, setItemH]     = useState(0);
   const [noTrans, setNoTrans] = useState(false);
@@ -38,7 +37,7 @@ export default function Hero() {
   useLayoutEffect(() => {
     const measure = () => {
       const first = trackRef.current?.children[0] as HTMLElement | undefined;
-      if (first) setItemH(first.offsetHeight);
+      if (first) setItemH(first.getBoundingClientRect().height);
     };
     measure();
     window.addEventListener('resize', measure);
@@ -103,11 +102,7 @@ export default function Hero() {
                 {/* Invisible sizer keeps the max word width reserved */}
                 <span className="rot-sizer" aria-hidden="true">{'\u00a0konvertuje\u00a0'}</span>
                 {/* Clipping viewport — height = one word */}
-                <span
-                  className="rot-viewport"
-                  ref={viewportRef}
-                  style={itemH ? { height: itemH } : undefined}
-                >
+                <span className="rot-viewport">
                   <span
                     className="rot-track"
                     ref={trackRef}

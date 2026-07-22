@@ -76,9 +76,8 @@ export default function Testimonials() {
         <div className="tm-list">
           {ITEMS.map((t, i) => (
             <article
-              className="tm-card reveal"
+              className="tm-card"
               key={i}
-              style={{ '--d': `${(i % 2) * 0.08}s` } as React.CSSProperties}
             >
               <header className="tm-card-head">
                 <div className="tm-person">

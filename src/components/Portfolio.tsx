@@ -53,7 +53,7 @@ export default function Portfolio() {
         <div className="portfolio-grid">
           {PROJECTS.map((p, i) => (
             <a
-              href="#"
+              href={i === 0 ? '/projekty/reality-expo' : '#'}
               className="pf-card reveal-scale"
               key={i}
               style={{ '--d': `${(i % 2) * 0.1}s` } as React.CSSProperties}
@@ -76,7 +76,7 @@ export default function Portfolio() {
             Domluvit schůzku zdarma
             <ArrowRight size={10} />
           </a>
-          <a href="#" className="btn btn-outline">
+          <a href="/projekty" className="btn btn-outline">
             Zobrazit všechny projekty
           </a>
         </div>

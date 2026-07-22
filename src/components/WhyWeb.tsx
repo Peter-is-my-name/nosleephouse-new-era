@@ -58,7 +58,7 @@ export default function WhyWeb() {
         <div className="whyweb-grid">
           {CARDS.map((c, i) => (
             <article
-              className="why-card reveal"
+              className="why-card reveal-scale"
               key={i}
               style={{ '--d': `${i * 0.12}s` } as React.CSSProperties}
             >

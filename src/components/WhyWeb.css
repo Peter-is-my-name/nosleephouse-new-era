@@ -32,6 +32,14 @@
   overflow: hidden;
   transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
+/* During entrance: include opacity so reveal-scale animates it */
+.why-card.reveal-scale {
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+/* After entrance: restore fast hover transition */
+.why-card.reveal-scale.is-visible {
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
 .why-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.55);

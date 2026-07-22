@@ -9,7 +9,7 @@
    teal background ensures it masks any card that scrolls behind it. */
 .features-heading-wrap {
   position: sticky;
-  top: 88px;
+  top: var(--header-h, 88px);
   z-index: 20;
   background: var(--teal);
   padding-top: 16px;
@@ -39,7 +39,7 @@
    overflow: clip prevents gap-fillers bleeding outside the list without
    creating a scroll container (which overflow:hidden would do, breaking sticky). */
 .features-cards {
-  --gap: clamp(20px, 3vw, 32px);
+  --gap: clamp(32px, 4vw, 64px);
   display: flex;
   flex-direction: column;
   overflow: clip;
@@ -63,7 +63,6 @@
   gap: clamp(24px, 5vw, 80px);
   padding: clamp(40px, 6vw, 96px) clamp(32px, 7vw, 130px);
   border-radius: 2px;
-  transition: box-shadow 0.6s var(--ease-out);
 }
 .feature-card:nth-child(1) { z-index: 1; }
 .feature-card:nth-child(2) { z-index: 2; }
@@ -86,10 +85,6 @@
   z-index: 2;
 }
 
-.feature-card:hover {
-  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
-}
-
 .feature-icon {
   flex-shrink: 0;
   width: clamp(120px, 15vw, 210px);
@@ -99,10 +94,6 @@
 .feature-icon img {
   width: 100%;
   height: auto;
-  transition: transform 0.6s var(--ease-out);
-}
-.feature-card:hover .feature-icon img {
-  transform: scale(1.06) rotate(-2deg);
 }
 
 .feature-text {
@@ -134,29 +125,13 @@
 
 @media (max-width: 800px) {
   .features-heading-wrap {
-    position: static;
     padding-top: 0;
-    /* disable the slide-off animation on small screens */
     transition: none;
   }
-  /* --released has no effect on position:static, but be explicit */
-  .features-heading-wrap--released {
-    top: auto;
-  }
-  .features-cards {
-    padding-bottom: 0;
-    overflow: visible;
-    /* also undo any inline transform the scroll listener may have set */
-    transform: none;
-  }
   .feature-card {
-    position: static;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-  }
-  .feature-card:not(:last-child)::after {
-    display: none;
   }
   .feature-icon {
     width: 130px;

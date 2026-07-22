@@ -46,13 +46,15 @@ export default function Features() {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const HEADER_H = 88; // fixed site header height
     const update = () => {
       if (!headingRef.current) return;
+      const siteHeader = document.querySelector('.site-header') as HTMLElement | null;
+      const headerH = siteHeader ? siteHeader.offsetHeight : 88;
       const h = headingRef.current.offsetHeight;
+      document.documentElement.style.setProperty('--header-h', `${headerH}px`);
       document.documentElement.style.setProperty(
         '--feature-card-top',
-        `${HEADER_H + h}px`
+        `${headerH + h}px`
       );
     };
     update();
@@ -105,9 +107,8 @@ export default function Features() {
         <div className="features-cards" ref={cardsRef}>
           {FEATURES.map((f, i) => (
             <article
-              className="feature-card reveal"
+              className="feature-card"
               key={i}
-              style={{ '--d': `${i * 0.08}s` } as React.CSSProperties}
             >
               <div className="feature-icon">
                 <img src={f.icon} alt="" aria-hidden="true" />
