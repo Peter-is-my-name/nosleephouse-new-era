@@ -37,6 +37,19 @@ export default function RealityExpoCase() {
     <>
       {/* ── 1. HERO — all project info lives here ────────── */}
       <section className="cs-hero">
+        {/* full-bleed background image */}
+        <div className="cs-hero-bg" aria-hidden="true">
+          <Image
+            src="/assets/portfolio/reality-expo.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: 'center 25%' }}
+          />
+        </div>
+        <div className="cs-hero-overlay" aria-hidden="true" />
+
         <div className="container cs-hero-inner">
 
           {/* top nav row */}
@@ -73,23 +86,20 @@ export default function RealityExpoCase() {
             </p>
           </div>
 
-          {/* bottom meta bar */}
+          {/* bottom meta bar — no dividing lines */}
           <div className="cs-hero-meta" role="list">
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Klient</span>
               <span className="cs-meta-value">Weinhold Legal</span>
             </div>
-            <span className="cs-meta-sep" aria-hidden="true" />
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Rok</span>
               <span className="cs-meta-value">2024</span>
             </div>
-            <span className="cs-meta-sep" aria-hidden="true" />
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Odvětví</span>
               <span className="cs-meta-value">Nemovitosti · Právo</span>
             </div>
-            <span className="cs-meta-sep" aria-hidden="true" />
             <div className="cs-meta-col cs-meta-col--cta" role="listitem">
               <a
                 href="https://weinholdlegal.com"
@@ -106,25 +116,7 @@ export default function RealityExpoCase() {
         </div>
       </section>
 
-      {/* ── 2. ARTWORK — images after all context ────────── */}
-      <section className="cs-artwork">
-        <div className="cs-artwork-main">
-          <Image
-            src="/assets/portfolio/reality-expo.jpg"
-            alt="Reality EXPO — výsledný web"
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center 25%' }}
-          />
-        </div>
-        <div className="container cs-artwork-caption">
-          <span>Weinhold Legal × Reality EXPO</span>
-          <span>Praha · 2024</span>
-        </div>
-      </section>
-
-      {/* ── 3. BRIEF — 2-column editorial ────────────────── */}
+      {/* ── 2. BRIEF — 2-column editorial ────────────────── */}
       <section className="cs-brief">
         <div className="container cs-brief-grid">
           <div className="cs-brief-left">

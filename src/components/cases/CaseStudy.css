@@ -28,13 +28,36 @@
 
 /* ── 1. HERO — text only, dark teal ───────────────────────── */
 .cs-hero {
-  background: var(--teal);
+  position: relative;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.cs-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cs-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to right,
+      rgba(10, 20, 14, 0.90) 0%,
+      rgba(10, 20, 14, 0.62) 48%,
+      rgba(10, 20, 14, 0.22) 100%),
+    linear-gradient(to top,
+      rgba(10, 20, 14, 0.88) 0%,
+      transparent 54%);
 }
 
 .cs-hero-inner {
+  position: relative;
+  z-index: 2;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -47,7 +70,6 @@
   align-items: center;
   justify-content: space-between;
   padding-block: clamp(18px, 2.5vw, 28px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cs-back {
@@ -135,23 +157,20 @@
   max-width: 560px;
 }
 
-/* bottom meta bar */
+/* bottom meta bar — no borders, no separators */
 .cs-hero-meta {
   display: flex;
-  align-items: stretch;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: flex-end;
+  gap: clamp(32px, 5vw, 64px);
+  padding-block: clamp(28px, 3.5vw, 44px);
 }
 
 .cs-meta-col {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 7px;
-  padding: clamp(18px, 2.2vw, 26px) clamp(16px, 2vw, 28px);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 .cs-meta-col:first-child { padding-left: 0; }
-.cs-meta-col:last-child  { border-right: none; }
 
 .cs-meta-col--cta {
   flex: 0 0 auto;
@@ -193,29 +212,9 @@
 .cs-live-link:hover { gap: 14px; }
 
 /* ── 2. ARTWORK ────────────────────────────────────────────── */
-.cs-artwork {
-  background: var(--ink);
-}
-
-.cs-artwork-main {
-  position: relative;
-  width: 100%;
-  height: clamp(300px, 52vw, 740px);
-  overflow: hidden;
-}
-.cs-artwork-main img { object-fit: cover; }
-
-.cs-artwork-caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-block: clamp(14px, 2vw, 20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.25);
-}
+.cs-artwork,
+.cs-artwork-main,
+.cs-artwork-caption { display: none; }
 
 /* ── 3. BRIEF — 2-column editorial ────────────────────────── */
 .cs-brief {

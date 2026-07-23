@@ -13,10 +13,15 @@
   z-index: 20;
   background: var(--teal);
   padding-top: 16px;
-  padding-bottom: clamp(24px, 3.5vw, 40px);
-  text-align: center;
-  /* JS drives transform directly — no CSS transitions allowed here */
+  padding-bottom: clamp(28px, 4vw, 52px);
   transition: none;
+}
+
+.features-heading-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
 }
 /* When card 3 is fully stacked, JS applies transform: translateY(-scrollDelta)
    directly on the element style, making the heading scroll off the top at
@@ -25,13 +30,29 @@
 .features-heading {
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(28px, 3.6vw, 48px);
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.04em;
   color: var(--white);
 }
 .features-heading .accent {
-  font-size: 1.16em;
+  font-size: 1.12em;
+}
+
+.features-heading-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.features-heading-desc p {
+  font-family: var(--font-hel);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+}
+.features-heading-desc strong {
+  font-weight: 700;
+  color: var(--white);
 }
 
 /* ── Stacking cards — exact technique from apadore.cz ───────────────────── */
@@ -43,34 +64,31 @@
   display: flex;
   flex-direction: column;
   overflow: clip;
-  /* Scroll runway: heading needs ~(88 + headingHeight) ≈ 220px of scroll
-     after card 3 stacks to fully exit the top. This padding keeps the
-     section tall enough for that natural scroll-off to complete. */
-  padding-bottom: clamp(220px, 28vh, 320px);
+  /* runway = heading height needed to scroll fully off the top */
+  padding-bottom: clamp(180px, 20vh, 240px);
 }
 
 /* Each card is sticky; JS sets --feature-card-top = header + heading height */
 .feature-card {
   position: sticky;
   top: var(--feature-card-top, 200px);
-  /* ascending z-index so each new card slides OVER the previous one */
-  position: relative; /* needed for ::after containing block */
-  position: sticky;   /* re-applies sticky (last declaration wins) */
+  position: relative;
+  position: sticky;
   background: var(--white);
   color: var(--ink);
   display: flex;
-  align-items: center;
-  gap: clamp(24px, 5vw, 80px);
-  padding: clamp(40px, 6vw, 96px) clamp(32px, 7vw, 130px);
+  align-items: stretch;
+  gap: 0;
+  padding: clamp(40px, 5.5vw, 80px) clamp(32px, 6vw, 100px);
   border-radius: 2px;
 }
 .feature-card:nth-child(1) { z-index: 1; }
 .feature-card:nth-child(2) { z-index: 2; }
 .feature-card:nth-child(3) { z-index: 3; }
+.feature-card:nth-child(4) { z-index: 4; }
+.feature-card:nth-child(5) { z-index: 5; }
+.feature-card:nth-child(6) { z-index: 6; }
 
-/* Gap-filler: a pseudo-element the same color as the section bg,
-   placed BELOW each card (except last). As a card sticks, the gap above
-   the next card shows as teal, giving the "lifting deck" feel. */
 .feature-card:not(:last-child) {
   margin-bottom: var(--gap);
 }
@@ -85,56 +103,143 @@
   z-index: 2;
 }
 
-.feature-icon {
-  flex-shrink: 0;
-  width: clamp(120px, 15vw, 210px);
+/* ── Left column: number badge + step name ── */
+.feature-step-left {
+  flex: 0 0 38%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  gap: 20px;
+  padding-right: clamp(28px, 4vw, 60px);
 }
-.feature-icon img {
-  width: 100%;
-  height: auto;
+.feature-num {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 5px 14px;
+  background: var(--green);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+}
+.feature-step-title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(22px, 2.6vw, 36px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
 }
 
-.feature-text {
-  flex: 1;
-  min-width: 0;
+/* ── Separator ── */
+.feature-sep {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(10, 10, 10, 0.1);
+  flex-shrink: 0;
+  margin-block: 4px;
 }
-.feature-text h3 {
+
+/* ── Right column: heading + body ── */
+.feature-step-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding-left: clamp(28px, 4vw, 60px);
+}
+.feature-step-heading {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.feature-step-body {
+  font-family: var(--font-hel);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.65;
+  color: rgba(10, 10, 10, 0.62);
+}
+.feature-step-body + .feature-step-body {
+  margin-top: 4px;
+}
+.feature-step-body strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ── CTA card (dark, card 6) ── */
+.feature-card--cta {
+  background: var(--ink);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(60px, 8vw, 110px) clamp(32px, 6vw, 100px);
+}
+.feature-cta-inner {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.feature-cta-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.feature-cta-heading {
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(32px, 3.6vw, 54px);
-  letter-spacing: -0.03em;
-  line-height: 1.06;
-  color: var(--ink);
-  margin-bottom: clamp(20px, 2.4vw, 40px);
+  font-size: clamp(28px, 3.4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--white);
 }
-.feature-body,
-.feature-body p {
-  font-family: var(--font-hel);
-  font-size: clamp(18px, 1.8vw, 27px);
-  line-height: 1.5;
-  color: var(--ink);
+.feature-cta-heading .accent {
+  font-size: 1.1em;
 }
-.feature-body p + p {
-  margin-top: 1.2em;
-}
-.feature-body strong {
-  font-weight: 700;
+.feature-cta-btn {
+  margin-top: 8px;
 }
 
+/* ── Responsive ── */
 @media (max-width: 800px) {
   .features-heading-wrap {
     padding-top: 0;
     transition: none;
   }
+  .features-heading-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
   .feature-card {
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+    gap: 28px;
+    padding: clamp(36px, 6vw, 56px) clamp(24px, 5vw, 40px);
   }
-  .feature-icon {
-    width: 130px;
-    justify-content: flex-start;
+  .feature-step-left {
+    flex: unset;
+    padding-right: 0;
+    gap: 14px;
+  }
+  .feature-sep {
+    width: 100%;
+    height: 1px;
+    margin-block: 0;
+    align-self: auto;
+  }
+  .feature-step-right {
+    padding-left: 0;
   }
 }

@@ -1,16 +1,46 @@
 import Image from 'next/image';
-import { ArrowRight } from './icons';
 import './Services.css';
 
-type Service = { title: string; sub: string; img: string; span?: boolean };
+type Service = {
+  title: string;
+  desc:  string;
+  img:   string;
+  tags:  string[];
+  wide?: boolean;
+};
 
 const SERVICES: Service[] = [
-  { title: 'Chci budovat značku firmy', sub: 'Potřebuji prezentační web', img: '/assets/services/reality-expo.jpg' },
-  { title: 'Chci více klientů a poptávek', sub: 'Potřebuji prodejní web', img: '/assets/services/realestate.jpg' },
-  { title: 'Chci prodávat produkty online', sub: 'Potřebuji e-shop', img: '/assets/services/jun.jpg' },
-  { title: 'Chci web na míru', sub: 'Potřebuji kompletní web', img: '/assets/services/daramis.jpg' },
-  { title: 'Chci lepší vizuální identitu svoji firmy', sub: 'Potřebuji e-shop', img: '/assets/services/jun.jpg' },
-  { title: 'Chci grafický dizajn', sub: 'Potřebuji kompletní web', img: '/assets/services/daramis.jpg' },
+  {
+    title: 'Tvorba webů & vývoj',
+    desc:  'Stavíme weby, které budují vaši autoritu a mění návštěvníky v platící klienty.',
+    img:   '/assets/services/reality-expo.jpg',
+    tags:  ['Firemní web', 'E-shop', 'Landing page'],
+  },
+  {
+    title: 'Marketing & Růst',
+    desc:  'Cílené kampaně zaměřené na stabilní přísun poptávek a maximalizaci zisku.',
+    img:   '/assets/services/realestate.jpg',
+    tags:  ['Google ADS', 'Meta ADS', 'SEO'],
+  },
+  {
+    title: 'Grafický Design',
+    desc:  'Ostrý vizuální obsah, díky kterému vaše značka okamžitě vystoupí z davu.',
+    img:   '/assets/services/jun.jpg',
+    tags:  ['Logo', 'Print', 'Prezentace'],
+  },
+  {
+    title: 'Vizuální Identita & AI Kreativy',
+    desc:  'Komplexní vizuální identita posílená AI nástroji pro rychlou a škálovatelnou produkci.',
+    img:   '/assets/services/daramis.jpg',
+    tags:  ['AI Kreativa', 'Brand Identity', 'Reklama'],
+  },
+  {
+    title: 'AI Automatizace',
+    desc:  'Propojíme vaše systémy a zbavíme vás rutiny, abyste se mohli soustředit na to, co vás baví.',
+    img:   '/assets/services/reality-expo.jpg',
+    tags:  ['Zapier', 'n8n', 'Make', 'CRM'],
+    wide:  true,
+  },
 ];
 
 export default function Services() {
@@ -27,28 +57,30 @@ export default function Services() {
           {SERVICES.map((s, i) => (
             <a
               href="#contact"
-              className={`service-card reveal-scale${i % 2 === 1 ? ' offset' : ''}`}
               key={i}
-              style={{ '--d': `${(i % 2) * 0.08 + Math.floor(i / 2) * 0.04}s` } as React.CSSProperties}
+              className={`service-card reveal-scale${s.wide ? ' service-card--wide' : ''}`}
+              style={{ '--d': `${i * 0.07}s` } as React.CSSProperties}
             >
               <div className="service-media">
-                <Image src={s.img} alt={s.title} fill loading="lazy" sizes="(max-width: 720px) 100vw, 50vw" />
+                <Image
+                  src={s.img}
+                  alt={s.title}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                />
               </div>
               <div className="service-body">
                 <h3>{s.title}</h3>
-                <span className="service-sub">{s.sub}</span>
+                <p className="service-desc">{s.desc}</p>
+                <div className="service-tags">
+                  {s.tags.map(tag => (
+                    <span key={tag} className="service-tag">{tag}</span>
+                  ))}
+                </div>
               </div>
-              <span className="service-arrow">
-                <ArrowRight size={14} />
-              </span>
             </a>
           ))}
-        </div>
-
-        <div className="services-cta reveal">
-          <a href="#services" className="btn btn-outline">
-            Zobrazit všechny služby
-          </a>
         </div>
       </div>
     </section>

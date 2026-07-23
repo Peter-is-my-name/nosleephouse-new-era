@@ -232,11 +232,180 @@
   background: var(--green);
 }
 
+/* ── Dropdown trigger: open state ── */
+.nav-desktop .has-dropdown.is-open > a {
+  color: var(--green);
+}
+.nav-desktop .has-dropdown.is-open > a span::after {
+  transform: scaleX(1);
+}
+.nav-desktop .has-dropdown.is-open svg {
+  transform: rotate(180deg);
+  opacity: 1;
+  color: var(--green);
+}
+
+/* ── Mega dropdown panel ── */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; /* overridden by inline style (dynamic center of SLUŽBY li) */
+  right: auto;
+  width: min(640px, calc(100vw - 32px));
+  z-index: 98;
+  background: rgba(12, 22, 22, 0.98);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-8px);
+  transition: opacity 0.32s var(--ease-out), transform 0.32s var(--ease-out), visibility 0.32s;
+  pointer-events: none;
+}
+.nav-dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* inner two-column layout */
+.nav-dropdown-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 24px 28px;
+}
+
+.nd-col {
+  flex: 1;
+}
+.nd-col--sectors {
+  flex: 0 0 210px;
+}
+
+/* vertical divider */
+.nd-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.07);
+  margin-inline: 28px;
+  flex-shrink: 0;
+}
+
+/* eyebrow label */
+.nd-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+/* ── Service links ── */
+.nd-services-list {
+  display: flex;
+  flex-direction: column;
+}
+.nd-service-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  transition: color 0.25s var(--ease-out), padding-left 0.25s var(--ease-out);
+  /* stagger animation */
+  opacity: 0;
+  transform: translateY(8px);
+}
+.nd-service-link:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.nav-dropdown.is-open .nd-service-link {
+  animation: ndItemIn 0.42s var(--ease-out) both;
+  animation-delay: calc(var(--nd-i, 0) * 0.055s);
+}
+.nd-service-link:hover {
+  color: var(--green);
+  padding-left: 4px;
+}
+
+/* arrow icon in service links */
+.nd-arrow {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.22s, transform 0.22s var(--ease-out);
+  color: var(--green);
+}
+.nd-service-link:hover .nd-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Sector items ── */
+.nd-sectors-list {
+  display: flex;
+  flex-direction: column;
+}
+.nd-sector-item {
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: default;
+  /* stagger animation */
+  opacity: 0;
+  transform: translateY(8px);
+}
+.nd-sector-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.nav-dropdown.is-open .nd-sector-item {
+  animation: ndItemIn 0.42s var(--ease-out) both;
+  animation-delay: calc(0.1s + var(--nd-i, 0) * 0.065s);
+}
+.nd-sector-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  color: var(--white);
+  margin-bottom: 3px;
+  transition: color 0.22s;
+}
+.nd-sector-sub {
+  font-family: var(--font-hel);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.5);
+}
+.nd-sector-item:hover .nd-sector-name {
+  color: var(--green);
+}
+
+@keyframes ndItemIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ── Responsive ── */
 @media (max-width: 900px) {
   .nav-cluster {
     display: none;
   }
   .burger {
     display: flex;
+  }
+  .nav-dropdown {
+    display: none;
   }
 }

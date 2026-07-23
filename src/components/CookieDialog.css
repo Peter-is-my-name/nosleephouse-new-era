@@ -50,6 +50,206 @@
   font-size: 12px;
 }
 
+/* ---- "Zobrazit detaily" ghost button in bar ---- */
+.cookie-details-btn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-roboto);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s;
+}
+.cookie-details-btn:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--white);
+}
+
+/* ---- Modal overlay ---- */
+.ck-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* ---- Modal container ---- */
+.ck-modal {
+  background: rgb(14, 26, 26);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  width: min(560px, 100%);
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+}
+
+.ck-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 28px 0;
+  flex-shrink: 0;
+}
+.ck-modal-header h2 {
+  font-family: var(--font-sans);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.ck-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.ck-close:hover {
+  color: var(--white);
+}
+
+/* ---- Modal body ---- */
+.ck-modal-body {
+  padding: 20px 28px 4px;
+  overflow-y: auto;
+  flex: 1;
+}
+.ck-intro {
+  font-family: var(--font-hel);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 20px;
+}
+
+/* ---- Cookie category row ---- */
+.ck-category {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 18px 0;
+}
+.ck-category:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.ck-category-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.ck-category-name {
+  font-family: var(--font-roboto);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.ck-category-desc {
+  font-family: var(--font-hel);
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---- Toggle switch ---- */
+.ck-toggle {
+  position: relative;
+  display: inline-flex;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+}
+.ck-toggle.is-locked {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.ck-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.ck-toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  transition: background 0.22s;
+}
+.ck-toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 0.22s;
+}
+.ck-toggle input:checked + .ck-toggle-track {
+  background: var(--green);
+}
+.ck-toggle input:checked + .ck-toggle-track::after {
+  transform: translateX(20px);
+}
+
+/* ---- Modal footer ---- */
+.ck-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+}
+.ck-modal-footer .btn {
+  padding: 12px 20px;
+  font-size: 12px;
+}
+.ck-footer-ghost {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-roboto);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 12px 14px;
+  margin-right: auto;
+  transition: color 0.2s;
+}
+.ck-footer-ghost:hover {
+  color: var(--white);
+}
+
+/* ---- Mobile ---- */
 @media (max-width: 620px) {
   .cookie-inner {
     flex-direction: column;
@@ -58,8 +258,47 @@
   }
   .cookie-actions {
     width: 100%;
+    flex-wrap: wrap;
+  }
+  .cookie-details-btn {
+    width: 100%;
+    text-align: center;
+    order: 3;
   }
   .cookie-actions .btn {
+    flex: 1;
+  }
+
+  .ck-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .ck-modal {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    max-height: 90dvh;
+  }
+  .ck-modal-header {
+    padding: 22px 20px 0;
+  }
+  .ck-modal-body {
+    padding: 16px 20px 4px;
+  }
+  .ck-modal-footer {
+    padding: 16px 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ck-footer-ghost {
+    order: 3;
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    margin-top: 4px;
+  }
+  .ck-modal-footer .btn {
     flex: 1;
   }
 }

@@ -1,49 +1,67 @@
 'use client'
 import { useEffect, useRef } from 'react';
+import type { ReactNode, CSSProperties } from 'react';
+import { ArrowRight } from './icons';
 import './Features.css';
 
-const FEATURES = [
+type Step = {
+  num:     string;
+  title:   string;
+  heading: string;
+  body:    ReactNode[];
+};
+
+const STEPS: Step[] = [
   {
-    icon: '/assets/features/icon-funkcnost.svg',
-    title: 'Funkčnost',
-    body: (
-      <>
-        Design je sice super, ale pokud web nefunguje, je to k ničemu. Stavíme weby, které jsou
-        nejen dobře vypadají, ale také <strong>plní vaše firemní cíle.</strong>
-      </>
-    ),
+    num:     '01',
+    title:   'Strategický hovor',
+    heading: 'Konzultace je prvním krokem k výsledkům',
+    body: [
+      <><strong>Probereme vaše podnikání, cíle a možnosti</strong> – a uvidíme, zda vám dokážeme reálně pomoci.</>,
+      <>Vážíme si <strong>vašeho času stejně jako svého</strong>. Naše kapacity jsou omezené, proto si vybíráme projekty, kterým dokážeme doručit <strong>maximální hodnotu</strong> a <strong>výsledky</strong>.</>,
+    ],
   },
   {
-    icon: '/assets/features/icon-zivotnost.svg',
-    title: 'Životnost',
-    body: (
-      <>
-        Náš web s vámi <strong>vydrží tak dlouho</strong>, jak budete potřebovat. Díky snadnosti
-        úprav si ho můžete libovolně aktualizovat podle sebe. Se škálováním vám rádi poradíme.
-      </>
-    ),
+    num:     '02',
+    title:   'Analýza a strategie',
+    heading: 'Vytvořit předvídatelný systém pro získávání klientů není otázkou loterie',
+    body: [
+      <>Stabilní výsledky nejsou otázkou štěstí, ale <strong>strategie, znalostí</strong> a <strong>ověřeného systému</strong>.</>,
+      <>Prostudujeme si vaši cílovou skupinu, zmapujeme konkurenci a odhalíme vzorce chování, které se opakují. Cíl není vytvořit jen hezký web, ale řešení, které vám spolehlivě zajistí výsledky.</>,
+    ],
   },
   {
-    icon: '/assets/features/icon-podpora.svg',
-    title: 'Podpora',
-    body: (
-      <>
-        <p>
-          Nový web vám nezabere stovky hodin, a přesto bude přesně{' '}
-          <strong>podle vašich představ</strong>. My dodáme práci, vy feedback.
-        </p>
-        <p>
-          Po spuštění webu <strong>nekončíme</strong>, postaráme se o úpravy a aktualizace a budeme
-          tu pro vás, kdykoli ho budete chtít posunout dál.
-        </p>
-      </>
-    ),
+    num:     '03',
+    title:   'Tvorba webu',
+    heading: 'Cesta k ziskovému kliknutí',
+    body: [
+      <>Každá sekce i detail má svůj účel. Web netvoříme izolovaně, ale jako součást <strong>celkového systému vedoucího uživatele k akci</strong>.</>,
+      <>Výsledkem je nejen reprezentativní design, ale předvídatelný nástroj pro <strong>získávání nových klientů</strong>.</>,
+    ],
+  },
+  {
+    num:     '04',
+    title:   'Akvizice a výkon',
+    heading: 'Cesta k návratnosti',
+    body: [
+      <>Proměníme váš web v předvídatelný ziskový systém pro získávání klientů – zajistíme, aby se vám <strong>investice do digitálního zázemí vrátila</strong>.</>,
+      <>Díky tomuto přístupu držíme dlouhodobě <strong>maximální spokojenost našich partnerů</strong> a pomáháme jim ovládnout jejich trh.</>,
+    ],
+  },
+  {
+    num:     '05',
+    title:   'Růst a optimalizace',
+    heading: 'Váš růst je naše priorita',
+    body: [
+      <><strong>Pravidelně</strong> analyzujeme výsledky a implementujeme vylepšení, které zvyšují konverzní poměr webu a efektivitu kampaní.</>,
+      <>Neřešíme jen „správu", ale aktivně navrhujeme <strong>nové cesty k získávání klientů</strong> a rozšiřování vašeho vlivu.</>,
+    ],
   },
 ];
 
 export default function Features() {
   const headingRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const cardsRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const update = () => {
@@ -65,7 +83,7 @@ export default function Features() {
 
   useEffect(() => {
     const heading = headingRef.current;
-    const cards = cardsRef.current;
+    const cards   = cardsRef.current;
     if (!heading || !cards) return;
 
     let releaseScrollY: number | null = null;
@@ -78,12 +96,10 @@ export default function Features() {
       );
 
       if (lastCard.getBoundingClientRect().top <= cardTop + 2) {
-        // Card 3 fully stacked — record release point once, then track scroll delta
         if (releaseScrollY === null) releaseScrollY = window.scrollY;
         const scrolled = window.scrollY - releaseScrollY;
         heading.style.transform = `translateY(${-scrolled}px)`;
       } else {
-        // Scrolled back above — restore heading to its sticky position
         releaseScrollY = null;
         heading.style.transform = '';
       }
@@ -97,28 +113,52 @@ export default function Features() {
     <section className="features">
       <div className="container">
         <div className="features-heading-wrap" ref={headingRef}>
-          <h2 className="features-heading reveal">
-            Naše weby a služby
-            <br />
-            mají tohle <span className="accent">společné</span>
-          </h2>
+          <div className="features-heading-grid">
+            <h2 className="features-heading reveal">
+              Jak probíhá
+              <br />
+              <span className="accent">spolupráce?</span>
+            </h2>
+            <div className="features-heading-desc reveal" style={{ '--d': '0.12s' } as CSSProperties}>
+              <p>V roce 2026 vám web sám o sobě výsledky nezaručí. Naše řešení jen loni přivedla klientům <strong>stovky kvalifikovaných poptávek</strong> a <strong>klientů</strong>.</p>
+              <p>Díky výsledkům a práci úzkého týmu specialistů nám vybudování funkčního akvizičního systému svěřilo již přes <strong>100+ klientů</strong> po celé ČR.</p>
+            </div>
+          </div>
         </div>
 
         <div className="features-cards" ref={cardsRef}>
-          {FEATURES.map((f, i) => (
-            <article
-              className="feature-card"
-              key={i}
-            >
-              <div className="feature-icon">
-                <img src={f.icon} alt="" aria-hidden="true" />
+          {/* ── Step cards ── */}
+          {STEPS.map((s, i) => (
+            <article className="feature-card" key={s.num}>
+              <div className="feature-step-left">
+                <span className="feature-num">{s.num}</span>
+                <h3 className="feature-step-title">{s.title}</h3>
               </div>
-              <div className="feature-text">
-                <h3>{f.title}</h3>
-                <div className="feature-body">{f.body}</div>
+              <div className="feature-sep" aria-hidden="true" />
+              <div className="feature-step-right">
+                <h4 className="feature-step-heading">{s.heading}</h4>
+                {s.body.map((p, j) => (
+                  <p key={j} className="feature-step-body">{p}</p>
+                ))}
               </div>
             </article>
           ))}
+
+          {/* ── CTA card (card 6) ── */}
+          <article className="feature-card feature-card--cta">
+            <div className="feature-cta-inner">
+              <p className="feature-cta-label">Pojďme spolupracovat</p>
+              <h3 className="feature-cta-heading">
+                Máte projekt, který si zaslouží
+                <br />
+                <span className="accent">skutečné výsledky?</span>
+              </h3>
+              <a href="#contact" className="btn btn-primary feature-cta-btn">
+                Domluvit bezplatný hovor
+                <ArrowRight size={11} />
+              </a>
+            </div>
+          </article>
         </div>
       </div>
     </section>

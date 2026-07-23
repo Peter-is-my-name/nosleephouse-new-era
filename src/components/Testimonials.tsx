@@ -5,6 +5,7 @@ type T = {
   name: string;
   role: string;
   company: string;
+  companyUrl: string;
   avatar: string;
   logo: React.ReactNode;
   quote: string;
@@ -15,6 +16,7 @@ const ITEMS: T[] = [
     name: 'Jakub Haidari',
     role: 'Marketing nehnuteľností,',
     company: 'realityexpo.sk',
+    companyUrl: 'https://realityexpo.sk',
     avatar: '/assets/testimonials/jakub.jpg',
     logo: <img className="tm-logo-img re" src="/assets/testimonials/realityexpo-logo.svg" alt="Reality EXPO" />,
     quote:
@@ -24,8 +26,9 @@ const ITEMS: T[] = [
     name: 'Radek Bareš',
     role: 'Majitel firmy,',
     company: 'DUOPET.CZ',
+    companyUrl: 'https://duopet.cz',
     avatar: '/assets/testimonials/radek.jpg',
-    logo: <img className="tm-logo-img" src="/assets/testimonials/duopet-logo.png" alt="DUOPET" />,
+    logo: <img className="tm-logo-img duopet" src="/assets/testimonials/duopet-logo.png" alt="DUOPET" />,
     quote:
       '„Profesionální přístup, rychlé spuštění a hlavně web, který skutečně přivádí nové klienty. Organická návštěvnost se do 3 měsíců zdvojnásobila. Oceňuji, že neskončili spuštěním, ale průběžně optimalizují."',
   },
@@ -33,6 +36,7 @@ const ITEMS: T[] = [
     name: 'Dominika Donovalová',
     role: 'Podnikateľka,',
     company: 'aparsia.cz',
+    companyUrl: 'https://aparsia.cz',
     avatar: '/assets/testimonials/dominika.jpg',
     logo: <img className="tm-logo-img aparsia" src="/assets/testimonials/aparsia-logo.png" alt="Aparsia" />,
     quote:
@@ -42,6 +46,7 @@ const ITEMS: T[] = [
     name: 'Filip Polanský',
     role: 'Majitel firmy,',
     company: 'DUOPET.CZ',
+    companyUrl: 'https://duopet.cz',
     avatar: '/assets/testimonials/filip.jpg',
     logo: null,
     quote:
@@ -50,7 +55,8 @@ const ITEMS: T[] = [
   {
     name: 'Jonathan Hill',
     role: 'Kuchař & podnikatel,',
-    company: 'socarrat.com',
+    company: 'SOCARRATCATERING.COM',
+    companyUrl: 'https://socarratcatering.com',
     avatar: '/assets/testimonials/jonathan.jpg',
     logo: <img className="tm-logo-img socarrat" src="/assets/testimonials/socarrat-logo.svg" alt="Socarrat" />,
     quote:
@@ -85,7 +91,7 @@ export default function Testimonials() {
                   <div className="tm-meta">
                     <span className="tm-name">{t.name}</span>
                     <span className="tm-role">
-                      {t.role} <a href="#">{t.company}</a>
+                      {t.role} <a href={t.companyUrl} target="_blank" rel="noopener noreferrer">{t.company}</a>
                     </span>
                   </div>
                 </div>
