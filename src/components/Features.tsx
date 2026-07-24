@@ -59,49 +59,120 @@ const STEPS: Step[] = [
   },
 ];
 
+const MOBILE_MAX = 800;
+
 export default function Features() {
   const headingRef = useRef<HTMLDivElement>(null);
+  const titleRef   = useRef<HTMLHeadingElement>(null);
   const cardsRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const lastStepCard = () =>
+      cardsRef.current
+        ? (Array.from(
+            cardsRef.current.querySelectorAll<HTMLElement>(
+              '.feature-card:not(.feature-card--cta)'
+            )
+          ).pop() ?? null)
+        : null;
+
     const update = () => {
-      if (!headingRef.current) return;
       const siteHeader = document.querySelector('.site-header') as HTMLElement | null;
       const headerH = siteHeader ? siteHeader.offsetHeight : 88;
-      const h = headingRef.current.offsetHeight;
-      document.documentElement.style.setProperty('--header-h', `${headerH}px`);
-      document.documentElement.style.setProperty(
-        '--feature-card-top',
-        `${headerH + h}px`
-      );
+      // On phone the wrapper is display:contents (no box), and only the
+      // headline pins — so the cards stop under the headline alone. On
+      // desktop the whole wrapper (headline + secondary text) pins as before,
+      // so the cards stop below both. Measuring the right element keeps each
+      // breakpoint's stop point correct.
+      const isMobile = window.innerWidth <= MOBILE_MAX;
+      const headingEl = isMobile ? titleRef.current : headingRef.current;
+      if (headingEl) {
+        const h = headingEl.offsetHeight;
+        document.documentElement.style.setProperty('--header-h', `${headerH}px`);
+        document.documentElement.style.setProperty(
+          '--feature-card-top',
+          `${headerH + h}px`
+        );
+      }
+      // Height of the last white step card, so the dark CTA can match it on
+      // phone/small tablet (applied via Features.css <=900px). The CTA's own
+      // height never feeds back into this — it's a different element — so
+      // there's no measurement loop.
+      const step = lastStepCard();
+      if (step) {
+        document.documentElement.style.setProperty('--last-step-h', `${step.offsetHeight}px`);
+      }
     };
     update();
     const ro = new ResizeObserver(update);
     if (headingRef.current) ro.observe(headingRef.current);
-    return () => ro.disconnect();
+    if (titleRef.current) ro.observe(titleRef.current);
+    const step = lastStepCard();
+    if (step) ro.observe(step);
+    window.addEventListener('resize', update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', update);
+    };
   }, []);
 
   useEffect(() => {
-    const heading = headingRef.current;
-    const cards   = cardsRef.current;
-    if (!heading || !cards) return;
-
-    let releaseScrollY: number | null = null;
+    const cards = cardsRef.current;
+    if (!cards) return;
 
     const onScroll = () => {
       const lastCard = cards.lastElementChild as HTMLElement | null;
       if (!lastCard) return;
-      const cardTop = parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue('--feature-card-top') || '200'
-      );
 
-      if (lastCard.getBoundingClientRect().top <= cardTop + 2) {
-        if (releaseScrollY === null) releaseScrollY = window.scrollY;
-        const scrolled = window.scrollY - releaseScrollY;
-        heading.style.transform = `translateY(${-scrolled}px)`;
+      // The pinned element that flies off differs by breakpoint: on desktop
+      // it's the whole wrapper, on phone just the headline (the wrapper is
+      // display:contents there, so transforming it would do nothing).
+      const isMobile = window.innerWidth <= MOBILE_MAX;
+      const flyEl = isMobile ? titleRef.current : headingRef.current;
+      const inactiveEl = isMobile ? headingRef.current : titleRef.current;
+      // Clear any transform left on the other element after a breakpoint change.
+      if (inactiveEl) inactiveEl.style.transform = '';
+      if (!flyEl) return;
+
+      let cardTop: number;
+      if (isMobile) {
+        // Phone only: recompute the stop point fresh each tick. The header
+        // shrinks on scroll (its padding animates), and only the headline
+        // pins here — so if the stop point didn't track the header exactly,
+        // a gap would open under the header and the freely-scrolling
+        // secondary text would peek through it.
+        const siteHeader = document.querySelector('.site-header') as HTMLElement | null;
+        const headerH = siteHeader ? siteHeader.offsetHeight : 88;
+        cardTop = headerH + flyEl.offsetHeight;
+        document.documentElement.style.setProperty('--header-h', `${headerH}px`);
+        document.documentElement.style.setProperty('--feature-card-top', `${cardTop}px`);
       } else {
-        releaseScrollY = null;
-        heading.style.transform = '';
+        // Desktop: unchanged from the original — read the value set on
+        // mount/resize (the whole wrapper is pinned + teal, so a small stale
+        // header gap is invisible teal-on-teal and never showed content).
+        cardTop = parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue('--feature-card-top') || '200'
+        );
+      }
+
+      // Self-correcting fly-off: derive the offset from how far the last card
+      // has overshot its stuck position RIGHT NOW, not from a remembered scroll
+      // baseline. This value is always >= 0, so the heading only ever moves UP
+      // (never down over the next section), and it recovers instantly after a
+      // reload/scroll-restore or a hash jump — the stateful version pushed the
+      // heading down over Testimonials in those cases. During a normal
+      // continuous scroll the value is identical, so the feel is unchanged.
+      const overshoot = cardTop - lastCard.getBoundingClientRect().top;
+      if (overshoot > 0) {
+        // On phone the headline carries the .reveal entrance transition, which
+        // would make this scroll-linked transform lag; disable it here (the
+        // entrance has long finished by the time the fly-off engages). The
+        // desktop wrapper has no such transition, so nothing to disable.
+        if (isMobile) flyEl.style.transition = 'none';
+        flyEl.style.transform = `translateY(${-overshoot}px)`;
+      } else {
+        flyEl.style.transform = '';
+        if (isMobile) flyEl.style.transition = '';
       }
     };
 
@@ -114,7 +185,7 @@ export default function Features() {
       <div className="container">
         <div className="features-heading-wrap" ref={headingRef}>
           <div className="features-heading-grid">
-            <h2 className="features-heading reveal">
+            <h2 className="features-heading reveal" ref={titleRef}>
               Jak probíhá
               <br />
               <span className="accent">spolupráce?</span>

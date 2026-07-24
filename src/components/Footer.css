@@ -73,16 +73,23 @@
   color: var(--white);
   margin-bottom: 20px;
 }
-.footer-linkedin {
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+.footer-linkedin,
+.footer-instagram {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-family: var(--font-sans);
   font-size: 18px;
   color: var(--white);
-  margin-bottom: 28px;
 }
-.footer-linkedin:hover {
+.footer-linkedin:hover,
+.footer-instagram:hover {
   color: var(--green);
 }
 .footer-cta {
@@ -162,7 +169,7 @@
   display: block;
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 13.7vw;
+  font-size: 12.9vw;
   letter-spacing: -0.045em;
   color: var(--green);
   white-space: nowrap;

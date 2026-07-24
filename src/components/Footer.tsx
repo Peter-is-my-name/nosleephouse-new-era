@@ -1,5 +1,5 @@
 'use client'
-import { ArrowRight, GoogleLogo, Star, LinkedInIcon } from './icons';
+import { ArrowRight, GoogleLogo, Star, LinkedInIcon, InstagramIcon } from './icons';
 import './Footer.css';
 
 const COLS = [
@@ -48,10 +48,26 @@ export default function Footer() {
             <a className="footer-phone" href="tel:+420734565323">
               +420 734 565 323
             </a>
-            <a className="footer-linkedin" href="#">
-              <LinkedInIcon size={20} />
-              LinkedIn
-            </a>
+            <div className="footer-social">
+              <a
+                className="footer-linkedin"
+                href="https://www.linkedin.com/company/nosleephouse"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon size={20} />
+                LinkedIn
+              </a>
+              <a
+                className="footer-instagram"
+                href="https://www.instagram.com/nosleephouse/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <InstagramIcon size={20} />
+                Instagram
+              </a>
+            </div>
             <a href="#contact" className="btn btn-primary footer-cta">
               Nacenění zdarma
               <ArrowRight size={10} />
@@ -99,9 +115,19 @@ export default function Footer() {
       <div className="footer-bar">
         <div className="container footer-bar-inner">
           <span>Copyright © nosleephouse™ 2026</span>
-          <a href="#">Instagram</a>
-          <a href="#">Linkedin</a>
-          <a href="#">Facebook</a>
+          <a href="https://www.instagram.com/nosleephouse/" target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+          <a href="https://www.linkedin.com/company/nosleephouse" target="_blank" rel="noopener noreferrer">
+            Linkedin
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61581980980548"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook
+          </a>
         </div>
       </div>
     </footer>

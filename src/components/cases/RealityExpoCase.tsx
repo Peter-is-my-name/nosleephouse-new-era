@@ -8,6 +8,24 @@ import './CaseStudy.css';
 
 const SERVICES = ['Branding', 'Web Design', 'Development', 'Kampaň'] as const;
 
+const CHALLENGES = [
+  {
+    num: '01',
+    title: 'Generická značka',
+    body: 'Vizuální identita nekomunikovala prémiovost ani důvěryhodnost, kterou akce tohoto rozsahu potřebuje.',
+  },
+  {
+    num: '02',
+    title: 'Web bez konverzí',
+    body: 'Návštěvníci si web prohlédli a odešli. Registrace byla schovaná, cesta k akci nejasná a nikdo ji nevedl k akci.',
+  },
+  {
+    num: '03',
+    title: 'Neefektivní kampaně',
+    body: 'PPC běželo bez segmentace publika — vysoké náklady na akvizici a nízká návratnost investice.',
+  },
+] as const;
+
 const DELIVERABLES = [
   {
     num: '01',
@@ -16,20 +34,31 @@ const DELIVERABLES = [
   },
   {
     num: '02',
-    title: 'Web & UX',
-    body: 'Přehledný web s registracemi vystavovatelů, harmonogramem a mapou stánků. Spuštěn za 4 týdny od briefu, bez jediného odkladu.',
+    title: 'Webová stránka',
+    body: 'Přehledný web postavený kolem jednoho cíle: registrace. Spuštěn za 4 týdny od briefu, bez jediného odkladu.',
   },
   {
     num: '03',
-    title: 'Digitální kampaň',
-    body: 'Cílená online kampaň zvýšila dosah 3× oproti předchozímu ročníku a přivedla o 40 % více online registrací.',
+    title: 'PPC kampaně',
+    body: 'Segmentované kampaně s přesným cílením — méně plýtvání rozpočtem, víc kvalifikovaných registrací.',
+  },
+  {
+    num: '04',
+    title: 'Event materiály',
+    body: 'Vizuály pro tiskoviny, signage a prezentaci akce na místě — jednotný vizuální jazyk od webu až po vstupní bránu.',
+  },
+  {
+    num: '05',
+    title: 'Social Media',
+    body: 'Obsahová strategie a vizuály pro sociální sítě, které držely publikum v obraze před akcí i během ní.',
   },
 ] as const;
 
 const RESULTS = [
-  { value: '3×', label: 'vyšší digitální dosah oproti předchozímu ročníku' },
-  { value: '+40 %', label: 'nárůst online registrací návštěvníků' },
-  { value: '4 týdny', label: 'od briefu k ostrému spuštění webu' },
+  { value: '4200+', label: 'registrovaných účastníků' },
+  { value: '2,1×', label: 'vyšší konverzní poměr webu' },
+  { value: '−38 %', label: 'nižší náklady na registraci' },
+  { value: '12×', label: 'návratnost investice' },
 ] as const;
 
 export default function RealityExpoCase() {
@@ -52,28 +81,8 @@ export default function RealityExpoCase() {
 
         <div className="container cs-hero-inner">
 
-          {/* top nav row */}
-          <div className="cs-hero-nav">
-            <Link href="/projekty" className="cs-back">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Projekty
-            </Link>
-            <span className="cs-index">01 / 04</span>
-          </div>
-
           {/* main text block */}
           <div className="cs-hero-text">
-            <div className="cs-hero-service-row">
-              {SERVICES.map((s, i) => (
-                <span key={s} className="cs-hero-service">
-                  {s}
-                  {i < SERVICES.length - 1 && <span className="cs-dot" aria-hidden="true" />}
-                </span>
-              ))}
-            </div>
-
             <h1 className="cs-hero-heading">
               Reality EXPO:<br />
               Branding, Web<br />a <span className="accent">kampaň.</span>
@@ -99,6 +108,10 @@ export default function RealityExpoCase() {
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Odvětví</span>
               <span className="cs-meta-value">Nemovitosti · Právo</span>
+            </div>
+            <div className="cs-meta-col" role="listitem">
+              <span className="cs-meta-label">Služby</span>
+              <span className="cs-meta-value">{SERVICES.join(' · ')}</span>
             </div>
             <div className="cs-meta-col cs-meta-col--cta" role="listitem">
               <a
@@ -129,16 +142,83 @@ export default function RealityExpoCase() {
           </div>
           <div className="cs-brief-right">
             <p className="cs-brief-body reveal">
-              Reality EXPO je každoroční veletrh nemovitostí v Praze, kde se setkávají
-              developeři, investoři a kupující. Weinhold Legal — přední česká právní firma
-              specializující se na real estate — nás oslovila s jasnou výzvou: vytvořit
-              silnou identitu pro veletrh, funkční web a kampaň, která přiláká rekordní návštěvnost.
+              Reality EXPO je největší realitní veletrh na Slovensku — místo, kde se
+              každoročně potkávají tisíce kupujících, prodávajících a developerů.
+              Weinhold Legal, klíčový partner akce, nás oslovil s jasným zadáním:
+              kompletní digitální transformace, od brand identity přes web až po
+              výkonnostní kampaně.
             </p>
             <p className="cs-brief-body reveal" style={{ '--d': '0.1s' } as CSSProperties}>
-              Veletrh potřeboval vizuální jazyk, který zaujme v přesyceném trhu a zároveň
-              jasně komunikuje profesionální zázemí Weinhold Legal. Žádné kompromisy.
-              Žádná generická šablona. Identita postavená na míru.
+              Žádné kompromisy. Žádná generická šablona. Identita, web i kampaně
+              postavené na míru pro akci, která si to zaslouží.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. CHALLENGE ──────────────────────────────────── */}
+      <section className="cs-challenge">
+        <div className="container">
+          <p className="cs-section-label reveal">Výzva</p>
+          <h2 className="cs-challenge-heading reveal">
+            Tři problémy,<br />jedno <span className="accent">řešení.</span>
+          </h2>
+          <div className="cs-deliv-grid cs-challenge-grid">
+            {CHALLENGES.map((c, i) => (
+              <div
+                key={c.num}
+                className="cs-deliv-item reveal"
+                style={{ '--d': `${i * 0.09}s` } as CSSProperties}
+              >
+                <span className="cs-deliv-num">{c.num}</span>
+                <h3 className="cs-deliv-title">{c.title}</h3>
+                <p className="cs-deliv-body">{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3b. SOLUTION ──────────────────────────────────── */}
+      <section className="cs-brief cs-solution">
+        <div className="container cs-brief-grid">
+          <div className="cs-brief-left">
+            <p className="cs-section-label reveal">Řešení</p>
+            <h2 className="cs-brief-heading reveal">
+              Ne víc reklamy.<br />
+              Systém, který<br />
+              <span className="accent">fungoval.</span>
+            </h2>
+          </div>
+          <div className="cs-brief-right">
+            <p className="cs-brief-body reveal">
+              Vytvořili jsme vlastní typografický systém a ikonografii, které daly
+              Reality EXPO jasnou vizuální identitu. Nový web jsme postavili kolem
+              jednoho cíle — registrace: každý prvek stránky vedl k akci.
+            </p>
+            <p className="cs-brief-body reveal" style={{ '--d': '0.1s' } as CSSProperties}>
+              PPC kampaně jsme přestavěli od základu s přesnou segmentací publika,
+              takže reklama cílila jen na lidi s reálným zájmem — ne na náhodné kliky.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3c. GALLERY — placeholders, to be replaced with real assets ── */}
+      <section className="cs-gallery">
+        <div className="container cs-gallery-grid">
+          <div className="cs-gallery-item reveal-scale">
+            <div className="cs-placeholder" aria-hidden="true">
+              <span>Placeholder — Brand identita</span>
+            </div>
+          </div>
+          <div
+            className="cs-gallery-item reveal-scale"
+            style={{ '--d': '0.08s' } as CSSProperties}
+          >
+            <div className="cs-placeholder" aria-hidden="true">
+              <span>Placeholder — Reality EXPO 2024 na místě</span>
+            </div>
           </div>
         </div>
       </section>
@@ -181,6 +261,32 @@ export default function RealityExpoCase() {
                 <div className="cs-result-label">{r.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5b. TESTIMONIAL ────────────────────────────────── */}
+      <section className="cs-testimonial">
+        <div className="container cs-testimonial-inner">
+          <p className="cs-section-label reveal">Reference</p>
+          <blockquote className="cs-testimonial-quote reveal">
+            „S Petrem a Martinem spolupracujeme přes 2 roky. Přístup k projektu byl
+            od začátku profesionální: jasná komunikace, výsledky, které překonaly
+            očekávání. Web spustili přesně v termínu a běží bezchybně. Doporučuji
+            každému, kdo hledá agenturní výsledky s lidským přístupem.“
+          </blockquote>
+          <div className="cs-testimonial-author reveal" style={{ '--d': '0.1s' } as CSSProperties}>
+            <Image
+              className="cs-testimonial-avatar"
+              src="/assets/testimonials/jakub.jpg"
+              alt="Jakub Haidari"
+              width={56}
+              height={56}
+            />
+            <div>
+              <span className="cs-testimonial-name">Jakub Haidari</span>
+              <span className="cs-testimonial-role">Marketing nehnuteľností, Reality EXPO</span>
+            </div>
           </div>
         </div>
       </section>

@@ -2,6 +2,9 @@
   background: var(--teal);
   padding-top: clamp(72px, 9vw, 128px);
   padding-bottom: clamp(48px, 6vw, 80px);
+  /* Contain the sticky heading's z-index:20 to this section so it can never
+     paint over the following section (Testimonials), even in an edge case. */
+  isolation: isolate;
 }
 
 /* ── Sticky heading ──────────────────────────────────────────────────────── */
@@ -60,7 +63,9 @@
    overflow: clip prevents gap-fillers bleeding outside the list without
    creating a scroll container (which overflow:hidden would do, breaking sticky). */
 .features-cards {
-  --gap: clamp(32px, 4vw, 64px);
+  /* Desktop gap. Mobile (<=800px) overrides this to 52px in the media query
+     below, so the two are tuned independently. */
+  --gap: 56px;
   display: flex;
   flex-direction: column;
   overflow: clip;
@@ -213,16 +218,69 @@
   margin-top: 8px;
 }
 
+/* Phone + small tablet only: the dark CTA matches the last white step card's
+   height (measured live in Features.tsx as --last-step-h). Desktop keeps the
+   CTA's natural height. */
+@media (max-width: 900px) {
+  .feature-card--cta {
+    min-height: var(--last-step-h);
+  }
+  /* Let the browser balance the secondary text's line breaks so the last
+     line isn't left with just one or two words. Phone + small tablet only. */
+  .features-heading-desc p {
+    text-wrap: pretty;
+  }
+}
+
+/* Small tablet (801–900px): extra breathing room below the heading row before
+   the cards. On phone (<=800px) this gap is handled by the secondary text's
+   own margin-bottom instead (the wrapper is display:contents there). */
+@media (min-width: 801px) and (max-width: 900px) {
+  .features-heading-wrap {
+    padding-bottom: 60px;
+  }
+}
+
 /* ── Responsive ── */
 @media (max-width: 800px) {
-  .features-heading-wrap {
-    padding-top: 0;
-    transition: none;
+  .features-cards {
+    --gap: 52px;
   }
+
+  /* Phone-only: dissolve the wrapper + grid so the headline and the
+     secondary text become direct children of .container. That gives the
+     headline a tall containing block (it can stay pinned across the whole
+     card stack) and lets the secondary text scroll on its own, behind the
+     cards. Desktop is untouched — these two elements keep their normal
+     box + the wrapper's original styling above. */
+  .features-heading-wrap,
   .features-heading-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: contents;
   }
+
+  /* Only the headline pins and masks on phone; the cards stop right under it
+     (--feature-card-top is measured from the headline alone in Features.tsx).
+     The teal background hides any card scrolling up behind it. */
+  .features-heading {
+    position: sticky;
+    top: var(--header-h, 88px);
+    z-index: 20;
+    background: var(--teal);
+    padding-block: 14px 24px;
+  }
+
+  /* Secondary text scrolls normally and sits BEHIND the cards (static +
+     z-index:0 < the cards' z-index), so the incoming cards cover it.
+     margin-top: 0 keeps the headline→text gap to the headline's own 24px
+     padding-bottom (matches the Portfolio section). margin-bottom is the
+     breathing room between the text and the first card. */
+  .features-heading-desc {
+    position: relative;
+    z-index: 0;
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+
   .feature-card {
     flex-direction: column;
     gap: 28px;

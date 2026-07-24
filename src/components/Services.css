@@ -45,6 +45,14 @@
 .service-card:hover {
   border-color: rgba(178, 251, 88, 0.28);
 }
+/* Keep opacity/transform in the transition list permanently (not just
+   pre-reveal): a transition only fires when a property's VALUE changes, so
+   this is harmless post-reveal, and swapping the list back on .is-visible
+   would strip opacity/transform at the exact moment they change, which
+   silently cancels the reveal animation. */
+.service-card.reveal-scale {
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out), border-color 0.35s var(--ease-out);
+}
 
 /* ── Image area ── */
 .service-media {

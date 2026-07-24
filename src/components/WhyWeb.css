@@ -32,13 +32,13 @@
   overflow: hidden;
   transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
-/* During entrance: include opacity so reveal-scale animates it */
+/* Keep opacity/transform in the transition list permanently: a transition
+   only fires when a property's VALUE changes, so this is harmless
+   post-reveal, and swapping the list back on .is-visible would strip
+   opacity/transform at the exact moment they change, silently cancelling
+   the reveal animation. */
 .why-card.reveal-scale {
   transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out), box-shadow 0.5s var(--ease-out);
-}
-/* After entrance: restore fast hover transition */
-.why-card.reveal-scale.is-visible {
-  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
 .why-card:hover {
   transform: translateY(-6px);
