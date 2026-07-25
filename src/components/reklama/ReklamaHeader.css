@@ -1,0 +1,95 @@
+.rk-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding-block: 30px;
+  transition: background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out),
+    padding 0.4s var(--ease-out);
+}
+.rk-header.scrolled {
+  background: var(--teal);
+  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.65);
+  padding-block: 16px;
+}
+
+.rk-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.rk-logo {
+  color: var(--green);
+  display: inline-flex;
+  transition: transform 0.4s var(--ease-out);
+}
+.rk-logo:hover {
+  transform: rotate(-4deg) scale(1.05);
+}
+
+.rk-header-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 22px);
+}
+
+.rk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+.rk-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0 rgba(178, 251, 88, 0.5);
+  animation: rk-ping 1.8s var(--ease-out) infinite;
+}
+@keyframes rk-ping {
+  0% { box-shadow: 0 0 0 0 rgba(178, 251, 88, 0.5); }
+  70% { box-shadow: 0 0 0 7px rgba(178, 251, 88, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(178, 251, 88, 0); }
+}
+
+.rk-cta {
+  padding: 13px 22px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Shared reklama content CTA — bold. Width matches the hero button because they
+   all share the "Chci více poptávek" label and the same .btn horizontal padding
+   (26px), auto-width on every breakpoint. Loaded globally via this always-present
+   header stylesheet. */
+.rk-btn {
+  font-weight: 600;
+}
+
+/* Tablet — hide the badge */
+@media (max-width: 720px) {
+  .rk-badge {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .rk-cta {
+    padding: 12px 18px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rk-dot {
+    animation: none;
+  }
+}

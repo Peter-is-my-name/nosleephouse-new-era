@@ -1,0 +1,148 @@
+.wp {
+  background: var(--teal);
+  padding-block: clamp(72px, 9vw, 128px);
+}
+
+.wp-head {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.wp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.75);
+}
+.wp-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.wp-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(38px, 4.8vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: var(--white);
+}
+.wp-heading .accent {
+  font-size: 1.12em;
+}
+
+/* Services-style image cards */
+.wp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 2.2vw, 32px);
+}
+.wp-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.35s var(--ease-out);
+}
+.wp-card.reveal-scale {
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+}
+.wp-card:hover {
+  border-color: rgba(178, 251, 88, 0.28);
+}
+
+.wp-card-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.wp-card-img {
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
+}
+.wp-card:hover .wp-card-img {
+  transform: scale(1.05);
+}
+.wp-card-num {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 11px;
+  background: var(--green);
+  color: var(--teal);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
+}
+
+.wp-card-text {
+  padding: clamp(22px, 2.6vw, 34px);
+  font-family: var(--font-hel);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.wp-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+/* Phone — switch to compact horizontal cards (image left, text right) so the
+   section is far less tall/scrollable than 4 stacked image cards. */
+@media (max-width: 760px) {
+  .wp-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .wp-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .wp-card-media {
+    flex: 0 0 40%;
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+  .wp-card-num {
+    top: 10px;
+    left: 10px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  .wp-card-text {
+    flex: 1;
+    padding: 18px 18px 18px 20px;
+    font-size: 15.5px;
+    align-self: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .wp-card-text {
+    font-size: 14.5px;
+    padding: 14px 14px 14px 16px;
+  }
+}

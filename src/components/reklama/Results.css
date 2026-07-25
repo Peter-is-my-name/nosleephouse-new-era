@@ -1,0 +1,147 @@
+.rs {
+  background: var(--teal);
+  padding-block: clamp(56px, 8vw, 110px);
+}
+
+.rs-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(38px, 4.8vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.rs-heading .accent {
+  font-size: 1.1em;
+}
+
+/* Static showcase card — not a link, no hover. Sharp corners to match the site. */
+.rs-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+}
+
+.rs-card-media {
+  position: relative;
+  min-height: 300px;
+}
+.rs-card-img {
+  object-fit: cover;
+}
+
+.rs-card-body {
+  padding: clamp(28px, 3.5vw, 52px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rs-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+.rs-card-title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(24px, 2.6vw, 34px);
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+.rs-card-text {
+  font-family: var(--font-hel);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 26px;
+}
+.rs-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.rs-stat {
+  text-align: center;
+  padding: 16px 8px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+}
+.rs-stat-value {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 26px);
+  color: var(--green);
+}
+.rs-stat-label {
+  font-family: var(--font-hel);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 4px;
+}
+
+/* ── Logos ── */
+.rs-logos {
+  margin-top: clamp(44px, 6vw, 72px);
+}
+.rs-logos-label {
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 28px;
+}
+.rs-logos-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(32px, 5vw, 64px);
+}
+/* Match the LogosMarquee treatment: grayscale + brightness (not a hard invert),
+   with explicit width AND height per logo so width="100%" SVGs never stretch. */
+.rs-logo {
+  display: block;
+  object-fit: contain;
+  opacity: 0.55;
+  filter: grayscale(1) brightness(1.5);
+}
+.rs-logo.l-rex     { height: 34px; width: 116px; }  /* realityexpo 135.9×40 */
+.rs-logo.l-forbes  { height: 28px; width: 111px; }  /* forbes 119×30 */
+.rs-logo.l-coex    { height: 30px; width: 45px; }   /* coex 51.3×34.5 */
+.rs-logo.l-eld     { height: 19px; width: 151px; }  /* eldenea 175×22 */
+.rs-logo.l-atalian { height: 34px; width: 70px; }   /* atalian 205×99 */
+.rs-logo.l-abra    { height: 26px; width: 79px; }   /* abra 164×54 */
+
+@media (max-width: 860px) {
+  .rs-card {
+    grid-template-columns: 1fr;
+  }
+  .rs-card-media {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rs-card-text {
+    font-size: 16px;
+  }
+  .rs-stat-value {
+    font-size: 22px;
+  }
+}

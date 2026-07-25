@@ -64,7 +64,8 @@ const ITEMS: T[] = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({ limit }: { limit?: number } = {}) {
+  const items = typeof limit === 'number' ? ITEMS.slice(0, limit) : ITEMS
   return (
     <section className="testimonials">
       <div className="container tm-grid">
@@ -80,7 +81,7 @@ export default function Testimonials() {
         </div>
 
         <div className="tm-list">
-          {ITEMS.map((t, i) => (
+          {items.map((t, i) => (
             <article
               className="tm-card"
               key={i}
