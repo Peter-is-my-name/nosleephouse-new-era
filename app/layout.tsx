@@ -29,7 +29,9 @@ export const metadata: Metadata = {
   },
   description:
     'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding. Spouštíme za 7 dní.',
-  icons: { icon: '/favicon.svg' },
+  // Favicon + Apple icon come from the file conventions app/icon.svg and
+  // app/apple-icon.png (same setup as the old site). The brand logo PNG lives
+  // at /icon-nsh.png.
   verification: {
     // Meta (Facebook) Business domain verification — renders
     // <meta name="facebook-domain-verification" ...> in <head> on every page.
