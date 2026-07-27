@@ -93,41 +93,44 @@ function buildClientThankYouEmail(body: FormPayload) {
   const greeting = firstName ? `Ahoj ${firstName},` : 'Ahoj,'
 
   const html = `
-  <div style="background:#0a0a0a;padding:32px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-    <div style="max-width:600px;margin:0 auto;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden;">
-      <div style="background:#0a0a0a;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,0.07);">
-        <span style="color:#B2FB58;font-weight:800;font-size:15px;letter-spacing:-0.02em;">nosleephouse</span>
+  <div style="background:#1a2f2f;padding:40px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <div style="max-width:600px;margin:0 auto;background:#142020;border:1px solid rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;">
+      <div style="padding:26px 34px;border-bottom:1px solid rgba(255,255,255,0.08);">
+        <span style="color:#b2fb58;font-weight:800;font-size:17px;letter-spacing:-0.02em;">nosleephouse</span>
       </div>
-      <div style="padding:36px 32px;">
-        <span style="display:inline-block;background:#B2FB58;color:#0a0a0a;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:6px;margin-bottom:20px;">
+      <div style="padding:40px 34px;">
+        <span style="display:inline-block;background:#b2fb58;color:#1a2f2f;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:2px;margin-bottom:24px;">
           Poptávka přijata
         </span>
-        <h1 style="color:#fafafa;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.35;">
+        <h1 style="color:#ffffff;font-size:25px;font-weight:700;margin:0 0 20px;line-height:1.3;letter-spacing:-0.02em;">
           ${greeting}<br>děkujeme za váš čas.
         </h1>
-        <p style="color:#c9c9c9;font-size:15px;line-height:1.7;margin:0 0 16px;">
+        <p style="color:rgba(255,255,255,0.72);font-size:15px;line-height:1.75;margin:0 0 18px;">
           Vaši poptávku jsme právě přijali a už se na ni díváme. Ozveme se vám
-          do <strong style="color:#fafafa;">24 hodin</strong> s konkrétními
+          do <strong style="color:#ffffff;">24 hodin</strong> s konkrétními
           návrhy na míru tomu, co jste nám o svém webu prozradili.
         </p>
-        <p style="color:#c9c9c9;font-size:15px;line-height:1.7;margin:0 0 28px;">
-          Pokud jste si už vybrali termín konzultace v kalendáři, uvidíme se
-          tam — pokud ne, klidně odpovězte na tento e-mail a domluvíme se.
+        <p style="color:rgba(255,255,255,0.72);font-size:15px;line-height:1.75;margin:0 0 30px;">
+          Pokud jste si už vybrali termín v kalendáři, skvěle, uvidíme se na
+          schůzce. Pokud ne, ozveme se vám do 24 hodin a termín domluvíme společně.
         </p>
-        <div style="background:#0a0a0a;border:1px solid rgba(178,251,88,0.25);border-radius:10px;padding:18px 20px;margin-bottom:8px;">
-          <p style="color:#B2FB58;font-size:13px;font-weight:600;margin:0 0 4px;">Co bude dál?</p>
-          <p style="color:#a1a1a1;font-size:13px;line-height:1.6;margin:0;">
+        <div style="background:rgba(178,251,88,0.06);border:1px solid rgba(178,251,88,0.22);border-radius:2px;padding:20px 22px;">
+          <p style="color:#b2fb58;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:0 0 8px;">Co bude dál?</p>
+          <p style="color:rgba(255,255,255,0.68);font-size:14px;line-height:1.65;margin:0;">
             Projdeme si vaše zadání, připravíme prvotní návrh řešení a probereme
-            ho spolu na krátkém hovoru — bez závazků.
+            ho spolu na krátkém hovoru bez závazků.
           </p>
         </div>
       </div>
-      <div style="padding:20px 32px;border-top:1px solid rgba(255,255,255,0.07);">
-        <p style="color:#4a4a4a;font-size:12px;margin:0;">
-          S pozdravem,<br><span style="color:#7a7a7a;">tým nosleephouse</span>
+      <div style="padding:22px 34px;border-top:1px solid rgba(255,255,255,0.08);">
+        <p style="color:rgba(255,255,255,0.4);font-size:12px;margin:0;line-height:1.6;">
+          S pozdravem,<br><span style="color:rgba(255,255,255,0.7);">tým nosleephouse</span>
         </p>
       </div>
     </div>
+    <p style="max-width:600px;margin:18px auto 0;color:rgba(255,255,255,0.32);font-size:11px;text-align:center;">
+      nosleephouse s.r.o. &middot; nosleephouse@gmail.com
+    </p>
   </div>`
 
   const text = [
@@ -135,7 +138,9 @@ function buildClientThankYouEmail(body: FormPayload) {
     '',
     'Vaši poptávku jsme právě přijali a už se na ni díváme. Ozveme se vám do 24 hodin s konkrétními návrhy na míru tomu, co jste nám o svém webu prozradili.',
     '',
-    'Pokud jste si už vybrali termín konzultace v kalendáři, uvidíme se tam — pokud ne, klidně odpovězte na tento e-mail a domluvíme se.',
+    'Pokud jste si už vybrali termín v kalendáři, skvěle, uvidíme se na schůzce. Pokud ne, ozveme se vám do 24 hodin a termín domluvíme společně.',
+    '',
+    'Co bude dál? Projdeme si vaše zadání, připravíme prvotní návrh řešení a probereme ho spolu na krátkém hovoru bez závazků.',
     '',
     'S pozdravem,',
     'tým nosleephouse',
@@ -213,7 +218,7 @@ export async function POST(req: NextRequest) {
       const clientRes = await sendEmail({
         apiKey,
         to: clientEmail,
-        subject: 'Děkujeme za vaši poptávku — ozveme se do 24 hodin',
+        subject: 'Děkujeme za vaši důvěru. První krok k více zákazníkům je za vámi.',
         html: clientHtml,
         text: clientText,
       })

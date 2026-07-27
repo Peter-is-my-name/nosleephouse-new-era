@@ -31,7 +31,7 @@ export default function FinalCTA() {
           <p className="fcta-sub">Klikněte na tlačítko a objednejte se na nezávaznou konzultaci.</p>
 
           <a href="#konzultace" onClick={toForm} className="btn btn-primary fcta-btn rk-btn">
-            Chceme více poptávek
+            Chci více poptávek
             <ArrowRight size={10} />
           </a>
 

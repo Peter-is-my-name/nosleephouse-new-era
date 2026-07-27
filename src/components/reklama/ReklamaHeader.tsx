@@ -35,7 +35,7 @@ export default function ReklamaHeader() {
             Návrh webu zdarma
           </span>
           <a href="#konzultace" onClick={toForm} className="btn btn-primary rk-cta">
-            Chceme více poptávek
+            Chci více poptávek
             <ArrowRight size={9} />
           </a>
         </div>
