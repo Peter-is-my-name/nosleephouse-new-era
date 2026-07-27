@@ -30,6 +30,13 @@ export const metadata: Metadata = {
   description:
     'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding. Spouštíme za 7 dní.',
   icons: { icon: '/favicon.svg' },
+  verification: {
+    // Meta (Facebook) Business domain verification — renders
+    // <meta name="facebook-domain-verification" ...> in <head> on every page.
+    other: {
+      'facebook-domain-verification': 'jh93n908qqyjbbiaar4802u66z6a5x',
+    },
+  },
   openGraph: {
     type: 'website',
     locale: 'cs_CZ',
