@@ -88,15 +88,15 @@ export default function ThankYou() {
 
       <main className="ty-main">
         <div className="ty-check" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 6 9 17l-5-5" />
           </svg>
         </div>
 
         <h1 className="ty-heading">Rezervujte si svůj termín konzultace níže 👇</h1>
         <p className="ty-sub">
-          Berte to vážně, jak je to jen možné. Každý den mám jen několik setkání, skutečně chci
-          předat hodnotu, takže si vyberte termín, kdy máte 100&nbsp;% čas.
+          Berte to vážně, jak je to jen možné. Každý den máme jen několik setkání a skutečně vám
+          chceme předat hodnotu, takže si vyberte termín, kdy máte 100&nbsp;% čas.
         </p>
 
         <div className="ty-calendly">

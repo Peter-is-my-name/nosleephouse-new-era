@@ -14,7 +14,7 @@ import RevealInit from '@/components/RevealInit'
 export const metadata: Metadata = {
   title: 'Získejte nárůst poptávek díky modernímu webu za 7 dní',
   description:
-    'Moderní web, který přivádí zákazníky — od návrhu po spuštění za 7 dní. Rezervujte si nezávaznou konzultaci zdarma. Odpovíme do 24 hodin.',
+    'Moderní web, který přivádí zákazníky, od návrhu po spuštění za 7 dní. Rezervujte si nezávaznou konzultaci zdarma. Odpovíme do 24 hodin.',
 }
 
 export default function ReklamaPage() {

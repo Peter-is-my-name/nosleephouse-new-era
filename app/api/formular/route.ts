@@ -175,8 +175,8 @@ export async function POST(req: NextRequest) {
     const isPartial = body.partial === true
 
     const subject = isPartial
-      ? `[NSH] Nezavřený formulář — ${body.email ?? 'neznámý'}`
-      : `[NSH] Nová poptávka — ${body.name ?? ''} (${body.email ?? '-'})`.trim()
+      ? `[NSH] Nezavřený formulář: ${body.email ?? 'neznámý'}`
+      : `[NSH] Nová poptávka: ${body.name ?? ''} (${body.email ?? '-'})`.trim()
 
     const apiKey = process.env.RESEND_API_KEY
     // Graceful stub: without a key we can't send, but the lead flow must still

@@ -30,7 +30,7 @@ export default function Results() {
           <div className="rs-card-media">
             <Image
               src="/assets/reklama/reality-expo-event.webp"
-              alt="Reality EXPO — veletrh plný návštěvníků"
+              alt="Reality EXPO, veletrh plný návštěvníků"
               fill
               className="rs-card-img"
               sizes="(max-width: 860px) 100vw, 50vw"

@@ -49,7 +49,7 @@ export default function ReklamaHero() {
 
           <div className="rk-hero-actions reveal" style={{ '--d': '0.44s' } as CSSProperties}>
             <a href="#konzultace" onClick={toForm} className="btn btn-primary hero-btn rk-btn">
-              Chci více poptávek
+              Chceme více poptávek
               <ArrowRight size={10} />
             </a>
           </div>

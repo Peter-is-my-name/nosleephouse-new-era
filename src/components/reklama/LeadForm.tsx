@@ -359,7 +359,7 @@ export default function LeadForm() {
               </>
             ) : (
               <>
-                Chci více poptávek
+                Chceme více poptávek
                 <ArrowRight size={10} />
               </>
             )}

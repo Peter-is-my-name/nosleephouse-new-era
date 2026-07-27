@@ -64,7 +64,7 @@ export default function WhyPartner() {
 
         <div className="wp-cta reveal">
           <a href="#konzultace" onClick={toForm} className="btn btn-primary rk-btn">
-            Chci více poptávek
+            Chceme více poptávek
             <ArrowRight size={10} />
           </a>
         </div>
