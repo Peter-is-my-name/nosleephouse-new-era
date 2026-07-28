@@ -6,14 +6,14 @@ import CookieDialog from '../../../src/components/CookieDialog';
 import RevealInit from '../../../src/components/RevealInit';
 
 export const metadata: Metadata = {
-  title: 'Reality EXPO — Případová studie',
+  title: 'Reality EXPO: Případová studie',
   description:
-    'Branding, web a digitální kampaň pro největší veletrh nemovitostí v ČR. Weinhold Legal × nosleephouse™.',
+    'Branding, web a digitální kampaň pro realitní event Reality Expo v Bratislavě. Reality Expo × nosleephouse™.',
   openGraph: {
-    title: 'Reality EXPO — Případová studie | nosleephouse™',
+    title: 'Reality EXPO: Případová studie | nosleephouse™',
     description:
       'Branding, web a digitální kampaň, které rozjely celý veletrh. Přečtěte si, jak jsme to udělali.',
-    images: [{ url: '/assets/portfolio/reality-expo.jpg' }],
+    images: [{ url: '/assets/reklama/reality-expo-event.webp' }],
   },
 };
 
