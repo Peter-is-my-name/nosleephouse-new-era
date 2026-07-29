@@ -10,7 +10,7 @@ type Review = {
   companyUrl: string;
   avatar: string;
   quote: string;
-  logo?: { src: string; alt: string };
+  logo?: { src: string; alt: string; h?: number };
 };
 
 const REVIEWS: Review[] = [
@@ -20,7 +20,7 @@ const REVIEWS: Review[] = [
     company: 'aparsia.cz',
     companyUrl: 'https://aparsia.cz',
     avatar: '/assets/testimonials/dominika.jpg',
-    logo: { src: '/assets/testimonials/aparsia-logo.png', alt: 'Aparsia' },
+    logo: { src: '/assets/testimonials/aparsia-logo.png', alt: 'Aparsia', h: 46 },
     quote:
       '„Martin byl skvělý od prvého kontaktu. Celý proces byl rychlý, komunikace bezproblémová a výsledný web přesně odráží můj styl. Líbilo se mi, že nevytvářeli jen hezký web. Přemýšleli nad tím, co nám přinese klienty. Výsledky to potvrdily.“',
   },
@@ -68,7 +68,7 @@ const REVIEWS: Review[] = [
 
 function Chevron({ dir }: { dir: 'left' | 'right' }) {
   return (
-    <svg width="9" height="16" viewBox="0 0 9 16" fill="none" aria-hidden="true">
+    <svg width="11" height="20" viewBox="0 0 9 16" fill="none" aria-hidden="true">
       <path
         d={dir === 'left' ? 'M8 1 1 8l7 7' : 'M1 1l7 7-7 7'}
         stroke="currentColor"
@@ -84,37 +84,40 @@ const N = REVIEWS.length;
 
 export default function Reviews() {
   const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const [translate, setTranslate] = useState(0);
+  const [cardW, setCardW] = useState(374);
+  const [gap, setGap] = useState(40);
+  const [step, setStep] = useState(414);
   const [maxIndex, setMaxIndex] = useState(0);
   const [ready, setReady] = useState(false);
 
-  // Bounded (non-looping) carousel. The first card lines up with the header's
-  // left edge; cards bleed off the right and the track stops once the last card
-  // is fully in view.
+  // Bounded carousel with a guaranteed peek of the next card. The first card
+  // lines up with the header; the card width is computed so ~3 cards fit plus a
+  // visible sliver of the next, which signals there is more to scroll.
   const measure = useCallback(() => {
     const vp = viewportRef.current;
-    const tr = trackRef.current;
     const hd = headRef.current;
-    if (!vp || !tr || !hd || tr.children.length < 1) return;
+    if (!vp || !hd) return;
     const vpW = vp.clientWidth;
     const inset = hd.getBoundingClientRect().left - vp.getBoundingClientRect().left;
-    const c0 = tr.children[0] as HTMLElement;
-    const cardW = c0.getBoundingClientRect().width;
-    const step =
-      tr.children.length > 1
-        ? (tr.children[1] as HTMLElement).offsetLeft - c0.offsetLeft
-        : cardW;
-    const gap = step - cardW;
-    const trackW = N * cardW + (N - 1) * gap;
+    const contentW = Math.max(0, vpW - 2 * inset);
+    const visible = contentW >= 900 ? 3 : contentW >= 600 ? 2 : 1;
+    const g = contentW >= 600 ? 40 : 20;
+    const peek = visible > 1 ? 72 : 56; // px of the next card kept visible
+    const cw = Math.max(240, Math.round((contentW - peek - (visible - 1) * g) / visible));
+    const st = cw + g;
+    const trackW = N * cw + (N - 1) * g;
     const maxT = inset;
     const minT = Math.min(inset, vpW - inset - trackW);
-    const maxI = Math.max(0, Math.ceil((maxT - minT) / step));
+    const maxI = Math.max(0, Math.ceil((maxT - minT) / st));
     const idx = Math.min(index, maxI);
+    setCardW(cw);
+    setGap(g);
+    setStep(st);
     setMaxIndex(maxI);
-    setTranslate(Math.max(minT, maxT - idx * step));
+    setTranslate(Math.max(minT, maxT - idx * st));
     if (idx !== index) setIndex(idx);
     setReady(true);
   }, [index]);
@@ -145,17 +148,20 @@ export default function Reviews() {
       <div className={`rvw-viewport${ready ? ' is-ready' : ''}`} ref={viewportRef}>
         <div
           className="rvw-track"
-          ref={trackRef}
           style={{
+            gap: `${gap}px`,
             transform: `translate3d(${translate}px, 0, 0)`,
             transition: 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
           {REVIEWS.map((r, i) => (
-            <article className="rvw-card" key={i}>
+            <article className="rvw-card" key={i} style={{ width: `${cardW}px` }}>
               <div className="rvw-card-body">
                 {r.logo && (
-                  <div className="rvw-logo">
+                  <div
+                    className="rvw-logo"
+                    style={r.logo.h ? { height: `${r.logo.h}px` } : undefined}
+                  >
                     <img src={r.logo.src} alt={r.logo.alt} draggable={false} />
                   </div>
                 )}
@@ -166,8 +172,8 @@ export default function Reviews() {
                   className="rvw-avatar"
                   src={r.avatar}
                   alt={r.name}
-                  width={64}
-                  height={64}
+                  width={56}
+                  height={56}
                   loading="lazy"
                   draggable={false}
                 />
@@ -200,6 +206,7 @@ export default function Reviews() {
           >
             <Chevron dir="left" />
           </button>
+
           <button
             type="button"
             className="rvw-arrow"

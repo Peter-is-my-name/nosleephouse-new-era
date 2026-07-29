@@ -144,8 +144,9 @@
   margin-top: clamp(32px, 4vw, 48px);
 }
 .blog-arrow {
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
   padding: 8px;
   background: #fff;
   border: none;

@@ -21,7 +21,7 @@ function ArrowUpRight() {
 
 function Chevron({ dir }: { dir: 'left' | 'right' }) {
   return (
-    <svg width="9" height="16" viewBox="0 0 9 16" fill="none" aria-hidden="true">
+    <svg width="11" height="20" viewBox="0 0 9 16" fill="none" aria-hidden="true">
       <path
         d={dir === 'left' ? 'M8 1 1 8l7 7' : 'M1 1l7 7-7 7'}
         stroke="currentColor"

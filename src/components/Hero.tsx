@@ -38,7 +38,7 @@ export default function Hero() {
               Digitální partner
             </span>
             <span className="line line-two reveal" style={{ '--d': '0.28s' } as CSSProperties}>
-              pro majitele <span className="accent">biznisu</span>
+              pro majitele <span className="accent">firem</span>
             </span>
           </h1>
 

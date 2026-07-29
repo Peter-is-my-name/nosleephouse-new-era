@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useCallback, type CSSProperties } from 'react';
+import { useState, useRef, useCallback, useEffect, type CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowRight, Logo } from './icons';
@@ -12,25 +12,6 @@ const isValidPhone = (v: string) => /^\d{9}$/.test(v.replace(/\s+/g, ''))
 const PHONE_COUNTRIES = [
   { code: '+420', flag: '🇨🇿', label: 'CZ' },
   { code: '+421', flag: '🇸🇰', label: 'SK' },
-] as const
-
-const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as const
-
-const WEBSITE_OPTIONS = [
-  'Prezentační stránku',
-  'Komplexnější vícestránkový web',
-  'Firemní web',
-  'Reklamní web (jednostránkový web)',
-  'E-shop',
-  'Už webovou stránku mám, ale potřebuji ji zlepšit.',
-  'Chci s vámi probrat něco jiného.',
-] as const
-
-const BUDGET_OPTIONS = [
-  'Mám k dispozici více než 50 000 Kč a chci investovat do komplexního dokončení a spuštění webu.',
-  'Mám bokem alespoň 30 000 Kč a chtěl bych investovat do celkového dokončení nového webu.',
-  'Mám bokem jen 15 000 Kč a potřeboval bych z toho na dokončení něco vykouzlit.',
-  'Bohužel si teď nemohu dovolit investovat další peníze do dokončení a spuštění webu.',
 ] as const
 
 const FOUNDERS = [
@@ -53,75 +34,62 @@ const FOUNDERS = [
 ]
 
 interface FormData {
-  email: string
   firstName: string
   lastName: string
+  email: string
   phone: string
   phonePrefix: string
-  websiteType: string
-  budget: string
+  message: string
 }
 type FormErrors = Partial<Record<keyof FormData, string>>
 
 const EMPTY: FormData = {
-  email: '',
   firstName: '',
   lastName: '',
+  email: '',
   phone: '',
   phonePrefix: '+420',
-  websiteType: '',
-  budget: '',
-}
-
-function OptionBtn({
-  label,
-  letter,
-  selected,
-  onClick,
-}: {
-  label: string
-  letter: string
-  selected: boolean
-  onClick: () => void
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`contact-opt${selected ? ' selected' : ''}`}
-      aria-pressed={selected}
-    >
-      <span className="contact-opt-letter">{letter}</span>
-      <span className="contact-opt-label">{label}</span>
-      {selected && (
-        <svg className="contact-opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      )}
-    </button>
-  )
+  message: '',
 }
 
 export default function ContactCTA() {
   const router = useRouter()
   const [data, setData] = useState<FormData>(EMPTY)
   const [errors, setErrors] = useState<FormErrors>({})
-  const [revealed, setRevealed] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [prefixOpen, setPrefixOpen] = useState(false)
   const partialSent = useRef(false)
+  const prefixRef = useRef<HTMLDivElement>(null)
+
+  const currentPrefix =
+    PHONE_COUNTRIES.find((c) => c.code === data.phonePrefix) ?? PHONE_COUNTRIES[0]
+
+  // Close the custom prefix dropdown on outside click / Escape.
+  useEffect(() => {
+    if (!prefixOpen) return
+    const onDown = (e: MouseEvent) => {
+      if (prefixRef.current && !prefixRef.current.contains(e.target as Node)) {
+        setPrefixOpen(false)
+      }
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setPrefixOpen(false)
+    }
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [prefixOpen])
 
   const setField = <K extends keyof FormData>(key: K, val: FormData[K]) => {
     setData((d) => ({ ...d, [key]: val }))
     setErrors((e) => ({ ...e, [key]: undefined }))
   }
 
-  const handleLastName = (v: string) => {
-    setField('lastName', v)
-    if (v.length > 0 && !revealed) setRevealed(true)
-  }
-
-  // Partial capture — once a valid email + name exist, fire a best-effort lead
-  // so an abandoned form still reaches the inbox. No Meta tracking here.
+  // Partial capture — once a valid email exists, fire a best-effort lead so an
+  // abandoned form still reaches the inbox. No Meta tracking here.
   const handleEmailBlur = useCallback(() => {
     if (isValidEmail(data.email) && !partialSent.current) {
       partialSent.current = true
@@ -142,20 +110,14 @@ export default function ContactCTA() {
 
   const validate = (): FormErrors => {
     const e: FormErrors = {}
-    if (!isValidEmail(data.email)) e.email = 'Zadejte platný e-mail.'
     if (!data.firstName.trim()) e.firstName = 'Vyplňte jméno.'
     if (!data.lastName.trim()) e.lastName = 'Vyplňte příjmení.'
+    if (!isValidEmail(data.email)) e.email = 'Zadejte platný e-mail.'
     if (!isValidPhone(data.phone)) e.phone = 'Zadejte platné číslo (9 číslic).'
-    if (!data.websiteType) e.websiteType = 'Vyberte typ webu.'
-    if (!data.budget) e.budget = 'Vyberte rozpočet.'
     return e
   }
 
   const handleSubmit = async () => {
-    if (!revealed) {
-      setRevealed(true)
-      return
-    }
     const errs = validate()
     if (Object.keys(errs).length) {
       setErrors(errs)
@@ -195,21 +157,6 @@ export default function ContactCTA() {
 
         <div className="contact-grid">
           <div className="contact-form reveal" style={{ '--d': '0.1s' } as CSSProperties}>
-            <div className="field">
-              <label htmlFor="cf-email">E-mail *</label>
-              <input
-                id="cf-email"
-                type="email"
-                value={data.email}
-                onChange={(e) => setField('email', e.target.value)}
-                onBlur={handleEmailBlur}
-                placeholder="vas@email.cz"
-                autoComplete="email"
-                className={errors.email ? 'err' : undefined}
-              />
-              {errors.email && <p className="contact-error">{errors.email}</p>}
-            </div>
-
             <div className="contact-row2">
               <div className="field">
                 <label htmlFor="cf-first">Jméno *</label>
@@ -230,7 +177,7 @@ export default function ContactCTA() {
                   id="cf-last"
                   type="text"
                   value={data.lastName}
-                  onChange={(e) => handleLastName(e.target.value)}
+                  onChange={(e) => setField('lastName', e.target.value)}
                   placeholder="Novák"
                   autoComplete="family-name"
                   className={errors.lastName ? 'err' : undefined}
@@ -239,72 +186,120 @@ export default function ContactCTA() {
               </div>
             </div>
 
-            {/* Progressive reveal */}
-            <div className={`contact-reveal${revealed ? ' open' : ''}`} aria-hidden={!revealed}>
-              <div className="contact-reveal-inner">
-                <div className="field">
-                  <label htmlFor="cf-phone">Telefon *</label>
-                  <div className={`contact-phone${errors.phone ? ' err' : ''}`}>
-                    <select
-                      aria-label="Předvolba"
-                      className="contact-prefix"
-                      value={data.phonePrefix}
-                      onChange={(e) => setField('phonePrefix', e.target.value)}
-                      tabIndex={revealed ? 0 : -1}
-                    >
-                      {PHONE_COUNTRIES.map((c) => (
-                        <option key={c.code} value={c.code}>
-                          {c.flag} {c.code}
-                        </option>
-                      ))}
-                    </select>
-                    <span className="contact-phone-sep" aria-hidden="true" />
-                    <input
-                      id="cf-phone"
-                      type="tel"
-                      value={data.phone}
-                      onChange={(e) => setField('phone', e.target.value)}
-                      placeholder="608 123 456"
-                      autoComplete="tel-national"
-                      tabIndex={revealed ? 0 : -1}
-                      className="contact-phone-input"
-                    />
-                  </div>
-                  {errors.phone && <p className="contact-error">{errors.phone}</p>}
-                </div>
-
-                <div className="field">
-                  <p className="contact-qlabel">Jaký typ webu potřebujete? *</p>
-                  <div className="contact-opts">
-                    {WEBSITE_OPTIONS.map((opt, i) => (
-                      <OptionBtn
-                        key={opt}
-                        label={opt}
-                        letter={OPTION_LETTERS[i]}
-                        selected={data.websiteType === opt}
-                        onClick={() => setField('websiteType', opt)}
-                      />
-                    ))}
-                  </div>
-                  {errors.websiteType && <p className="contact-error">{errors.websiteType}</p>}
-                </div>
-
-                <div className="field">
-                  <p className="contact-qlabel">S jakým rozpočtem počítáte? *</p>
-                  <div className="contact-opts">
-                    {BUDGET_OPTIONS.map((opt, i) => (
-                      <OptionBtn
-                        key={opt}
-                        label={opt}
-                        letter={OPTION_LETTERS[i]}
-                        selected={data.budget === opt}
-                        onClick={() => setField('budget', opt)}
-                      />
-                    ))}
-                  </div>
-                  {errors.budget && <p className="contact-error">{errors.budget}</p>}
-                </div>
+            <div className="contact-row2">
+              <div className="field">
+                <label htmlFor="cf-email">E-mail *</label>
+                <input
+                  id="cf-email"
+                  type="email"
+                  value={data.email}
+                  onChange={(e) => setField('email', e.target.value)}
+                  onBlur={handleEmailBlur}
+                  placeholder="vas@email.cz"
+                  autoComplete="email"
+                  className={errors.email ? 'err' : undefined}
+                />
+                {errors.email && <p className="contact-error">{errors.email}</p>}
               </div>
+              <div className="field">
+                <label htmlFor="cf-phone">Telefon *</label>
+                <div className={`contact-phone${errors.phone ? ' err' : ''}`}>
+                  <div className="contact-prefix" ref={prefixRef}>
+                    <button
+                      type="button"
+                      className="contact-prefix-btn"
+                      onClick={() => setPrefixOpen((o) => !o)}
+                      aria-haspopup="listbox"
+                      aria-expanded={prefixOpen}
+                      aria-label={`Předvolba ${currentPrefix.code}`}
+                    >
+                      <span className="contact-prefix-flag">{currentPrefix.flag}</span>
+                      <span className="contact-prefix-code">{currentPrefix.code}</span>
+                      <svg
+                        className={`contact-prefix-caret${prefixOpen ? ' open' : ''}`}
+                        width="11"
+                        height="7"
+                        viewBox="0 0 11 7"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M1 1.5 5.5 6l4.5-4.5"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    {prefixOpen && (
+                      <ul className="contact-prefix-menu" role="listbox">
+                        {PHONE_COUNTRIES.map((c) => {
+                          const active = c.code === data.phonePrefix
+                          return (
+                            <li key={c.code} role="option" aria-selected={active}>
+                              <button
+                                type="button"
+                                className={`contact-prefix-opt${active ? ' selected' : ''}`}
+                                onClick={() => {
+                                  setField('phonePrefix', c.code)
+                                  setPrefixOpen(false)
+                                }}
+                              >
+                                <span className="contact-prefix-flag">{c.flag}</span>
+                                <span className="contact-prefix-code">{c.code}</span>
+                                <span className="contact-prefix-country">{c.label}</span>
+                                {active && (
+                                  <svg
+                                    className="contact-prefix-check"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                  >
+                                    <path
+                                      d="M20 6 9 17l-5-5"
+                                      stroke="currentColor"
+                                      strokeWidth="2.5"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
+                                )}
+                              </button>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                  <span className="contact-phone-sep" aria-hidden="true" />
+                  <input
+                    id="cf-phone"
+                    type="tel"
+                    value={data.phone}
+                    onChange={(e) => setField('phone', e.target.value)}
+                    placeholder="608 123 456"
+                    autoComplete="tel-national"
+                    className="contact-phone-input"
+                  />
+                </div>
+                {errors.phone && <p className="contact-error">{errors.phone}</p>}
+              </div>
+            </div>
+
+            <div className="field">
+              <label htmlFor="cf-msg" className="contact-msg-title">
+                S čím vám můžeme pomoci?
+              </label>
+              <textarea
+                id="cf-msg"
+                rows={4}
+                value={data.message}
+                onChange={(e) => setField('message', e.target.value)}
+                placeholder="Stačí pár vět o vašem projektu nebo cíli. Ozveme se do 24 hodin."
+              />
             </div>
 
             <p className="gdpr">
@@ -338,17 +333,21 @@ export default function ContactCTA() {
                 <div className="founder" key={f.name}>
                   <Image className="founder-photo" src={f.photo} alt={f.name} width={210} height={245} loading="lazy" />
                   <div className="founder-info">
-                    <span className="founder-role">{f.role}</span>
-                    <a className="founder-name" href={`mailto:${f.email}`}>
-                      {f.name}
-                    </a>
-                    <span className="founder-reason">{f.reason}</span>
-                    <a className="founder-contact" href={`tel:${f.phone.replace(/\s/g, '')}`}>
-                      {f.phone}
-                    </a>
-                    <a className="founder-contact" href={`mailto:${f.email}`}>
-                      {f.email}
-                    </a>
+                    <div className="founder-top">
+                      <span className="founder-role">{f.role}</span>
+                      <a className="founder-name" href={`mailto:${f.email}`}>
+                        {f.name}
+                      </a>
+                    </div>
+                    <div className="founder-bottom">
+                      <span className="founder-reason">{f.reason}</span>
+                      <a className="founder-contact" href={`tel:${f.phone.replace(/\s/g, '')}`}>
+                        {f.phone}
+                      </a>
+                      <a className="founder-contact" href={`mailto:${f.email}`}>
+                        {f.email}
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}

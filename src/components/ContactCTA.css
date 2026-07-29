@@ -50,6 +50,11 @@
   color: var(--white);
   letter-spacing: -0.1px;
 }
+.contact-msg-title {
+  font-size: 17px !important;
+  font-weight: 500;
+  margin-top: 6px;
+}
 .field input,
 .field textarea {
   width: 100%;
@@ -175,31 +180,124 @@
 .contact-phone.err {
   border-color: #ff6b6b;
 }
+/* custom branded country-prefix dropdown (native <select> can't be styled) */
 .contact-prefix {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+}
+.contact-prefix-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: transparent;
   border: none;
   color: var(--white);
   font-family: var(--font-hel);
   font-size: 15px;
-  padding: 15px 10px 15px 16px;
+  padding: 15px 13px 15px 16px;
   cursor: pointer;
   outline: none;
+  white-space: nowrap;
 }
-.contact-prefix option {
-  color: #141414;
+.contact-prefix-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+.contact-prefix-code {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+.contact-prefix-caret {
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s var(--ease-out), color 0.2s var(--ease-out);
+}
+.contact-prefix-btn:hover .contact-prefix-caret {
+  color: var(--green);
+}
+.contact-prefix-caret.open {
+  transform: rotate(180deg);
+  color: var(--green);
+}
+
+.contact-prefix-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  min-width: 168px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #21393a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.42);
+  animation: contact-prefix-in 0.16s var(--ease-out);
+}
+@keyframes contact-prefix-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+.contact-prefix-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-hel);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.18s var(--ease-out), color 0.18s var(--ease-out);
+}
+.contact-prefix-opt .contact-prefix-flag {
+  font-size: 17px;
+}
+.contact-prefix-opt .contact-prefix-code {
+  font-weight: 500;
+}
+.contact-prefix-country {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12.5px;
+  letter-spacing: 0.05em;
+}
+.contact-prefix-opt:hover {
+  background: rgba(178, 251, 88, 0.12);
+  color: var(--white);
+}
+.contact-prefix-opt.selected {
+  color: var(--green);
+}
+.contact-prefix-opt.selected .contact-prefix-country {
+  color: rgba(178, 251, 88, 0.7);
+}
+.contact-prefix-check {
+  margin-left: auto;
+  color: var(--green);
 }
 .contact-phone-sep {
   width: 1px;
   align-self: stretch;
-  background: var(--line-strong);
-  margin: 8px 0;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 11px 0;
 }
-.contact-phone-input {
+/* higher specificity than `.field input` so the inner input stays borderless
+   (otherwise the global input border draws a nested box-in-box). */
+.contact-phone .contact-phone-input {
   flex: 1;
   min-width: 0;
   background: transparent;
   border: none;
-  padding: 15px 16px;
+  border-radius: 0;
+  padding: 15px 16px 15px 14px;
   font-family: var(--font-hel);
   font-size: 15px;
   color: var(--white);
@@ -319,6 +417,14 @@
 .founder-info {
   display: flex;
   flex-direction: column;
+  gap: 14px; /* role+name and the contact block kept close together, near image bottom */
+  padding-bottom: 4px;
+  min-width: 0;
+}
+.founder-top,
+.founder-bottom {
+  display: flex;
+  flex-direction: column;
 }
 .founder-role {
   font-family: var(--font-sans);
@@ -335,7 +441,6 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: underline;
-  margin-bottom: 16px;
 }
 .founder-name:hover {
   color: var(--green);

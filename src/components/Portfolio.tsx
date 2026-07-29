@@ -9,7 +9,7 @@ const PROJECTS: Project[] = [
     brand: 'Reality Expo',
     title: 'Reality EXPO: Branding, Web a kampaň, které rozjely celý veletrh',
     img: '/assets/reklama/why-4.jpg',
-    pos: 'center 35%',
+    pos: 'center 60%',
     href: '/projekty/reality-expo',
   },
   {
