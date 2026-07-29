@@ -22,7 +22,7 @@ const CHALLENGES = [
   {
     num: '03',
     title: 'Neefektivní kampaně',
-    body: 'PPC běželo bez segmentace publika — vysoké náklady na akvizici a nízká návratnost investice.',
+    body: 'PPC běželo bez segmentace publika, což vedlo k vysokým nákladům na akvizici a nízké návratnosti investice.',
   },
 ] as const;
 
@@ -30,7 +30,7 @@ const DELIVERABLES = [
   {
     num: '01',
     title: 'Brand Identity',
-    body: 'Logo, barevný systém, typografie a grafický jazyk Reality EXPO — profesionální estetika, která zaujme developery, investory i kupující.',
+    body: 'Logo, barevný systém, typografie a grafický jazyk Reality EXPO. Profesionální estetika, která zaujme developery, investory i kupující.',
   },
   {
     num: '02',
@@ -40,12 +40,12 @@ const DELIVERABLES = [
   {
     num: '03',
     title: 'PPC kampaně',
-    body: 'Segmentované kampaně s přesným cílením — méně plýtvání rozpočtem, víc kvalifikovaných registrací.',
+    body: 'Segmentované kampaně s přesným cílením, tedy méně plýtvání rozpočtem, víc kvalifikovaných registrací.',
   },
   {
     num: '04',
     title: 'Event materiály',
-    body: 'Vizuály pro tiskoviny, signage a prezentaci akce na místě — jednotný vizuální jazyk od webu až po vstupní bránu.',
+    body: 'Vizuály pro tiskoviny, signage a prezentaci akce na místě, jednotný vizuální jazyk od webu až po vstupní bránu.',
   },
   {
     num: '05',
@@ -69,12 +69,12 @@ export default function RealityExpoCase() {
         {/* full-bleed background image */}
         <div className="cs-hero-bg" aria-hidden="true">
           <Image
-            src="/assets/portfolio/reality-expo.jpg"
+            src="/assets/reklama/reality-expo-event.webp"
             alt=""
             fill
             priority
             sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center 25%' }}
+            style={{ objectFit: 'cover', objectPosition: 'center 35%' }}
           />
         </div>
         <div className="cs-hero-overlay" aria-hidden="true" />
@@ -89,9 +89,9 @@ export default function RealityExpoCase() {
             </h1>
 
             <p className="cs-hero-desc">
-              Weinhold Legal nás oslovila s výzvou, která spojila tři věci najednou:
-              vizuální identitu veletrhu, funkční web a digitální kampaň, která dovezla
-              rekordní návštěvnost. Vše spuštěno za čtyři týdny.
+              Organizátoři Reality Expo nás oslovili s výzvou, která spojila tři věci
+              najednou: vizuální identitu eventu, funkční web a digitální kampaň, která
+              přivedla rekordní návštěvnost. Vše spuštěno za čtyři týdny.
             </p>
           </div>
 
@@ -99,15 +99,15 @@ export default function RealityExpoCase() {
           <div className="cs-hero-meta" role="list">
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Klient</span>
-              <span className="cs-meta-value">Weinhold Legal</span>
+              <span className="cs-meta-value">Reality Expo</span>
             </div>
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Rok</span>
-              <span className="cs-meta-value">2024</span>
+              <span className="cs-meta-value">2025</span>
             </div>
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Odvětví</span>
-              <span className="cs-meta-value">Nemovitosti · Právo</span>
+              <span className="cs-meta-value">Nemovitosti · Event</span>
             </div>
             <div className="cs-meta-col" role="listitem">
               <span className="cs-meta-label">Služby</span>
@@ -115,7 +115,7 @@ export default function RealityExpoCase() {
             </div>
             <div className="cs-meta-col cs-meta-col--cta" role="listitem">
               <a
-                href="https://weinholdlegal.com"
+                href="https://realityexpo.sk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cs-live-link"
@@ -142,11 +142,10 @@ export default function RealityExpoCase() {
           </div>
           <div className="cs-brief-right">
             <p className="cs-brief-body reveal">
-              Reality EXPO je největší realitní veletrh na Slovensku — místo, kde se
-              každoročně potkávají tisíce kupujících, prodávajících a developerů.
-              Weinhold Legal, klíčový partner akce, nás oslovil s jasným zadáním:
-              kompletní digitální transformace, od brand identity přes web až po
-              výkonnostní kampaně.
+              Reality Expo je realitní event v srdci Bratislavy. V ikonické Staré
+              tržnici se každoročně potkávají tisíce lidí řešících bydlení s předními
+              odborníky v oboru. Organizátoři nás oslovili s jasným zadáním: kompletní
+              digitální transformace, od brand identity přes web až po výkonnostní kampaně.
             </p>
             <p className="cs-brief-body reveal" style={{ '--d': '0.1s' } as CSSProperties}>
               Žádné kompromisy. Žádná generická šablona. Identita, web i kampaně
@@ -194,11 +193,11 @@ export default function RealityExpoCase() {
             <p className="cs-brief-body reveal">
               Vytvořili jsme vlastní typografický systém a ikonografii, které daly
               Reality EXPO jasnou vizuální identitu. Nový web jsme postavili kolem
-              jednoho cíle — registrace: každý prvek stránky vedl k akci.
+              jednoho cíle, registrace. Každý prvek stránky vedl k akci.
             </p>
             <p className="cs-brief-body reveal" style={{ '--d': '0.1s' } as CSSProperties}>
               PPC kampaně jsme přestavěli od základu s přesnou segmentací publika,
-              takže reklama cílila jen na lidi s reálným zájmem — ne na náhodné kliky.
+              takže reklama cílila jen na lidi s reálným zájmem, ne na náhodné kliky.
             </p>
           </div>
         </div>
@@ -209,7 +208,7 @@ export default function RealityExpoCase() {
         <div className="container cs-gallery-grid">
           <div className="cs-gallery-item reveal-scale">
             <div className="cs-placeholder" aria-hidden="true">
-              <span>Placeholder — Brand identita</span>
+              <span>Placeholder: Brand identita</span>
             </div>
           </div>
           <div
@@ -217,7 +216,7 @@ export default function RealityExpoCase() {
             style={{ '--d': '0.08s' } as CSSProperties}
           >
             <div className="cs-placeholder" aria-hidden="true">
-              <span>Placeholder — Reality EXPO 2024 na místě</span>
+              <span>Placeholder: Reality EXPO 2025 na místě</span>
             </div>
           </div>
         </div>
@@ -298,7 +297,7 @@ export default function RealityExpoCase() {
           <a href="/projekty/aparsia" className="cs-next-card reveal-scale">
             <div className="cs-next-media">
               <Image
-                src="/assets/portfolio/aparsia.jpg"
+                src="/assets/reklama/aparsia.png"
                 alt="Aparsia"
                 fill
                 loading="lazy"
@@ -306,7 +305,7 @@ export default function RealityExpoCase() {
               />
             </div>
             <div className="cs-next-info">
-              <span className="cs-next-brand">DARAMIS · 2024</span>
+              <span className="cs-next-brand">Aparsia · 2025</span>
               <h3 className="cs-next-title">
                 Aparsia: Vícejazyčný web, který otevírá realitní trh světu
                 <ArrowRight size={20} />

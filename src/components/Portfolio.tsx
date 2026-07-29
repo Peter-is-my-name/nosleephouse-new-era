@@ -2,30 +2,33 @@ import Image from 'next/image';
 import { ArrowRight } from './icons';
 import './Portfolio.css';
 
-type Project = { brand: string; brandCls?: string; title: string; img: string };
+type Project = { brand: string; brandCls?: string; title: string; img: string; pos?: string; href?: string };
 
 const PROJECTS: Project[] = [
   {
-    brand: 'Weinhold Legal',
+    brand: 'Reality Expo',
     title: 'Reality EXPO: Branding, Web a kampaň, které rozjely celý veletrh',
-    img: '/assets/portfolio/reality-expo.jpg',
+    img: '/assets/reklama/why-4.jpg',
+    pos: 'center 35%',
+    href: '/projekty/reality-expo',
   },
   {
-    brand: 'DARAMIS',
-    brandCls: 'wide',
+    brand: 'Aparsia',
     title: 'Aparsia: Vícejazyčný web, který otevírá realitní trh světu',
-    img: '/assets/portfolio/aparsia.jpg',
+    img: '/assets/reklama/aparsia.png',
+    href: '/projekty/aparsia',
   },
   {
-    brand: 'lumnio',
+    brand: 'DUOPET',
     title: 'DUOPET: Čistý web, který vyzdvihl recyklaci plastů',
-    img: '/assets/portfolio/duopet.jpg',
+    img: '/assets/reklama/duopetcz.jpeg',
+    href: '/projekty/duopet',
   },
   {
-    brand: 'LOXIA',
-    brandCls: 'wide',
+    brand: 'JUN',
     title: 'JUN Matcha: Čistá vizuální identita, která od nuly postavila silnou značku prémiové matchy',
-    img: '/assets/portfolio/jun.jpg',
+    img: '/assets/reklama/junmatcha.png',
+    href: '/projekty/jun-matcha',
   },
 ];
 
@@ -53,13 +56,20 @@ export default function Portfolio() {
         <div className="portfolio-grid">
           {PROJECTS.map((p, i) => (
             <a
-              href={i === 0 ? '/projekty/reality-expo' : '#'}
+              href={p.href ?? '#'}
               className="pf-card reveal-scale"
               key={i}
               style={{ '--d': `${(i % 2) * 0.1}s` } as React.CSSProperties}
             >
               <div className="pf-media">
-                <Image src={p.img} alt={p.title} fill loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" />
+                <Image
+                  src={p.img}
+                  alt={p.title}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 760px) 100vw, 50vw"
+                  style={p.pos ? { objectPosition: p.pos } : undefined}
+                />
                 <span className={`pf-brand${p.brandCls ? ' ' + p.brandCls : ''}`}>{p.brand}</span>
                 <span className="pf-badge">Případová studie</span>
               </div>

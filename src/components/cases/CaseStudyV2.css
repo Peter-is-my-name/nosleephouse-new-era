@@ -1,0 +1,361 @@
+/* ============================================================
+   Case Study V2 — narrative layout
+   Hero is reused from CaseStudy.css (.cs-hero*). Everything below
+   the hero is a fresh, story-driven structure:
+   Lead (s čím přišel) → Problémy → Cíl → Řešení → Výsledky
+   Closers (testimonial / next / cta) reuse CaseStudy.css.
+   Shares the same tokens: --teal --ink --shark --green --white,
+   --font-sans (grotesk), --font-serif (italic accent), --font-hel.
+   ============================================================ */
+
+/* ── LEAD — s čím klient přišel ────────────────────────────── */
+.cs2-lead {
+  background: var(--teal);
+  padding-block: clamp(76px, 9vw, 132px);
+}
+.cs2-lead-inner {
+  max-width: 1000px;
+}
+.cs2-lead-statement {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(30px, 4.6vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.042em;
+  color: var(--white);
+  max-width: 15ch;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+.cs2-lead-statement .accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.06em;
+  letter-spacing: -0.02em;
+}
+.cs2-lead-body {
+  font-family: var(--font-hel);
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 64ch;
+}
+.cs2-lead-body + .cs2-lead-body { margin-top: 1.4em; }
+
+.cs2-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(34px, 4vw, 54px);
+}
+.cs2-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 9px 17px 9px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+}
+.cs2-chip::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+/* ── shared heading for V2 sections ────────────────────────── */
+.cs2-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(32px, 4.4vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.042em;
+  color: var(--white);
+}
+.cs2-heading .accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.07em;
+  letter-spacing: -0.02em;
+}
+
+/* ── PROBLEM — editorial numbered rows w/ impact ───────────── */
+.cs2-problem {
+  background: var(--ink);
+  padding-block: clamp(76px, 9vw, 124px);
+}
+.cs2-problem-head {
+  margin-bottom: clamp(44px, 5.5vw, 72px);
+}
+.cs2-prob-list {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cs2-prob-row {
+  display: grid;
+  grid-template-columns: 84px 1fr 240px;
+  gap: clamp(20px, 3vw, 52px);
+  align-items: start;
+  padding-block: clamp(28px, 3.2vw, 46px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.4s var(--ease-out);
+}
+.cs2-prob-row:hover { background: rgba(255, 255, 255, 0.015); }
+.cs2-prob-num {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 46px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--green);
+}
+.cs2-prob-title {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(20px, 2vw, 27px);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  margin-bottom: 13px;
+}
+.cs2-prob-body {
+  font-family: var(--font-hel);
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 54ch;
+}
+.cs2-prob-impact {
+  align-self: center;
+}
+.cs2-prob-impact-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 7px;
+}
+.cs2-prob-impact-value {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
+/* ── GOAL — objective band on a dark card ──────────────────── */
+.cs2-goal {
+  background: var(--teal);
+  padding-block: clamp(56px, 7vw, 104px);
+}
+.cs2-goal-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  gap: clamp(28px, 5vw, 80px);
+  align-items: center;
+  background: var(--shark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  padding: clamp(40px, 6vw, 92px);
+}
+.cs2-goal-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--green);
+}
+.cs2-goal-statement {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(25px, 3.4vw, 46px);
+  line-height: 1.22;
+  letter-spacing: -0.012em;
+  color: var(--white);
+}
+.cs2-goal-statement .hl { color: var(--green); }
+.cs2-goal-sub {
+  margin-top: clamp(18px, 2vw, 26px);
+  font-family: var(--font-hel);
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.66;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 52ch;
+}
+
+/* ── APPROACH — labeled narrative + delivered chips ────────── */
+.cs2-approach {
+  background: var(--ink);
+  padding-block: clamp(76px, 9vw, 124px);
+}
+.cs2-approach-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(40px, 7vw, 104px);
+  align-items: start;
+}
+.cs2-approach-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(30px, 3.8vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  position: sticky;
+  top: calc(var(--header-h, 88px) + 32px);
+}
+.cs2-approach-heading .accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.08em;
+}
+.cs2-steps {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(30px, 3.6vw, 48px);
+}
+.cs2-step-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 13px;
+}
+.cs2-step-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.cs2-step-body {
+  font-family: var(--font-hel);
+  font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 58ch;
+}
+.cs2-delivered {
+  margin-top: clamp(38px, 4.5vw, 56px);
+  padding-top: clamp(32px, 4vw, 46px);
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+.cs2-delivered-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 18px;
+}
+
+/* ── RESULTS V2 — one hero metric + supporting grid ────────── */
+.cs2-results {
+  background: var(--teal);
+  padding-block: clamp(76px, 9vw, 132px);
+}
+.cs2-results-head {
+  margin-bottom: clamp(48px, 6vw, 76px);
+}
+.cs2-result-hero {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(24px, 4vw, 68px);
+  align-items: center;
+  padding-bottom: clamp(40px, 5vw, 64px);
+  margin-bottom: clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cs2-result-hero-value {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(96px, 16vw, 224px);
+  line-height: 0.78;
+  letter-spacing: -0.055em;
+  color: var(--green);
+}
+.cs2-result-hero-label {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  max-width: 15ch;
+}
+.cs2-result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.cs2-result {
+  background: var(--teal);
+  padding: clamp(30px, 3.6vw, 48px) clamp(22px, 2.6vw, 36px);
+}
+.cs2-result-value {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(34px, 4vw, 54px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.cs2-result-label {
+  font-family: var(--font-hel);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 26ch;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .cs2-approach-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 5vw, 56px);
+  }
+  .cs2-approach-heading { position: static; }
+  .cs2-goal-card {
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+  }
+}
+
+@media (max-width: 760px) {
+  .cs2-prob-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .cs2-prob-num { font-size: 34px; }
+  .cs2-prob-impact {
+    align-self: start;
+    padding-top: 4px;
+  }
+  .cs2-result-hero {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    text-align: left;
+  }
+  .cs2-result-hero-value { font-size: clamp(88px, 34vw, 140px); }
+  .cs2-result-grid { grid-template-columns: 1fr; }
+}
