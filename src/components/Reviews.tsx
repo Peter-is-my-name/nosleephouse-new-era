@@ -22,7 +22,7 @@ const REVIEWS: Review[] = [
     avatar: '/assets/testimonials/dominika.jpg',
     logo: { src: '/assets/testimonials/aparsia-logo.png', alt: 'Aparsia', h: 46 },
     quote:
-      '„Martin byl skvělý od prvého kontaktu. Celý proces byl rychlý, komunikace bezproblémová a výsledný web přesně odráží můj styl. Líbilo se mi, že nevytvářeli jen hezký web. Přemýšleli nad tím, co nám přinese klienty. Výsledky to potvrdily.“',
+      '„Kluci byli skvělí od prvního kontaktu. Celý proces byl rychlý, komunikace bezproblémová a výsledný web přesně odráží můj styl. Líbilo se mi, že nevytvářeli jen hezký web, ale přemýšleli nad tím, co nám přinese klienty. Výsledky to potvrdily.“',
   },
   {
     name: 'Jakub Haidari',

@@ -157,7 +157,7 @@ export default function ContactCTA() {
 
         <div className="contact-grid">
           <div className="contact-form reveal" style={{ '--d': '0.1s' } as CSSProperties}>
-            <div className="contact-row2">
+            <div className="contact-row2 contact-names">
               <div className="field">
                 <label htmlFor="cf-first">Jméno *</label>
                 <input

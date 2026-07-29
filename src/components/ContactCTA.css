@@ -475,4 +475,9 @@
   .contact-row2 {
     grid-template-columns: 1fr;
   }
+  /* keep the short name + surname fields side by side on phones */
+  .contact-row2.contact-names {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
 }

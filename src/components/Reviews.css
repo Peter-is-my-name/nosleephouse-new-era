@@ -163,8 +163,8 @@
   margin-top: clamp(32px, 4vw, 48px);
 }
 .rvw-arrow {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
   padding: 8px;
   background: #fff;
@@ -213,5 +213,9 @@
   .rvw-avatar {
     width: 56px;
     height: 56px;
+  }
+  .rvw-arrow {
+    width: 52px;
+    height: 52px;
   }
 }

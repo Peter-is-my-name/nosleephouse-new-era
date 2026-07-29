@@ -140,12 +140,12 @@
 .blog-nav {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: clamp(16px, 2vw, 24px); /* matched to the reviews section arrow spacing */
   margin-top: clamp(32px, 4vw, 48px);
 }
 .blog-arrow {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
   padding: 8px;
   background: #fff;
@@ -177,5 +177,24 @@
   }
   .blog-title {
     max-width: none;
+  }
+  /* narrow 2-up cards: stack author over date so the meta never overflows
+     the card and touches the neighbouring card */
+  .blog-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  .blog-card-dot {
+    display: none;
+  }
+  .blog-card-author,
+  .blog-card-date {
+    font-size: 13px;
+    white-space: normal;
+  }
+  .blog-arrow {
+    width: 52px;
+    height: 52px;
   }
 }

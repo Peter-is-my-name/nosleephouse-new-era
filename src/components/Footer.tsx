@@ -27,7 +27,7 @@ export default function Footer() {
               <ul>
                 {c.links.map((l) => (
                   <li key={l}>
-                    <a href="#">{l}</a>
+                    <a href={c.head === 'Služby' ? '#contact' : '#'}>{l}</a>
                   </li>
                 ))}
               </ul>

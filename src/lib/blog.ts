@@ -244,8 +244,8 @@ export const POSTS: BlogPost[] = [
     seoDescription:
       'Jak spustíme web za 7 dní: náš proces krok za krokem od úvodní konzultace přes návrh a vývoj až po spuštění a optimalizaci.',
     keywords: ['web za 7 dní', 'tvorba webu proces', 'rychlá tvorba webu', 'jak vzniká web', 'spuštění webu'],
-    cover: '/assets/portfolio/jun.jpg',
-    coverAlt: 'Tým nosleephouse při návrhu webu',
+    cover: '/assets/blog/web-proces.jpg',
+    coverAlt: 'Pracovní stůl s notebookem při tvorbě webu',
     author: AUTHOR,
     authorRole: AUTHOR_ROLE,
     date: '2026-07-14',
