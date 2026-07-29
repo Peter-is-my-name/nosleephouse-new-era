@@ -37,21 +37,14 @@ export default function Portfolio() {
     <section id="portfolio" className="portfolio">
       <div className="container">
         <h2 className="portfolio-heading reveal">
-          Chcete vidět
+          Vybrané projekty
           <br />
-          <span className="accent">všechnu</span> naši práci?
-          <br />
-          Vemte si den volna.
+          z našeho <span className="accent">portfolia.</span>
         </h2>
         <p className="portfolio-lead reveal" style={{ '--d': '0.1s' } as React.CSSProperties}>
-          Říkejte nám, jak chcete, pracanti nebo rychlíci, protože za sebou máme více než{' '}
-          <strong>80 projektů z různých odvětví</strong>. Abyste tu nepromarnili mládí, mrkněte na
-          ty nejnovější.
+          Za sebou máme <strong>150+ projektů z různých odvětví</strong> a pořád nás to baví.
+          Abyste tu nestrávili celý den, tady jsou ty nejnovější.
         </p>
-
-        <h3 className="portfolio-sub reveal">
-          Tyhle weby už <span className="accent">fungují.</span>
-        </h3>
 
         <div className="portfolio-grid">
           {PROJECTS.map((p, i) => (

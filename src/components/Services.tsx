@@ -29,16 +29,16 @@ const SERVICES: Service[] = [
     tags:  ['Logo', 'Print', 'Prezentace'],
   },
   {
-    title: 'Vizuální Identita & AI Kreativy',
-    desc:  'Komplexní vizuální identita posílená AI nástroji pro rychlou a škálovatelnou produkci.',
-    img:   '/assets/services/daramis.jpg',
-    tags:  ['AI Kreativa', 'Brand Identity', 'Reklama'],
+    title: 'Vizuální Identita',
+    desc:  'Komplexní vizuální identita, která vaší značce dá jasný, konzistentní a zapamatovatelný charakter.',
+    img:   '/assets/reklama/aparsia.png',
+    tags:  ['Brand Identity', 'Vizuální styl', 'Reklama'],
   },
   {
-    title: 'AI Automatizace',
+    title: 'AI Automatizace & AI Kreativy',
     desc:  'Propojíme vaše systémy a zbavíme vás rutiny, abyste se mohli soustředit na to, co vás baví.',
     img:   '/assets/services/reality-expo.jpg',
-    tags:  ['Zapier', 'n8n', 'Make', 'CRM'],
+    tags:  ['Zapier', 'n8n', 'Make', 'AI Kreativa'],
     wide:  true,
   },
 ];
@@ -48,9 +48,9 @@ export default function Services() {
     <section id="services" className="services">
       <div className="services-inner">
         <h2 className="services-heading reveal">
-          Vyberte si, co
+          Služby, které
           <br />
-          <span className="accent">potřebujete</span>
+          <span className="accent">spolu fungují</span>
         </h2>
 
         <div className="services-grid">

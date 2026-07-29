@@ -34,9 +34,11 @@
 
   /* type families — next/font variables override these via html class */
   --font-sans: var(--font-inter, 'Inter'), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: var(--font-serif-loaded, 'Instrument Serif'), Georgia, 'Times New Roman', serif;
-  --font-hel: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-roboto: 'Roboto', 'Inter', sans-serif;
+  /* Secondary fonts turned off — single primary font (Inter) across the site.
+     Restore the originals to bring back the serif accent + Helvetica body. */
+  --font-serif: var(--font-inter, 'Inter'), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-hel: var(--font-inter, 'Inter'), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-roboto: var(--font-inter, 'Inter'), -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* layout */
   --container: 1232px;
@@ -109,11 +111,16 @@ video {
   padding-inline: var(--gutter);
 }
 
-/* the italic serif accent word used across headings */
+/* the italic accent word used across headings */
 .accent {
   font-family: var(--font-serif);
-  font-style: italic;
   font-weight: 400;
+  /* Single font across the site: accent words stay the same size and style
+     as the rest of the sentence (no serif, no italic). The !important lines
+     override every per-heading serif/italic/size bump — remove them (and
+     restore --font-serif) to bring back the italic serif accent. */
+  font-size: 1em !important;
+  font-style: normal !important;
 }
 
 /* section heading: Inter, tight tracking */
@@ -141,7 +148,7 @@ video {
   gap: 10px;
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   padding: 16px 26px;

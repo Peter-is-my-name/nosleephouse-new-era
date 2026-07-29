@@ -122,6 +122,174 @@
   align-self: flex-start;
   padding: 14px 26px;
 }
+.contact-submit:disabled {
+  opacity: 0.75;
+  cursor: default;
+}
+.contact-spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(20, 47, 47, 0.35);
+  border-top-color: var(--teal);
+  border-radius: 50%;
+  animation: contact-spin 0.7s linear infinite;
+}
+@keyframes contact-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- extended fields (reklama flow, homepage look) ---------- */
+.contact-row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.field input.err {
+  border-color: #ff6b6b;
+}
+.contact-error {
+  font-family: var(--font-hel);
+  font-size: 12.5px;
+  color: #ff8a8a;
+}
+.contact-qlabel {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--white);
+  letter-spacing: -0.1px;
+}
+
+/* phone with country prefix */
+.contact-phone {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+}
+.contact-phone:focus-within {
+  border-color: var(--green);
+  background: rgba(178, 251, 88, 0.05);
+}
+.contact-phone.err {
+  border-color: #ff6b6b;
+}
+.contact-prefix {
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: var(--font-hel);
+  font-size: 15px;
+  padding: 15px 10px 15px 16px;
+  cursor: pointer;
+  outline: none;
+}
+.contact-prefix option {
+  color: #141414;
+}
+.contact-phone-sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line-strong);
+  margin: 8px 0;
+}
+.contact-phone-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  padding: 15px 16px;
+  font-family: var(--font-hel);
+  font-size: 15px;
+  color: var(--white);
+  outline: none;
+}
+
+/* option buttons (typ webu / rozpočet) */
+.contact-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.contact-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 13px 15px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-hel);
+  font-size: 14px;
+  line-height: 1.4;
+  transition: border-color 0.25s var(--ease-out), background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+.contact-opt:hover {
+  border-color: rgba(178, 251, 88, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white);
+}
+.contact-opt-letter {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  transition: inherit;
+}
+.contact-opt-label {
+  flex: 1;
+}
+.contact-opt-check {
+  flex-shrink: 0;
+  color: var(--teal);
+}
+.contact-opt.selected {
+  border-color: var(--green);
+  background: var(--green);
+  color: var(--teal);
+}
+.contact-opt.selected .contact-opt-letter {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--green);
+}
+.contact-opt.selected .contact-opt-label {
+  font-weight: 500;
+}
+
+/* progressive reveal (animated open, no reflow jump) */
+.contact-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.45s var(--ease-out), opacity 0.4s var(--ease-out);
+}
+.contact-reveal.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.contact-reveal-inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.contact-reveal.open .contact-reveal-inner {
+  padding-top: 22px;
+}
 
 /* ---------- founders ---------- */
 .contact-side-title {
@@ -196,8 +364,10 @@
   .contact-logo {
     display: none;
   }
-  .budget-opt {
-    font-size: 10px;
-    padding: 12px 4px;
+}
+
+@media (max-width: 520px) {
+  .contact-row2 {
+    grid-template-columns: 1fr;
   }
 }

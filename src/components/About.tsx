@@ -8,16 +8,16 @@ export default function About() {
       <div className="container about-grid">
         <div className="about-copy">
           <h2 className="about-heading reveal">
-            S weby
+            Digitálními partnery
             <br />
-            máme <span className="accent">přes 8 let</span>
+            pro firmy jsme už
             <br />
-            zkušeností
+            <span className="accent">přes 7 let</span>
           </h2>
           <p className="about-text reveal" style={{ '--d': '0.1s' } as React.CSSProperties}>
-            U každého projektu klademe důraz hlavně na <strong>vztah s klientem</strong>. Za každou
-            firmou totiž stojí lidé, jako jsme my. Jsme nosleephouse™, malý tým s velkými
-            zkušenostmi.
+            Za sedm let jsme se naučili jednu věc: dobrý web vzniká z <strong>dobrého vztahu
+            s klientem</strong>, ne ze zadání v tabulce. Proto s vámi mluvíme přímo, a hlavně
+            musíme váš biznis pochopit od první schůzky po spuštění.
           </p>
           <div className="reveal" style={{ '--d': '0.2s' } as React.CSSProperties}>
             <a href="#about" className="btn btn-outline">

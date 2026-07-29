@@ -19,7 +19,7 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 })
 
-const SITE_URL = 'https://nosleephouse.com'
+const SITE_URL = 'https://nosleephouse.cz'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -72,7 +72,49 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${inter.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'nosleephouse™',
+              alternateName: 'nosleephouse',
+              url: SITE_URL,
+              logo: `${SITE_URL}/icon-nsh.png`,
+              description:
+                'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding.',
+              email: 'info@nosleephouse.com',
+              telephone: '+420734565323',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Bratislava',
+                addressCountry: 'SK',
+              },
+              sameAs: [
+                'https://www.instagram.com/nosleephouse/',
+                'https://www.linkedin.com/company/nosleephouse',
+                'https://www.facebook.com/profile.php?id=61581980980548',
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'nosleephouse™',
+              url: SITE_URL,
+              inLanguage: 'cs-CZ',
+              publisher: { '@type': 'Organization', name: 'nosleephouse™', url: SITE_URL },
+            }),
+          }}
+        />
+      </body>
     </html>
   )
 }

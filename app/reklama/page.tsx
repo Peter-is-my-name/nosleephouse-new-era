@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import ReklamaHeader from '@/components/reklama/ReklamaHeader'
 import ReklamaHero from '@/components/reklama/ReklamaHero'
 import LogosMarquee from '@/components/LogosMarquee'
-import Testimonials from '@/components/Testimonials'
+import Reviews from '@/components/Reviews'
 import WhyPartner from '@/components/reklama/WhyPartner'
 import LeadForm from '@/components/reklama/LeadForm'
 import Results from '@/components/reklama/Results'
@@ -24,7 +24,7 @@ export default function ReklamaPage() {
       <main>
         <ReklamaHero />
         <LogosMarquee />
-        <Testimonials limit={3} />
+        <Reviews />
         <WhyPartner />
         <LeadForm />
         <Results />

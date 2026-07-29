@@ -5,10 +5,11 @@ import { createPortal } from 'react-dom';
 import { ArrowRight, ChevronDown, Logo } from './icons';
 import './Header.css';
 
-type NavItem = { label: string; hash: string; page: string; dropdown?: true };
+type NavItem = { label: string; hash: string; page: string; dropdown?: true; hide?: true };
+// `hide: true` items are temporarily hidden — remove the flag to show them again.
 const NAV: NavItem[] = [
-  { label: 'Domů',       hash: '#top',       page: '/'           },
-  { label: 'Naše práce', hash: '#portfolio', page: '/#portfolio'  },
+  { label: 'Domů',       hash: '#top',       page: '/',           hide: true },
+  { label: 'Naše projekty', hash: '#portfolio', page: '/#portfolio', hide: true },
   { label: 'Služby',     hash: '#services',  page: '/#services',  dropdown: true },
   { label: 'O nás',      hash: '#about',     page: '/#about'      },
   { label: 'Blog',       hash: '#',          page: '#'            },
@@ -17,9 +18,9 @@ const NAV: NavItem[] = [
 const SERVICES = [
   { label: 'Tvorba webů & vývoj',           href: '/#services' },
   { label: 'Grafický Design',                href: '/#services' },
-  { label: 'Vizuální Identita & AI Kreativy', href: '/#services' },
+  { label: 'Vizuální Identita',              href: '/#services' },
   { label: 'Marketing & Růst',               href: '/#services' },
-  { label: 'AI Automatizace',                href: '/#services' },
+  { label: 'AI Automatizace & AI Kreativy',  href: '/#services' },
 ];
 
 const SECTORS = [
@@ -110,7 +111,7 @@ export default function Header() {
       </button>
       <nav aria-label="Mobilní navigace">
         <ul>
-          {NAV.map((item, i) => (
+          {NAV.filter((it) => !it.hide).map((item, i) => (
             <li key={item.label} style={{ '--i': i } as React.CSSProperties}>
               <a href={nh(item)} onClick={() => setOpen(false)}>
                 {item.label}
@@ -120,7 +121,7 @@ export default function Header() {
         </ul>
       </nav>
       <a href={isHome ? '#portfolio' : '/#portfolio'} className="btn btn-primary mobile-menu-cta" onClick={() => setOpen(false)}>
-        Naše práce
+        Naše projekty
         <ArrowRight size={14} />
       </a>
     </div>,
@@ -138,7 +139,7 @@ export default function Header() {
           <div className="nav-cluster">
             <nav className="nav-desktop" aria-label="Hlavní navigace">
               <ul>
-                {NAV.map((item) =>
+                {NAV.filter((i) => !i.hide).map((item) =>
                   item.dropdown ? (
                     <li
                       key={item.label}
@@ -163,12 +164,9 @@ export default function Header() {
               </ul>
             </nav>
             <a href={isHome ? '#portfolio' : '/#portfolio'} className="btn btn-primary header-cta" onClick={() => setServicesOpen(false)}>
-              Naše práce
+              Naše projekty
               <ArrowRight size={9} />
             </a>
-            <button className="lang" type="button">
-              EN
-            </button>
           </div>
 
           <button

@@ -1,0 +1,180 @@
+/* ============================================================
+   Blog section (homepage) — 1:1 with Figma node 168-1618.
+   Dark teal, heading + "Číst všechno" outline button, cards with
+   lime arrow badge + title + excerpt + author/date, ‹ › arrows.
+   ============================================================ */
+
+.blog {
+  background: var(--teal);
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(56px, 8vw, 96px);
+  overflow: hidden;
+}
+
+/* header: heading (left) + "Číst všechno" (right) */
+.blog-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+.blog-title {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  max-width: 12ch;
+}
+.blog-readall {
+  flex-shrink: 0;
+}
+
+/* carousel */
+.blog-viewport {
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.blog-viewport.is-ready {
+  opacity: 1;
+}
+.blog-track {
+  display: flex;
+  align-items: flex-start;
+  will-change: transform;
+}
+
+.blog-card {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: inherit;
+  text-decoration: none;
+}
+.blog-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 393 / 400;
+  overflow: hidden;
+}
+.blog-card-media img {
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
+}
+.blog-card:hover .blog-card-media img {
+  transform: scale(1.045);
+}
+.blog-card-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: var(--green);
+  transition: transform 0.35s var(--ease-out);
+}
+.blog-card:hover .blog-card-badge {
+  transform: translate(3px, -3px);
+}
+
+.blog-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.blog-card-title {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(20px, 1.9vw, 27px);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  transition: color 0.3s var(--ease-out);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-card:hover .blog-card-title {
+  color: var(--green);
+}
+.blog-card-excerpt {
+  font-family: var(--font-hel);
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.5);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+.blog-card-author,
+.blog-card-date {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  white-space: nowrap;
+}
+.blog-card-dot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  background: var(--green);
+}
+
+/* nav arrows */
+.blog-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(32px, 4vw, 48px);
+}
+.blog-arrow {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: #fff;
+  border: none;
+  color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.blog-arrow:not(:disabled):hover {
+  background: var(--green);
+}
+.blog-arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.blog-arrow:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .blog-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .blog-title {
+    max-width: none;
+  }
+}

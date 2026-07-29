@@ -34,6 +34,9 @@
 .reviews-left {
   display: flex;
   flex-direction: column;
+  /* flex-start stops the Google SVG from stretching to the column width and
+     centering its glyphs — keeps "Google" flush-left under "HODNOCENÍ NA". */
+  align-items: flex-start;
   gap: 5px;
 }
 .partner {

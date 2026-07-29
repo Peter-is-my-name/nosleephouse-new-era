@@ -43,6 +43,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(24px, 3vw, 48px) 40px;
+  /* spacing that the removed "Tyhle weby už fungují" sub-heading used to provide */
+  margin-top: clamp(48px, 6vw, 80px);
 }
 
 .pf-card {
