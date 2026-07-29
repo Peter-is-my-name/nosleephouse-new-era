@@ -5,11 +5,8 @@ import './Results.css'
 // never stretch to fill their box.
 const LOGOS = [
   { src: '/assets/logos/realityexpo.svg', alt: 'Reality EXPO', cls: 'l-rex' },
-  { src: '/assets/logos/forbes.svg', alt: 'Forbes', cls: 'l-forbes' },
-  { src: '/assets/logos/coex.svg', alt: 'COex', cls: 'l-coex' },
+  { src: '/assets/logos/deltaplus.svg', alt: 'Delta Plus', cls: 'l-deltaplus' },
   { src: '/assets/logos/eldenea.svg', alt: 'Eldenea', cls: 'l-eld' },
-  { src: '/assets/logos/atalian.png', alt: 'Atalian', cls: 'l-atalian' },
-  { src: '/assets/logos/abra.png', alt: 'Abra', cls: 'l-abra' },
 ]
 
 const STATS = [

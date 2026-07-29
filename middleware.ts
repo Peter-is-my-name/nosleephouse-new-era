@@ -29,6 +29,12 @@ function isPublic(pathname: string): boolean {
 }
 
 export function middleware(req: NextRequest) {
+  // Never gate local development — the full site stays editable/previewable
+  // on localhost. Only real (production) deployments are hidden.
+  if (process.env.NODE_ENV !== 'production') {
+    return NextResponse.next();
+  }
+
   if (isPublic(req.nextUrl.pathname)) {
     return NextResponse.next();
   }

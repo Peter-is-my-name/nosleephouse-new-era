@@ -42,11 +42,8 @@
    width="100%" never stretch to fill the flex container.
    Widths = height × (viewBox_w / viewBox_h), rounded to nearest px.  ── */
 
-/* coex.svg  51.3×34.5  ratio 1.49 */
-.logo-item img.logo-coex        { height: 32px; width: 49px; }
-
-/* forbes.svg  119×30  ratio 3.97 */
-.logo-item img.logo-forbes      { height: 36px; width: 143px; }
+/* deltaplus.svg  361×53  ratio 6.81 — flat wordmark */
+.logo-item img.logo-deltaplus   { height: 22px; width: 150px; }
 
 /* eldenea.svg  175×22  ratio 7.95 — very flat; keep height small */
 .logo-item img.logo-eldenea     { height: 22px; width: 175px; }
@@ -65,21 +62,6 @@
 
 /* dd.svg  36×38  ratio 0.95 — near-square icon */
 .logo-item img.logo-dd          { height: 34px; width: 32px; }
-
-/* dofe.png  405×144  ratio 2.81 */
-.logo-item img.logo-dofe        { height: 30px; width: 84px; }
-
-/* hastgroup.png  609×167  ratio 3.65 */
-.logo-item img.logo-hastgroup   { height: 26px; width: 95px; }
-
-/* atalian.png  205×99  ratio 2.07 */
-.logo-item img.logo-atalian     { height: 38px; width: 79px; }
-
-/* abra.png  164×54  ratio 3.04 */
-.logo-item img.logo-abra        { height: 28px; width: 85px; }
-
-/* hopi.png  118×117  ratio 1.01 — square icon */
-.logo-item img.logo-hopi        { height: 36px; width: 36px; }
 
 /* edge fades */
 .logos-fade {

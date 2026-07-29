@@ -5,19 +5,13 @@ import './LogosMarquee.css';
 type Logo = { src: string; alt: string; cls?: string };
 
 const LOGOS: Logo[] = [
-  { src: '/assets/logos/coex.svg',       alt: 'COex',            cls: 'logo-coex' },
-  { src: '/assets/logos/forbes.svg',     alt: 'Forbes',          cls: 'logo-forbes' },
+  { src: '/assets/logos/deltaplus.svg',  alt: 'Delta Plus',      cls: 'logo-deltaplus' },
   { src: '/assets/logos/eldenea.svg',    alt: 'Eldenea',         cls: 'logo-eldenea' },
   { src: '/assets/logos/realityexpo.svg',alt: 'Reality EXPO',    cls: 'logo-realityexpo' },
   { src: '/assets/logos/nosto.svg',      alt: 'Nosto',           cls: 'logo-nosto' },
   { src: '/assets/logos/asteria.svg',    alt: 'Asteria',         cls: 'logo-asteria' },
   { src: '/assets/logos/denovo.svg',     alt: 'De Novo',         cls: 'logo-denovo' },
   { src: '/assets/logos/dd.svg',         alt: 'DD',              cls: 'logo-dd' },
-  { src: '/assets/logos/dofe.png',       alt: 'DofE',            cls: 'logo-dofe' },
-  { src: '/assets/logos/hastgroup.png',  alt: 'HastGroup',       cls: 'logo-hastgroup' },
-  { src: '/assets/logos/atalian.png',    alt: 'Atalian',         cls: 'logo-atalian' },
-  { src: '/assets/logos/abra.png',       alt: 'Abra',            cls: 'logo-abra' },
-  { src: '/assets/logos/hopi.png',       alt: 'Hopi Logistics',  cls: 'logo-hopi' },
 ];
 
 const BASE_SPEED = 60;   // px per second

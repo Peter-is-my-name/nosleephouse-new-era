@@ -121,12 +121,9 @@
   opacity: 0.55;
   filter: grayscale(1) brightness(1.5);
 }
-.rs-logo.l-rex     { height: 34px; width: 116px; }  /* realityexpo 135.9×40 */
-.rs-logo.l-forbes  { height: 28px; width: 111px; }  /* forbes 119×30 */
-.rs-logo.l-coex    { height: 30px; width: 45px; }   /* coex 51.3×34.5 */
-.rs-logo.l-eld     { height: 19px; width: 151px; }  /* eldenea 175×22 */
-.rs-logo.l-atalian { height: 34px; width: 70px; }   /* atalian 205×99 */
-.rs-logo.l-abra    { height: 26px; width: 79px; }   /* abra 164×54 */
+.rs-logo.l-rex       { height: 34px; width: 116px; }  /* realityexpo 135.9×40 */
+.rs-logo.l-deltaplus { height: 20px; width: 136px; }  /* deltaplus 361×53 */
+.rs-logo.l-eld       { height: 19px; width: 151px; }  /* eldenea 175×22 */
 
 @media (max-width: 860px) {
   .rs-card {
