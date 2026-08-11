@@ -2,9 +2,15 @@
  * Blog data source. No CMS: posts live here as typed data so pages can be
  * statically generated with full control over SEO (metadata, JSON-LD, OG).
  *
+ * Posts are stored per locale. Translations of the same article share an `id`,
+ * which is what pairs them for hreflang and the language switcher — the URL
+ * slug itself is localized.
+ *
  * The Reality EXPO posts are derived from the nosleephouse Instagram carousel
  * about the second year of the partnership; the rest are evergreen articles.
  */
+
+import { LOCALES, type Locale } from './i18n'
 
 export type Block =
   | { type: 'p'; text: string }
@@ -15,6 +21,9 @@ export type Block =
   | { type: 'list'; items: string[] }
 
 export type BlogPost = {
+  /** stable across locales — pairs an article with its translation */
+  id: string
+  /** localized URL slug */
   slug: string
   title: string
   /** short teaser shown on cards + as meta description fallback */
@@ -28,7 +37,7 @@ export type BlogPost = {
   authorRole: string
   /** ISO date, used for <time> + schema */
   date: string
-  /** human date, Czech */
+  /** human date, localized */
   dateLabel: string
   readingMinutes: number
   tags: string[]
@@ -36,10 +45,17 @@ export type BlogPost = {
 }
 
 const AUTHOR = 'Lukáš Čičvák'
-const AUTHOR_ROLE = 'Zakladatel & prodejce'
+const AUTHOR_ROLE_CS = 'Zakladatel & prodejce'
+const AUTHOR_ROLE_EN = 'Founder & sales'
+const AUTHOR_2 = 'Vratko Varga'
+const AUTHOR_2_ROLE_CS = 'Zakladatel & designér'
+const AUTHOR_2_ROLE_EN = 'Founder & designer'
 
-export const POSTS: BlogPost[] = [
+/* ── Czech ─────────────────────────────────────────────────── */
+
+const POSTS_CS: BlogPost[] = [
   {
+    id: 'reality-expo-2025',
     slug: 'reality-expo-2025-full-servis',
     title: 'Jak vypadá skutečný full servis: Reality EXPO 2025',
     excerpt:
@@ -57,7 +73,7 @@ export const POSTS: BlogPost[] = [
     cover: '/assets/reklama/reality-expo-event.webp',
     coverAlt: 'Tým nosleephouse na veletrhu Reality EXPO 2025 v Bratislavě',
     author: AUTHOR,
-    authorRole: AUTHOR_ROLE,
+    authorRole: AUTHOR_ROLE_CS,
     date: '2026-07-24',
     dateLabel: '24. července 2026',
     readingMinutes: 5,
@@ -106,6 +122,7 @@ export const POSTS: BlogPost[] = [
   },
 
   {
+    id: 'website-cost-2026',
     slug: 'kolik-stoji-web-na-miru-2026',
     title: 'Kolik stojí web na míru v roce 2026? Kompletní přehled',
     excerpt:
@@ -116,7 +133,7 @@ export const POSTS: BlogPost[] = [
     cover: '/assets/reklama/aparsia.png',
     coverAlt: 'Moderní firemní web na notebooku',
     author: AUTHOR,
-    authorRole: AUTHOR_ROLE,
+    authorRole: AUTHOR_ROLE_CS,
     date: '2026-07-28',
     dateLabel: '28. července 2026',
     readingMinutes: 6,
@@ -174,6 +191,7 @@ export const POSTS: BlogPost[] = [
   },
 
   {
+    id: 'losing-customers',
     slug: '7-znaku-ze-vas-web-ztraci-zakazniky',
     title: '7 znaků, že váš web ztrácí zákazníky (a jak to spravit)',
     excerpt:
@@ -183,8 +201,8 @@ export const POSTS: BlogPost[] = [
     keywords: ['web ztrácí zákazníky', 'konverze webu', 'proč web nefunguje', 'optimalizace webu', 'výzva k akci'],
     cover: '/assets/reklama/junmatcha.png',
     coverAlt: 'Zákazník prohlížející web na mobilu',
-    author: 'Vratko Varga',
-    authorRole: 'Zakladatel & designér',
+    author: AUTHOR_2,
+    authorRole: AUTHOR_2_ROLE_CS,
     date: '2026-07-21',
     dateLabel: '21. července 2026',
     readingMinutes: 5,
@@ -237,6 +255,7 @@ export const POSTS: BlogPost[] = [
   },
 
   {
+    id: 'website-in-7-days',
     slug: 'web-za-7-dni-nas-proces',
     title: 'Web za 7 dní: jak funguje náš proces od návrhu po spuštění',
     excerpt:
@@ -247,7 +266,7 @@ export const POSTS: BlogPost[] = [
     cover: '/assets/blog/web-proces.jpg',
     coverAlt: 'Pracovní stůl s notebookem při tvorbě webu',
     author: AUTHOR,
-    authorRole: AUTHOR_ROLE,
+    authorRole: AUTHOR_ROLE_CS,
     date: '2026-07-14',
     dateLabel: '14. července 2026',
     readingMinutes: 5,
@@ -298,6 +317,7 @@ export const POSTS: BlogPost[] = [
   },
 
   {
+    id: 'seo-basics',
     slug: 'seo-zaklady-pro-majitele-firem',
     title: 'SEO základy pro majitele firem: jak vás najdou na Googlu i v AI',
     excerpt:
@@ -308,7 +328,7 @@ export const POSTS: BlogPost[] = [
     cover: '/assets/reklama/why-4.jpg',
     coverAlt: 'Vyhledávání a SEO pro firmy',
     author: AUTHOR,
-    authorRole: AUTHOR_ROLE,
+    authorRole: AUTHOR_ROLE_CS,
     date: '2026-07-06',
     dateLabel: '6. července 2026',
     readingMinutes: 6,
@@ -350,6 +370,7 @@ export const POSTS: BlogPost[] = [
   },
 
   {
+    id: 'investment-not-cost',
     slug: 'web-neni-naklad-ale-investice',
     title: 'Web není náklad, ale investice. Proč to změní vaše rozhodování',
     excerpt:
@@ -359,8 +380,8 @@ export const POSTS: BlogPost[] = [
     keywords: ['web jako investice', 'návratnost webu', 'hodnota webu', 'web pro byznys', 'investice do webu'],
     cover: '/assets/reklama/duopetcz.jpeg',
     coverAlt: 'Web jako investice do růstu firmy',
-    author: 'Vratko Varga',
-    authorRole: 'Zakladatel & designér',
+    author: AUTHOR_2,
+    authorRole: AUTHOR_2_ROLE_CS,
     date: '2026-06-30',
     dateLabel: '30. června 2026',
     readingMinutes: 4,
@@ -399,10 +420,421 @@ export const POSTS: BlogPost[] = [
   },
 ]
 
-export function getAllPosts(): BlogPost[] {
-  return [...POSTS].sort((a, b) => (a.date < b.date ? 1 : -1))
+/* ── English ───────────────────────────────────────────────── */
+
+const POSTS_EN: BlogPost[] = [
+  {
+    id: 'reality-expo-2025',
+    slug: 'reality-expo-2025-full-service',
+    title: 'What real full service looks like: Reality EXPO 2025',
+    excerpt:
+      'We are in our second year with Reality EXPO. What started as graphic design grew into a complete partnership, from digital all the way to physical production.',
+    seoDescription:
+      'The Reality EXPO 2025 case: how nosleephouse covered the full service, from PPC campaigns and the website to motion design on screens across Bratislava.',
+    keywords: [
+      'Reality EXPO 2025',
+      'full service marketing',
+      'PPC campaigns',
+      'event marketing',
+      'nosleephouse',
+      'digital agency',
+    ],
+    cover: '/assets/reklama/reality-expo-event.webp',
+    coverAlt: 'The nosleephouse team at the Reality EXPO 2025 fair in Bratislava',
+    author: AUTHOR,
+    authorRole: AUTHOR_ROLE_EN,
+    date: '2026-07-24',
+    dateLabel: '24 July 2026',
+    readingMinutes: 5,
+    tags: ['Case study', 'Event marketing'],
+    content: [
+      {
+        type: 'p',
+        text: 'We have been working with the Reality EXPO team for two years now. What began as a collaboration on graphics gradually grew into a comprehensive partnership in which we cover practically everything, from digital through to physical production on site.',
+      },
+      {
+        type: 'p',
+        text: 'Reality EXPO is the largest real-estate event of its kind in Bratislava. Every year the iconic Stará tržnica market hall brings together thousands of people looking for a home and the leading experts in the field. For the second edition we got a clear brief: take care of the entire digital and visual experience so that it works as one coherent whole.',
+      },
+      { type: 'h2', text: 'What we delivered for Reality EXPO 2025' },
+      {
+        type: 'list',
+        items: [
+          'PPC campaigns on Google Ads and Meta Ads with precise targeting of attendees.',
+          'Continuous development and optimisation of the website throughout the run-up.',
+          'All print materials and graphic output for the event.',
+          'Advertising in Forbes magazine.',
+          'A motion design campaign on screens across Bratislava.',
+        ],
+      },
+      {
+        type: 'image',
+        src: '/assets/reklama/why-4.jpg',
+        alt: 'Visual identity and branding for Reality EXPO 2025',
+        caption:
+          'One visual language, from the website through print to the large-format screens.',
+      },
+      {
+        type: 'p',
+        text: 'This is exactly the kind of collaboration we like best. When a client trusts one team with the whole project, we can deliver a result that makes sense as a whole, rather than a pile of unrelated output from five different suppliers.',
+      },
+      {
+        type: 'quote',
+        text: 'We have been working together for over a year and I have to praise both their approach and their communication. Whenever I got in touch, often with a short deadline, they delivered. I recommend them to anyone who wants to get their project noticed.',
+        author: 'Jakub Haidari',
+        role: 'Real-estate marketing and organiser of Reality EXPO',
+      },
+      {
+        type: 'p',
+        text: 'Do you want results too, not just promises? Write to us and we will turn your project into something people talk about.',
+      },
+    ],
+  },
+
+  {
+    id: 'website-cost-2026',
+    slug: 'how-much-does-a-custom-website-cost-2026',
+    title: 'How much does a custom website cost in 2026? A complete overview',
+    excerpt:
+      'Website prices run into the tens of thousands and the differences are enormous. We explain what drives the price, what you will really pay and how to tell the investment will pay off.',
+    seoDescription:
+      'How much does a custom website cost in 2026? An overview of prices by website type, what affects the price and how to tell the investment will pay off.',
+    keywords: [
+      'how much does a website cost',
+      'website price',
+      'custom website cost',
+      'web design pricing',
+      'website for business',
+    ],
+    cover: '/assets/reklama/aparsia.png',
+    coverAlt: 'A modern company website on a laptop',
+    author: AUTHOR,
+    authorRole: AUTHOR_ROLE_EN,
+    date: '2026-07-28',
+    dateLabel: '28 July 2026',
+    readingMinutes: 6,
+    tags: ['Web', 'Guide'],
+    content: [
+      {
+        type: 'p',
+        text: 'How much does a website cost? It is the question we get most often. It is also the trickiest, because the honest answer is: it depends. The gap between a cheap template and a custom website that genuinely earns money for a company is enormous. Let us break it down straight.',
+      },
+      { type: 'h2', text: 'What drives the price of a website' },
+      {
+        type: 'list',
+        items: [
+          'Scope: how many pages and sections the site has.',
+          'Custom or template: original design and hand-written code versus an off-the-shelf theme.',
+          'Features: e-commerce, a booking system, a CRM connection or AI tools.',
+          'Content: copywriting, photography and graphic assets.',
+          'SEO and speed: preparing the site so that both people and search engines find it.',
+          'Ongoing care: changes, updates and continuous optimisation.',
+        ],
+      },
+      { type: 'h2', text: 'Indicative prices by website type' },
+      {
+        type: 'p',
+        text: 'Treat the following numbers as a guide, not a fixed price list. Every project is different, but this is roughly the range on the Czech market.',
+      },
+      {
+        type: 'list',
+        items: [
+          'A single-page presentation site: from around CZK 15,000.',
+          'A custom multi-page company website: roughly CZK 30,000 to 80,000.',
+          'An e-shop or a site with advanced features: from CZK 80,000 upwards.',
+        ],
+      },
+      { type: 'h2', text: 'Why the cheapest option usually ends up the most expensive' },
+      {
+        type: 'p',
+        text: 'A cheap template site looks great on price at first glance. The problem arrives later: slow loading, dismal search rankings and a design that convinces nobody. A website that does not bring in customers is not a saving. It is a cost that returns nothing.',
+      },
+      {
+        type: 'p',
+        text: 'A well-built website behaves like an investment instead. It works for you around the clock, builds trust and turns visitors into enquiries. So the question is not what the website costs, but what it will earn you.',
+      },
+      {
+        type: 'quote',
+        text: 'A professional approach, a fast launch and above all a website that genuinely brings in new clients. Organic traffic doubled within 3 months.',
+        author: 'Radek Bareš',
+        role: 'Owner of a recycling company, DUOPET',
+      },
+      {
+        type: 'p',
+        text: 'Want to know what a website would cost specifically for you? Get in touch and we will prepare a no-obligation quote.',
+      },
+    ],
+  },
+
+  {
+    id: 'losing-customers',
+    slug: '7-signs-your-website-is-losing-customers',
+    title: '7 signs your website is losing customers (and how to fix it)',
+    excerpt:
+      'A website can look good and still quietly drive customers away. Here are 7 warning signs to watch for, and how to fix each of them.',
+    seoDescription:
+      '7 signs your website is losing customers: slow loading, an unclear call to action, a poor mobile version and more. Find out how to fix them.',
+    keywords: [
+      'website losing customers',
+      'website conversion',
+      'why my website does not work',
+      'website optimisation',
+      'call to action',
+    ],
+    cover: '/assets/reklama/junmatcha.png',
+    coverAlt: 'A customer browsing a website on a mobile phone',
+    author: AUTHOR_2,
+    authorRole: AUTHOR_2_ROLE_EN,
+    date: '2026-07-21',
+    dateLabel: '21 July 2026',
+    readingMinutes: 5,
+    tags: ['Web', 'Conversion'],
+    content: [
+      {
+        type: 'p',
+        text: 'A website can look great at first glance and still quietly drive customers away day after day. Most business owners have no idea it is happening. Here are seven signs that give it away.',
+      },
+      { type: 'h2', text: '1. The site loads slowly' },
+      {
+        type: 'p',
+        text: 'Every extra second costs conversions. If a site takes longer than three seconds to load, a large share of people leave before they see anything at all.',
+      },
+      { type: 'h2', text: '2. It is not clear what the visitor should do' },
+      {
+        type: 'p',
+        text: 'A good website leads to one action: enquire, buy, call. When there are five calls to action, or none, the visitor gets lost and leaves.',
+      },
+      { type: 'h2', text: '3. It is unusable on mobile' },
+      {
+        type: 'p',
+        text: 'Most people arrive on a phone. If the text breaks out of the layout and the buttons are hard to tap, you are losing the majority of your customers.',
+      },
+      { type: 'h2', text: '4. The site does not inspire trust' },
+      {
+        type: 'p',
+        text: 'No testimonials, no numbers, no real photos, no contact details. Without trust nobody will order from you, however good the offer is.',
+      },
+      { type: 'h2', text: '5. The copy talks about you, not the customer' },
+      {
+        type: 'p',
+        text: 'Visitors do not care how great you are. They care what is in it for them. Flip the perspective and conversions will follow.',
+      },
+      { type: 'h2', text: '6. Nobody can find the site' },
+      {
+        type: 'p',
+        text: 'A beautiful website without SEO is a billboard in a forest. If neither Google nor the AI search engines know you exist, traffic will not arrive on its own.',
+      },
+      { type: 'h2', text: '7. Nothing has happened to it for years' },
+      {
+        type: 'p',
+        text: 'A website is not a sculpture. The market changes, technology changes, and a site that has not been touched for years holds you back more than it helps.',
+      },
+      {
+        type: 'p',
+        text: 'Recognise your website in two or more of these? Most of them can be fixed faster than you would expect. Get in touch and we will go through it together.',
+      },
+    ],
+  },
+
+  {
+    id: 'website-in-7-days',
+    slug: 'website-in-7-days-our-process',
+    title: 'A website in 7 days: how our process works from design to launch',
+    excerpt:
+      'Launching a website in seven days is not magic, it is discipline. Here is our process step by step, from the first call to a live site that brings in enquiries.',
+    seoDescription:
+      'How we launch a website in 7 days: our process step by step, from the first consultation through design and development to launch and optimisation.',
+    keywords: [
+      'website in 7 days',
+      'web design process',
+      'fast website build',
+      'how a website is made',
+      'website launch',
+    ],
+    cover: '/assets/blog/web-proces.jpg',
+    coverAlt: 'A desk with a laptop during a website build',
+    author: AUTHOR,
+    authorRole: AUTHOR_ROLE_EN,
+    date: '2026-07-14',
+    dateLabel: '14 July 2026',
+    readingMinutes: 5,
+    tags: ['Web', 'Process'],
+    content: [
+      {
+        type: 'p',
+        text: 'Seven days from brief to a live website sounds like a marketing promise. For us it is a real process built on clear steps and zero pointless waiting. Here is how it goes.',
+      },
+      { type: 'h2', text: 'Day 1: Consultation and goal' },
+      {
+        type: 'p',
+        text: 'We start with a conversation, not a questionnaire. We need to understand your business, your customers and the single goal the website has to achieve. Without that, even a beautiful website is useless.',
+      },
+      { type: 'h2', text: 'Days 2 to 3: Design and structure' },
+      {
+        type: 'p',
+        text: 'We prepare a custom structure and visual design. No template, no compromises. Every section has a job and leads the visitor towards action.',
+      },
+      { type: 'h2', text: 'Days 4 to 5: Development' },
+      {
+        type: 'p',
+        text: 'We turn the design into a fast, cleanly coded website. We write the code ourselves, so we have full control over both speed and the end result.',
+      },
+      { type: 'h2', text: 'Day 6: Content and SEO' },
+      {
+        type: 'p',
+        text: 'We add copy that sells and prepare the site for search engines. Speed, meta descriptions, structure — so that people and AI alike can find you.',
+      },
+      { type: 'h2', text: 'Day 7: Launch' },
+      {
+        type: 'p',
+        text: 'The website goes live. And that is not the end. We watch the numbers and keep tuning, because launch is the beginning, not the finish line.',
+      },
+      {
+        type: 'stats',
+        items: [
+          { value: '7', label: 'days from brief to launch' },
+          { value: '0', label: 'templates, everything custom' },
+          { value: '1', label: 'clear goal for every website' },
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Want a website that will not sit in development for six months? Book a no-obligation consultation.',
+      },
+    ],
+  },
+
+  {
+    id: 'seo-basics',
+    slug: 'seo-basics-for-business-owners',
+    title: 'SEO basics for business owners: how people find you on Google and in AI',
+    excerpt:
+      'SEO does not have to be rocket science. We explain the basics in plain language: what decides whether people find you on Google and, increasingly, in AI search.',
+    seoDescription:
+      'SEO basics for business owners: how search works on Google and in AI, what affects rankings and how to start so customers can find you.',
+    keywords: [
+      'SEO for business',
+      'SEO basics',
+      'search engine optimisation',
+      'AI search',
+      'how to rank first on Google',
+    ],
+    cover: '/assets/reklama/why-4.jpg',
+    coverAlt: 'Search and SEO for businesses',
+    author: AUTHOR,
+    authorRole: AUTHOR_ROLE_EN,
+    date: '2026-07-06',
+    dateLabel: '6 July 2026',
+    readingMinutes: 6,
+    tags: ['SEO', 'Guide'],
+    content: [
+      {
+        type: 'p',
+        text: 'SEO sounds like a field for insiders. In reality it comes down to something simple: helping search engines understand what you do, and convincing them you are trustworthy. Here are the basics, without the filler.',
+      },
+      { type: 'h2', text: 'How search engines think' },
+      {
+        type: 'p',
+        text: 'Google and the newer AI search engines are both looking for the best answer to a query. They reward sites that are fast, clear, well structured and carry content you can trust.',
+      },
+      { type: 'h2', text: 'The three pillars it rests on' },
+      {
+        type: 'list',
+        items: [
+          'Technical: speed, the mobile version, clean code and a sound page structure.',
+          'Content: copy that answers what people are actually searching for.',
+          'Authority: links, references and signals that you are credible in your field.',
+        ],
+      },
+      { type: 'h2', text: 'The new player: AI search' },
+      {
+        type: 'p',
+        text: 'Customers increasingly ask ChatGPT or Perplexity directly. Those tools cite websites that are clearly written and carry structured data. Whoever thinks about it today gets a head start.',
+      },
+      { type: 'h2', text: 'Where to start' },
+      {
+        type: 'p',
+        text: 'You do not have to solve everything at once. Start with site speed, clear page descriptions and one good article on a topic your customers are searching for. The rest can be built up gradually.',
+      },
+      {
+        type: 'p',
+        text: 'Want a website that moves you up the rankings? We build them that way from the ground up. Get in touch.',
+      },
+    ],
+  },
+
+  {
+    id: 'investment-not-cost',
+    slug: 'a-website-is-an-investment-not-a-cost',
+    title: 'A website is an investment, not a cost. Why that changes your decisions',
+    excerpt:
+      'As long as you see your website as a necessary expense, you will save in the wrong place. Here is why it pays to flip the perspective, and what it does to your business.',
+    seoDescription:
+      'Why you should treat a website as an investment rather than a cost. How the right decisions about your website affect company growth and overall return.',
+    keywords: [
+      'website as an investment',
+      'website ROI',
+      'value of a website',
+      'website for business',
+      'investing in a website',
+    ],
+    cover: '/assets/reklama/duopetcz.jpeg',
+    coverAlt: 'A website as an investment in company growth',
+    author: AUTHOR_2,
+    authorRole: AUTHOR_2_ROLE_EN,
+    date: '2026-06-30',
+    dateLabel: '30 June 2026',
+    readingMinutes: 4,
+    tags: ['Business', 'Strategy'],
+    content: [
+      {
+        type: 'p',
+        text: 'Ask two business owners about their website and you will get two answers. One is working out how to do it as cheaply as possible. The other is working out how much it will bring in. The second one almost always wins. Here is why.',
+      },
+      { type: 'h2', text: 'Costs get cut, investments get developed' },
+      {
+        type: 'p',
+        text: 'When you treat a website as a cost, you look for places to save. A cheaper template, no SEO, no upkeep. The result is a website that does nothing. When you treat it as an investment, you ask what it will return, and you decide completely differently.',
+      },
+      { type: 'h2', text: 'A website works while you sleep' },
+      {
+        type: 'p',
+        text: 'A good website is the best salesperson in the company. It does not sleep, it does not take holidays, and it reaches people exactly when they are looking for your service. Costs do not do that.',
+      },
+      {
+        type: 'quote',
+        text: 'What I liked was that they were not just making a pretty website. They thought about what would bring us clients. The results proved them right.',
+        author: 'Dominika Donovalová',
+        role: 'Owner of a real-estate agency, aparsia.cz',
+      },
+      { type: 'h2', text: 'How to spot an investment that makes sense' },
+      {
+        type: 'p',
+        text: 'It is not about spending as much as possible. It is about investing in the things that bring customers: speed, a clear path to an enquiry, credibility and visibility in search. The rest is nice, but secondary.',
+      },
+      {
+        type: 'p',
+        text: 'Want a website that behaves like an investment rather than a line in the accounts? Let us talk about it.',
+      },
+    ],
+  },
+]
+
+const POSTS: Record<Locale, BlogPost[]> = { cs: POSTS_CS, en: POSTS_EN }
+
+export function getAllPosts(locale: Locale): BlogPost[] {
+  return [...POSTS[locale]].sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
-export function getPost(slug: string): BlogPost | undefined {
-  return POSTS.find((p) => p.slug === slug)
+export function getPost(locale: Locale, slug: string): BlogPost | undefined {
+  return POSTS[locale].find((p) => p.slug === slug)
+}
+
+/** Slug of the same article in every locale — used for hreflang alternates. */
+export function getPostSlugs(id: string): Record<Locale, string> {
+  const slugs = {} as Record<Locale, string>
+  for (const locale of LOCALES) {
+    slugs[locale] = POSTS[locale].find((p) => p.id === id)?.slug ?? ''
+  }
+  return slugs
 }

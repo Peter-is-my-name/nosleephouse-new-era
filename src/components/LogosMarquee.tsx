@@ -1,5 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react';
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
 import './LogosMarquee.css';
 
 type Logo = { src: string; alt: string; cls?: string };
@@ -17,7 +19,10 @@ const LOGOS: Logo[] = [
 const BASE_SPEED = 60;   // px per second
 const HOVER_FACTOR = 0.3; // slows to 30% on hover
 
-export default function LogosMarquee() {
+/** `locale` defaults to Czech so the untranslated /reklama funnel can keep
+    rendering this component without passing anything. */
+export default function LogosMarquee({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
+  const t = getDictionary(locale).logos;
   const trackRef  = useRef<HTMLDivElement>(null);
   const targetRef = useRef(1); // 1 = full speed, HOVER_FACTOR on hover
 
@@ -52,7 +57,7 @@ export default function LogosMarquee() {
   return (
     <section
       className="logos"
-      aria-label="Partneři a média"
+      aria-label={t.ariaLabel}
       onMouseEnter={() => { targetRef.current = HOVER_FACTOR; }}
       onMouseLeave={() => { targetRef.current = 1; }}
     >

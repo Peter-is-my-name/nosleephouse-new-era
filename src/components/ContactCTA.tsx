@@ -3,6 +3,10 @@ import { useState, useRef, useCallback, useEffect, type CSSProperties } from 're
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowRight, Logo } from './icons';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { rich } from '@/lib/rich';
+import { thankYouHref } from '@/lib/routes';
 import './ContactCTA.css';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -14,20 +18,17 @@ const PHONE_COUNTRIES = [
   { code: '+421', flag: '🇸🇰', label: 'SK' },
 ] as const
 
+/* Locale-independent details; role + reason come from the dictionary. */
 const FOUNDERS = [
   {
     photo: '/assets/contact/martin.jpg',
-    role: 'Zakladatel & prodejce',
     name: 'Martin Bujňák',
-    reason: 'Kvůli stavu projektu a dalších otázek:',
     phone: '+420 734 565 323',
     email: 'martin@nosleephouse.com',
   },
   {
     photo: '/assets/contact/peter.jpg',
-    role: 'Zakladatel & grafický dizajnér',
     name: 'Peter Hronec',
-    reason: 'Kvůli grafickýmu dizajnu:',
     phone: '+421 948 332 118',
     email: 'peter.hronec@nosleephouse.com',
   },
@@ -52,7 +53,8 @@ const EMPTY: FormData = {
   message: '',
 }
 
-export default function ContactCTA() {
+export default function ContactCTA({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale).contact
   const router = useRouter()
   const [data, setData] = useState<FormData>(EMPTY)
   const [errors, setErrors] = useState<FormErrors>({})
@@ -60,6 +62,8 @@ export default function ContactCTA() {
   const [prefixOpen, setPrefixOpen] = useState(false)
   const partialSent = useRef(false)
   const prefixRef = useRef<HTMLDivElement>(null)
+  // Tags the lead email so the team knows which language to reply in.
+  const leadSource = locale === 'cs' ? 'homepage-contact' : `homepage-contact-${locale}`
 
   const currentPrefix =
     PHONE_COUNTRIES.find((c) => c.code === data.phonePrefix) ?? PHONE_COUNTRIES[0]
@@ -101,19 +105,19 @@ export default function ContactCTA() {
           name: `${data.firstName} ${data.lastName}`.trim() || data.email,
           phonePrefix: data.phonePrefix,
           partial: true,
-          source: 'homepage-contact',
+          source: leadSource,
         }),
         keepalive: true,
       }).catch(() => {})
     }
-  }, [data.email, data.firstName, data.lastName, data.phonePrefix])
+  }, [data.email, data.firstName, data.lastName, data.phonePrefix, leadSource])
 
   const validate = (): FormErrors => {
     const e: FormErrors = {}
-    if (!data.firstName.trim()) e.firstName = 'Vyplňte jméno.'
-    if (!data.lastName.trim()) e.lastName = 'Vyplňte příjmení.'
-    if (!isValidEmail(data.email)) e.email = 'Zadejte platný e-mail.'
-    if (!isValidPhone(data.phone)) e.phone = 'Zadejte platné číslo (9 číslic).'
+    if (!data.firstName.trim()) e.firstName = t.errors.firstName
+    if (!data.lastName.trim()) e.lastName = t.errors.lastName
+    if (!isValidEmail(data.email)) e.email = t.errors.email
+    if (!isValidPhone(data.phone)) e.phone = t.errors.phone
     return e
   }
 
@@ -131,25 +135,21 @@ export default function ContactCTA() {
       await fetch('/api/formular', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, name, source: 'homepage-contact' }),
+        body: JSON.stringify({ ...data, name, source: leadSource }),
       })
     } catch {
       /* best-effort */
     }
 
     setSubmitting(false)
-    router.push('/dotaznik-odeslany-2')
+    router.push(thankYouHref(locale))
   }
 
   return (
     <section id="contact" className="contact">
       <div className="container">
         <div className="contact-head reveal">
-          <h2 className="contact-heading">
-            Začněte získávat
-            <br />
-            <span className="accent">více poptávek</span>
-          </h2>
+          <h2 className="contact-heading">{rich(t.heading)}</h2>
           <span className="contact-logo">
             <Logo height={54} />
           </span>
@@ -159,26 +159,26 @@ export default function ContactCTA() {
           <div className="contact-form reveal" style={{ '--d': '0.1s' } as CSSProperties}>
             <div className="contact-row2 contact-names">
               <div className="field">
-                <label htmlFor="cf-first">Jméno *</label>
+                <label htmlFor="cf-first">{t.firstName}</label>
                 <input
                   id="cf-first"
                   type="text"
                   value={data.firstName}
                   onChange={(e) => setField('firstName', e.target.value)}
-                  placeholder="Honza"
+                  placeholder={t.firstNamePlaceholder}
                   autoComplete="given-name"
                   className={errors.firstName ? 'err' : undefined}
                 />
                 {errors.firstName && <p className="contact-error">{errors.firstName}</p>}
               </div>
               <div className="field">
-                <label htmlFor="cf-last">Příjmení *</label>
+                <label htmlFor="cf-last">{t.lastName}</label>
                 <input
                   id="cf-last"
                   type="text"
                   value={data.lastName}
                   onChange={(e) => setField('lastName', e.target.value)}
-                  placeholder="Novák"
+                  placeholder={t.lastNamePlaceholder}
                   autoComplete="family-name"
                   className={errors.lastName ? 'err' : undefined}
                 />
@@ -188,21 +188,21 @@ export default function ContactCTA() {
 
             <div className="contact-row2">
               <div className="field">
-                <label htmlFor="cf-email">E-mail *</label>
+                <label htmlFor="cf-email">{t.email}</label>
                 <input
                   id="cf-email"
                   type="email"
                   value={data.email}
                   onChange={(e) => setField('email', e.target.value)}
                   onBlur={handleEmailBlur}
-                  placeholder="vas@email.cz"
+                  placeholder={t.emailPlaceholder}
                   autoComplete="email"
                   className={errors.email ? 'err' : undefined}
                 />
                 {errors.email && <p className="contact-error">{errors.email}</p>}
               </div>
               <div className="field">
-                <label htmlFor="cf-phone">Telefon *</label>
+                <label htmlFor="cf-phone">{t.phone}</label>
                 <div className={`contact-phone${errors.phone ? ' err' : ''}`}>
                   <div className="contact-prefix" ref={prefixRef}>
                     <button
@@ -211,7 +211,7 @@ export default function ContactCTA() {
                       onClick={() => setPrefixOpen((o) => !o)}
                       aria-haspopup="listbox"
                       aria-expanded={prefixOpen}
-                      aria-label={`Předvolba ${currentPrefix.code}`}
+                      aria-label={`${t.prefixAria} ${currentPrefix.code}`}
                     >
                       <span className="contact-prefix-flag">{currentPrefix.flag}</span>
                       <span className="contact-prefix-code">{currentPrefix.code}</span>
@@ -280,7 +280,7 @@ export default function ContactCTA() {
                     type="tel"
                     value={data.phone}
                     onChange={(e) => setField('phone', e.target.value)}
-                    placeholder="608 123 456"
+                    placeholder={t.phonePlaceholder}
                     autoComplete="tel-national"
                     className="contact-phone-input"
                   />
@@ -291,20 +291,18 @@ export default function ContactCTA() {
 
             <div className="field">
               <label htmlFor="cf-msg" className="contact-msg-title">
-                S čím vám můžeme pomoci?
+                {t.messageLabel}
               </label>
               <textarea
                 id="cf-msg"
                 rows={4}
                 value={data.message}
                 onChange={(e) => setField('message', e.target.value)}
-                placeholder="Stačí pár vět o vašem projektu nebo cíli. Ozveme se do 24 hodin."
+                placeholder={t.messagePlaceholder}
               />
             </div>
 
-            <p className="gdpr">
-              Odesláním souhlasíte se zpracováním osobních údajů za účelem kontaktování.
-            </p>
+            <p className="gdpr">{t.gdpr}</p>
 
             <button
               type="button"
@@ -315,11 +313,11 @@ export default function ContactCTA() {
               {submitting ? (
                 <>
                   <span className="contact-spinner" aria-hidden="true" />
-                  Odesílám…
+                  {t.submitting}
                 </>
               ) : (
                 <>
-                  Chci více poptávek
+                  {t.submit}
                   <ArrowRight size={10} />
                 </>
               )}
@@ -327,20 +325,20 @@ export default function ContactCTA() {
           </div>
 
           <div className="contact-side reveal" style={{ '--d': '0.2s' } as CSSProperties}>
-            <p className="contact-side-title">Spěchá to? Volejte nebo pište.</p>
+            <p className="contact-side-title">{t.sideTitle}</p>
             <div className="founders">
-              {FOUNDERS.map((f) => (
+              {FOUNDERS.map((f, i) => (
                 <div className="founder" key={f.name}>
                   <Image className="founder-photo" src={f.photo} alt={f.name} width={210} height={245} loading="lazy" />
                   <div className="founder-info">
                     <div className="founder-top">
-                      <span className="founder-role">{f.role}</span>
+                      <span className="founder-role">{t.founders[i].role}</span>
                       <a className="founder-name" href={`mailto:${f.email}`}>
                         {f.name}
                       </a>
                     </div>
                     <div className="founder-bottom">
-                      <span className="founder-reason">{f.reason}</span>
+                      <span className="founder-reason">{t.founders[i].reason}</span>
                       <a className="founder-contact" href={`tel:${f.phone.replace(/\s/g, '')}`}>
                         {f.phone}
                       </a>

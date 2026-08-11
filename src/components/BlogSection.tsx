@@ -2,8 +2,24 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/blog';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { rich } from '@/lib/rich';
+import { blogHref, postHref } from '@/lib/routes';
 import './BlogSection.css';
+
+/** Only what the card needs — passed in from the server page so the full blog
+    content of both locales never reaches the client bundle. */
+export type BlogCard = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  cover: string;
+  coverAlt: string;
+  author: string;
+  date: string;
+  dateLabel: string;
+};
 
 function ArrowUpRight() {
   return (
@@ -33,9 +49,14 @@ function Chevron({ dir }: { dir: 'left' | 'right' }) {
   );
 }
 
-const POSTS = getAllPosts();
-
-export default function BlogSection() {
+export default function BlogSection({
+  locale,
+  posts,
+}: {
+  locale: Locale;
+  posts: BlogCard[];
+}) {
+  const t = getDictionary(locale).blogSection;
   const viewportRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const [translate, setTranslate] = useState(0);
@@ -53,7 +74,7 @@ export default function BlogSection() {
     const visible = w >= 860 ? 4 : w >= 620 ? 3 : w >= 440 ? 2 : 1;
     const g = w >= 560 ? 24 : 16;
     const cw = visible === 1 ? Math.round(w * 0.86) : Math.round((w - (visible - 1) * g) / visible);
-    const maxI = Math.max(0, POSTS.length - visible);
+    const maxI = Math.max(0, posts.length - visible);
     const idx = Math.min(index, maxI);
     setGap(g);
     setCardW(cw);
@@ -61,7 +82,7 @@ export default function BlogSection() {
     setTranslate(-idx * (cw + g));
     if (idx !== index) setIndex(idx);
     setReady(true);
-  }, [index]);
+  }, [index, posts.length]);
 
   useEffect(() => { measure(); }, [measure]);
   useEffect(() => {
@@ -80,10 +101,10 @@ export default function BlogSection() {
       <div className="container">
         <div className="blog-head">
           <h2 className="blog-title reveal" id="blog-heading">
-            Přečtěte si náš <span className="accent">blog</span>
+            {rich(t.heading)}
           </h2>
-          <Link href="/blog" className="btn btn-outline blog-readall">
-            Číst všechno
+          <Link href={blogHref(locale)} className="btn btn-outline blog-readall">
+            {t.readAll}
           </Link>
         </div>
       </div>
@@ -98,10 +119,10 @@ export default function BlogSection() {
               gap: `${gap}px`,
             }}
           >
-            {POSTS.map((post) => (
+            {posts.map((post) => (
               <Link
                 key={post.slug}
-                href={`/blog/${post.slug}`}
+                href={postHref(locale, post.slug)}
                 className="blog-card"
                 style={{ width: `${cardW}px` }}
               >
@@ -141,7 +162,7 @@ export default function BlogSection() {
             className="blog-arrow"
             onClick={() => go(-1)}
             disabled={atStart}
-            aria-label="Předchozí články"
+            aria-label={t.prevAria}
           >
             <Chevron dir="left" />
           </button>
@@ -150,7 +171,7 @@ export default function BlogSection() {
             className="blog-arrow"
             onClick={() => go(1)}
             disabled={atEnd}
-            aria-label="Další články"
+            aria-label={t.nextAria}
           >
             <Chevron dir="right" />
           </button>

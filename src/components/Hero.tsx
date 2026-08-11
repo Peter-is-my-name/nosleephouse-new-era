@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import { ArrowRight, Star, GoogleLogo } from './icons';
 import type { CSSProperties } from 'react';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { rich } from '@/lib/rich';
 import './Hero.css';
 
 const heroVisual = '/assets/hero.jpg';
@@ -13,18 +16,20 @@ const HERO_SHAPE_PATH =
 const HERO_CLIP_PATH =
   'M1 0.98204C1 0.99196 0.99249 1 0.98322 1L0.01678 1C0.00751 1 0 0.99196 0 0.98204L0 0.72931C0 0.72274 0.00336 0.71669 0.00875 0.71354L0.56771 0.38749C0.5731 0.38434 0.57646 0.37829 0.57646 0.37172L0.57646 0.24466C0.57646 0.23808 0.57982 0.23202 0.58522 0.22888L0.97521 0.0022C0.98639 -0.0043 1 0.00437 1 0.01798L1 0.98204Z';
 
-export default function Hero() {
+export default function Hero({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale).hero;
+
   return (
     <section id="top" className="hero">
       <div className="container hero-grid">
         <div className="hero-copy">
           <div className="reviews reveal" style={{ '--d': '0.05s' } as CSSProperties}>
             <div className="reviews-left">
-              <span className="partner">Hodnocení na</span>
+              <span className="partner">{t.ratingOn}</span>
               <GoogleLogo height={24} white />
             </div>
             <div className="reviews-right">
-              <div className="stars" aria-label="Hodnocení 5 z 5">
+              <div className="stars" aria-label={t.ratingAria}>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={15} />
                 ))}
@@ -35,20 +40,20 @@ export default function Hero() {
 
           <h1 className="hero-title">
             <span className="line reveal" style={{ '--d': '0.15s' } as CSSProperties}>
-              Digitální partner
+              {rich(t.line1)}
             </span>
             <span className="line line-two reveal" style={{ '--d': '0.28s' } as CSSProperties}>
-              pro majitele <span className="accent">firem</span>
+              {rich(t.line2)}
             </span>
           </h1>
 
           <p className="hero-sub reveal" style={{ '--d': '0.42s' } as CSSProperties}>
-            Weby na míru, které vaší firmě přinášejí <strong>skutečné klienty</strong>.
+            {rich(t.sub)}
           </p>
 
           <div className="reveal" style={{ '--d': '0.54s' } as CSSProperties}>
             <a href="#contact" className="btn btn-primary hero-btn">
-              Získat cenový návrh zdarma
+              {t.cta}
               <ArrowRight size={10} />
             </a>
           </div>
@@ -80,7 +85,7 @@ export default function Hero() {
               <div className="hero-img-wrap">
                 <Image
                   src={heroVisual}
-                  alt="Tým nosleephouse na veletrhu"
+                  alt={t.imageAlt}
                   fill
                   priority
                   className="hero-img"
@@ -101,13 +106,13 @@ export default function Hero() {
             className="hero-badge badge-projects reveal"
             style={{ '--d': '0.7s' } as CSSProperties}
           >
-            <strong>150+</strong>&nbsp;realizovaných projektů od roku 2019
+            {rich(t.badgeProjects)}
           </span>
           <span
             className="hero-badge badge-team reveal"
             style={{ '--d': '0.8s' } as CSSProperties}
           >
-            <strong>8</strong>&nbsp;seniorních odborníků v týmu
+            {rich(t.badgeTeam)}
           </span>
         </div>
       </div>

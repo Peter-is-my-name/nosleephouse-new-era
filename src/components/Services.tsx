@@ -1,69 +1,40 @@
 import Image from 'next/image';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { rich } from '@/lib/rich';
 import './Services.css';
 
-type Service = {
-  title: string;
-  desc:  string;
-  img:   string;
-  tags:  string[];
-  wide?: boolean;
-};
-
-const SERVICES: Service[] = [
-  {
-    title: 'Tvorba webů & vývoj',
-    desc:  'Stavíme weby, které budují vaši autoritu a mění návštěvníky v platící klienty.',
-    img:   '/assets/services/reality-expo.jpg',
-    tags:  ['Firemní web', 'E-shop', 'Landing page'],
-  },
-  {
-    title: 'Marketing & Růst',
-    desc:  'Cílené kampaně zaměřené na stabilní přísun poptávek a maximalizaci zisku.',
-    img:   '/assets/services/realestate.jpg',
-    tags:  ['Google ADS', 'Meta ADS', 'SEO'],
-  },
-  {
-    title: 'Grafický Design',
-    desc:  'Ostrý vizuální obsah, díky kterému vaše značka okamžitě vystoupí z davu.',
-    img:   '/assets/services/jun.jpg',
-    tags:  ['Logo', 'Print', 'Prezentace'],
-  },
-  {
-    title: 'Vizuální Identita',
-    desc:  'Komplexní vizuální identita, která vaší značce dá jasný, konzistentní a zapamatovatelný charakter.',
-    img:   '/assets/reklama/aparsia.png',
-    tags:  ['Brand Identity', 'Vizuální styl', 'Reklama'],
-  },
-  {
-    title: 'AI Automatizace & AI Kreativy',
-    desc:  'Propojíme vaše systémy a zbavíme vás rutiny, abyste se mohli soustředit na to, co vás baví.',
-    img:   '/assets/services/reality-expo.jpg',
-    tags:  ['Zapier', 'n8n', 'Make', 'AI Kreativa'],
-    wide:  true,
-  },
+/* Imagery is locale-independent, so it stays here alongside the layout. */
+const IMAGES = [
+  '/assets/services/reality-expo.jpg',
+  '/assets/services/realestate.jpg',
+  '/assets/services/jun.jpg',
+  '/assets/reklama/aparsia.png',
+  '/assets/services/reality-expo.jpg',
 ];
 
-export default function Services() {
+/** The last card spans the full grid width. */
+const WIDE_INDEX = 4;
+
+export default function Services({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale).services;
+
   return (
     <section id="services" className="services">
       <div className="services-inner">
-        <h2 className="services-heading reveal">
-          Služby, které
-          <br />
-          <span className="accent">spolu fungují</span>
-        </h2>
+        <h2 className="services-heading reveal">{rich(t.heading)}</h2>
 
         <div className="services-grid">
-          {SERVICES.map((s, i) => (
+          {t.items.map((s, i) => (
             <a
               href="#contact"
               key={i}
-              className={`service-card reveal-scale${s.wide ? ' service-card--wide' : ''}`}
+              className={`service-card reveal-scale${i === WIDE_INDEX ? ' service-card--wide' : ''}`}
               style={{ '--d': `${i * 0.07}s` } as React.CSSProperties}
             >
               <div className="service-media">
                 <Image
-                  src={s.img}
+                  src={IMAGES[i]}
                   alt={s.title}
                   fill
                   loading="lazy"
