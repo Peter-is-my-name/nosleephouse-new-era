@@ -1,33 +1,28 @@
 'use client'
 import { ArrowRight, LinkedInIcon, InstagramIcon } from './icons';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
 import './Footer.css';
 
-const COLS = [
-  { head: 'Rozhlédněte se', links: ['Domů', 'O nás', 'Kontakt', 'Kariéra'] },
-  {
-    head: 'Služby',
-    links: [
-      'Tvorba webů & vývoj',
-      'Grafický Design',
-      'Vizuální Identita',
-      'Marketing & Růst',
-      'AI Automatizace & AI Kreativy',
-    ],
-  },
-];
+export default function Footer({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale);
 
-export default function Footer() {
+  const cols = [
+    { head: t.footer.exploreHead, links: t.footer.exploreLinks, href: '#' },
+    { head: t.footer.servicesHead, links: t.header.services, href: '#contact' },
+  ];
+
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-cols">
-          {COLS.map((c) => (
+          {cols.map((c) => (
             <nav className="footer-col" key={c.head} aria-label={c.head}>
               <span className="footer-col-head">{c.head}</span>
               <ul>
                 {c.links.map((l) => (
                   <li key={l}>
-                    <a href={c.head === 'Služby' ? '#contact' : '#'}>{l}</a>
+                    <a href={c.href}>{l}</a>
                   </li>
                 ))}
               </ul>
@@ -35,7 +30,7 @@ export default function Footer() {
           ))}
 
           <div className="footer-contact">
-            <span className="footer-label">Kontakt</span>
+            <span className="footer-label">{t.footer.contactLabel}</span>
             <a className="footer-email" href="mailto:info@nosleephouse.com">
               info@nosleephouse.com
             </a>
@@ -63,7 +58,7 @@ export default function Footer() {
               </a>
             </div>
             <a href="#contact" className="btn btn-primary footer-cta">
-              Nacenění zdarma
+              {t.footer.cta}
               <ArrowRight size={10} />
             </a>
           </div>
@@ -76,7 +71,7 @@ export default function Footer() {
 
       <div className="footer-bar">
         <div className="container footer-bar-inner">
-          <span>Copyright © nosleephouse™ 2026</span>
+          <span>{t.footer.copyright}</span>
           <a href="https://www.instagram.com/nosleephouse/" target="_blank" rel="noopener noreferrer">
             Instagram
           </a>

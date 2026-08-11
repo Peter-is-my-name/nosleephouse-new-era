@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
-
-const SITE = 'https://nosleephouse.cz'
+import { SITE_URL } from '@/lib/i18n'
+import { thankYouHref } from '@/lib/routes'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,9 +8,14 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
       // thank-you pages are transactional, not for search
-      disallow: ['/reklama/dotaznik-odeslany', '/dotaznik-odeslany-2', '/coming-soon'],
+      disallow: [
+        '/reklama/dotaznik-odeslany',
+        thankYouHref('cs'),
+        thankYouHref('en'),
+        '/coming-soon',
+      ],
     },
-    sitemap: `${SITE}/sitemap.xml`,
-    host: SITE,
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   }
 }

@@ -1,0 +1,20 @@
+import type { Metadata } from 'next'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import GdprContent from '@/components/GdprContent'
+import { gdprHref } from '@/lib/routes'
+import { buildGdprMetadata } from '@/lib/siteMeta'
+
+export const metadata: Metadata = buildGdprMetadata('en')
+
+export default function GdprPage() {
+  return (
+    <>
+      <Header locale="en" altHref={gdprHref('cs')} />
+      <main>
+        <GdprContent locale="en" />
+      </main>
+      <Footer locale="en" />
+    </>
+  )
+}

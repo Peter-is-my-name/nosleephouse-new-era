@@ -1,70 +1,50 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { rich } from '@/lib/rich';
 import './Reviews.css';
 
-type Review = {
-  name: string;
-  role: string;
+/* Locale-independent metadata for each review; the name, role and quote come
+   from the dictionary and are matched by position. */
+const REVIEW_META: {
   company: string;
   companyUrl: string;
   avatar: string;
-  quote: string;
   logo?: { src: string; alt: string; h?: number };
-};
-
-const REVIEWS: Review[] = [
+}[] = [
   {
-    name: 'Dominika Donovalová',
-    role: 'Majitelka realitní kanceláře,',
     company: 'aparsia.cz',
     companyUrl: 'https://aparsia.cz',
     avatar: '/assets/testimonials/dominika.jpg',
     logo: { src: '/assets/testimonials/aparsia-logo.png', alt: 'Aparsia', h: 46 },
-    quote:
-      '„Kluci byli skvělí od prvního kontaktu. Celý proces byl rychlý, komunikace bezproblémová a výsledný web přesně odráží můj styl. Líbilo se mi, že nevytvářeli jen hezký web, ale přemýšleli nad tím, co nám přinese klienty. Výsledky to potvrdily.“',
   },
   {
-    name: 'Jakub Haidari',
-    role: 'Marketing nehnuteľností,',
     company: 'realityexpo.sk',
     companyUrl: 'https://realityexpo.sk',
     avatar: '/assets/testimonials/jakub.jpg',
     logo: { src: '/assets/testimonials/realityexpo-logo.svg', alt: 'Reality EXPO' },
-    quote:
-      '„S Petrem a Martinem spolupracujeme přes 2 roky. Přístup k projektu byl od začátku profesionální: jasná komunikace, výsledky, které překonaly očekávání. Web spustili přesně v termínu a běží bezchybně. Doporučuji každému, kdo hledá agenturní výsledky s lidským přístupem.“',
   },
   {
-    name: 'Radek Bareš',
-    role: 'Majitel recyklační firmy,',
     company: 'duopet.cz',
     companyUrl: 'https://duopet.cz',
     avatar: '/assets/testimonials/radek.jpg',
     logo: { src: '/assets/testimonials/duopet-logo.png', alt: 'DUOPET' },
-    quote:
-      '„Profesionální přístup, rychlé spuštění a hlavně web, který skutečně přivádí nové klienty. Organická návštěvnost se do 3 měsíců zdvojnásobila. Oceňuji, že neskončili spuštěním, ale průběžně optimalizují.“',
   },
   {
-    name: 'Filip Polanský',
-    role: 'Majitel firmy,',
     company: 'duopet.cz',
     companyUrl: 'https://duopet.cz',
     avatar: '/assets/testimonials/filip.jpg',
     logo: { src: '/assets/testimonials/duopet-logo.png', alt: 'DUOPET' },
-    quote:
-      '„Hledali jsme partu, která rozumí technologii i designu zároveň. nosleephouse je přesně to. Dodali komplexní design i vývoj dashboardu, včetně AI web appek pro urychlení našich procesů. Spolupráce byla efektivní a výsledek překvapil i naše investory.“',
   },
   {
-    name: 'Jonathan Hill',
-    role: 'Kuchař & podnikatel,',
     company: 'socarratcatering.com',
     companyUrl: 'https://socarratcatering.com',
     avatar: '/assets/testimonials/jonathan.jpg',
     logo: { src: '/assets/testimonials/socarrat-logo.svg', alt: 'Socarrat' },
-    quote:
-      '„Leo pro nás navrhl krásnou brand identitu, logo, menu i vizuály pro sociální sítě. Zákazníci si to pochvalují. Web krásně zpracovaný taky, kluky mohu jenom doporučit.“',
   },
-];
+] as const;
 
 function Chevron({ dir }: { dir: 'left' | 'right' }) {
   return (
@@ -80,9 +60,13 @@ function Chevron({ dir }: { dir: 'left' | 'right' }) {
   );
 }
 
-const N = REVIEWS.length;
+const N = REVIEW_META.length;
 
-export default function Reviews() {
+/** `locale` defaults to Czech so the untranslated /reklama funnel can keep
+    rendering this component without passing anything. */
+export default function Reviews({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
+  const t = getDictionary(locale).reviews;
+  const reviews = REVIEW_META.map((meta, i) => ({ ...meta, ...t.items[i] }));
   const viewportRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -135,13 +119,11 @@ export default function Reviews() {
   const atEnd = index >= maxIndex;
 
   return (
-    <section className="rvw" aria-label="Recenze klientů">
+    <section className="rvw" aria-label={t.sectionAria}>
       <div className="container">
         <div className="rvw-head" ref={headRef}>
-          <span className="rvw-label">Recenze</span>
-          <h2 className="rvw-title reveal">
-            Příběhy našich <span className="accent">klientů</span>
-          </h2>
+          <span className="rvw-label">{t.label}</span>
+          <h2 className="rvw-title reveal">{rich(t.heading)}</h2>
         </div>
       </div>
 
@@ -154,7 +136,7 @@ export default function Reviews() {
             transition: 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
-          {REVIEWS.map((r, i) => (
+          {reviews.map((r, i) => (
             <article className="rvw-card" key={i} style={{ width: `${cardW}px` }}>
               <div className="rvw-card-body">
                 {r.logo && (
@@ -202,7 +184,7 @@ export default function Reviews() {
             className="rvw-arrow"
             onClick={() => go(-1)}
             disabled={atStart}
-            aria-label="Předchozí recenze"
+            aria-label={t.prevAria}
           >
             <Chevron dir="left" />
           </button>
@@ -212,7 +194,7 @@ export default function Reviews() {
             className="rvw-arrow"
             onClick={() => go(1)}
             disabled={atEnd}
-            aria-label="Další recenze"
+            aria-label={t.nextAria}
           >
             <Chevron dir="right" />
           </button>

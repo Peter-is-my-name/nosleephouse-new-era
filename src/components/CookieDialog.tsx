@@ -1,5 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
 import './CookieDialog.css';
 
 interface CookiePrefs {
@@ -9,7 +11,10 @@ interface CookiePrefs {
   marketing: boolean;
 }
 
-export default function CookieDialog() {
+const CATEGORY_KEYS = ['necessary', 'preferences', 'statistics', 'marketing'] as const;
+
+export default function CookieDialog({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale).cookies;
   const [visible, setVisible]         = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [prefs, setPrefs]             = useState<CookiePrefs>({
@@ -51,24 +56,21 @@ export default function CookieDialog() {
 
   return (
     <>
-      <div className={`cookie${visible ? ' is-open' : ''}`} role="dialog" aria-label="Informace o cookies">
+      <div className={`cookie${visible ? ' is-open' : ''}`} role="dialog" aria-label={t.dialogAria}>
         <div className="cookie-inner">
           <div className="cookie-text">
-            <h2>Informace o cookies</h2>
-            <p>
-              Pro co nejlepší služby používáme cookies k ukládání a přístupu k informacím o zařízení.
-              Souhlasem umožníte zpracování údajů, jako je chování na webu.
-            </p>
+            <h2>{t.title}</h2>
+            <p>{t.text}</p>
           </div>
           <div className="cookie-actions">
             <button type="button" className="cookie-details-btn" onClick={() => setDetailsOpen(true)}>
-              Zobrazit detaily
+              {t.details}
             </button>
             <button type="button" className="btn btn-outline cookie-decline" onClick={declineAll}>
-              Odmítnout
+              {t.decline}
             </button>
             <button type="button" className="btn btn-primary" onClick={acceptAll}>
-              Přijmout vše
+              {t.acceptAll}
             </button>
           </div>
         </div>
@@ -84,8 +86,8 @@ export default function CookieDialog() {
             onClick={e => e.stopPropagation()}
           >
             <div className="ck-modal-header">
-              <h2 id="ck-modal-title">Nastavení cookies</h2>
-              <button type="button" className="ck-close" onClick={() => setDetailsOpen(false)} aria-label="Zavřít">
+              <h2 id="ck-modal-title">{t.modalTitle}</h2>
+              <button type="button" className="ck-close" onClick={() => setDetailsOpen(false)} aria-label={t.closeAria}>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                   <path d="M14 4L4 14M4 4l10 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -93,36 +95,12 @@ export default function CookieDialog() {
             </div>
 
             <div className="ck-modal-body">
-              <p className="ck-intro">
-                Cookies jsou malé textové soubory ukládané na vašem zařízení. Některé pomáhají webu fungovat, jiné nám umožní personalizovat obsah nebo pochopit, jak web používáte. Volba je na vás.
-              </p>
+              <p className="ck-intro">{t.intro}</p>
 
-              {([
-                {
-                  key: 'necessary' as const,
-                  label: 'Nutné',
-                  desc: 'Nutné cookies pomáhají, aby byla stránka použitelná tak, že umožní základní funkce jako navigace stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
-                  locked: true,
-                },
-                {
-                  key: 'preferences' as const,
-                  label: 'Preferenční',
-                  desc: 'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk.',
-                  locked: false,
-                },
-                {
-                  key: 'statistics' as const,
-                  label: 'Statistické',
-                  desc: 'Statistické cookies nám pomáhají, abychom porozuměli, jak návštěvníci používají naše webové stránky. Anonymně sbírají a sdílují informace.',
-                  locked: false,
-                },
-                {
-                  key: 'marketing' as const,
-                  label: 'Marketingové',
-                  desc: 'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele.',
-                  locked: false,
-                },
-              ] as const).map(({ key, label, desc, locked }) => (
+              {CATEGORY_KEYS.map((key) => {
+                const { label, desc } = t.categories[key];
+                const locked = key === 'necessary';
+                return (
                 <div className="ck-category" key={key}>
                   <div className="ck-category-header">
                     <div className="ck-category-text">
@@ -140,13 +118,14 @@ export default function CookieDialog() {
                     </label>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="ck-modal-footer">
-              <button type="button" className="ck-footer-ghost" onClick={declineAll}>Odmítnout</button>
-              <button type="button" className="btn btn-outline" onClick={acceptCustom}>Povolit výběr</button>
-              <button type="button" className="btn btn-primary" onClick={acceptAll}>Povolit vše</button>
+              <button type="button" className="ck-footer-ghost" onClick={declineAll}>{t.decline}</button>
+              <button type="button" className="btn btn-outline" onClick={acceptCustom}>{t.allowSelection}</button>
+              <button type="button" className="btn btn-primary" onClick={acceptAll}>{t.allowAll}</button>
             </div>
           </div>
         </div>

@@ -1,6 +1,9 @@
 'use client'
 import { useEffect } from 'react'
 import { Logo } from './icons'
+import type { Locale } from '@/lib/i18n'
+import { getDictionary } from '@/lib/dictionaries'
+import { homeHref } from '@/lib/routes'
 import './reklama/ThankYou.css'
 
 /**
@@ -39,12 +42,15 @@ function CalendlyEmbed() {
   )
 }
 
-export default function ThankYou2() {
+export default function ThankYou2({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale).thankYou
+  const home = homeHref(locale)
+
   return (
     <div className="ty">
       <header className="ty-header">
         <div className="container ty-header-inner">
-          <a href="/" aria-label="nosleephouse">
+          <a href={home} aria-label="nosleephouse">
             <Logo height={40} />
           </a>
         </div>
@@ -57,20 +63,17 @@ export default function ThankYou2() {
           </svg>
         </div>
 
-        <h1 className="ty-heading">Rezervujte si svůj termín konzultace níže 👇</h1>
-        <p className="ty-sub">
-          Berte to vážně, jak je to jen možné. Každý den máme jen několik setkání a skutečně vám
-          chceme předat hodnotu, takže si vyberte termín, kdy máte 100&nbsp;% čas.
-        </p>
+        <h1 className="ty-heading">{t.heading}</h1>
+        <p className="ty-sub">{t.sub}</p>
 
         <div className="ty-calendly">
           <CalendlyEmbed />
         </div>
 
         <div className="ty-foot">
-          <p className="ty-noslot">Pokud termín nevyhovuje, ozveme se vám sami.</p>
-          <a href="/" className="btn btn-outline ty-back">
-            ← Zpět na hlavní stránku
+          <p className="ty-noslot">{t.noSlot}</p>
+          <a href={home} className="btn btn-outline ty-back">
+            {t.back}
           </a>
         </div>
       </main>

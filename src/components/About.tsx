@@ -1,27 +1,24 @@
 import Image from 'next/image';
 import { ArrowRight } from './icons';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { rich } from '@/lib/rich';
 import './About.css';
 
-export default function About() {
+export default function About({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale).about;
+
   return (
     <section id="about" className="about">
       <div className="container about-grid">
         <div className="about-copy">
-          <h2 className="about-heading reveal">
-            Digitálními partnery
-            <br />
-            pro firmy jsme už
-            <br />
-            <span className="accent">přes 7 let</span>
-          </h2>
+          <h2 className="about-heading reveal">{rich(t.heading)}</h2>
           <p className="about-text reveal" style={{ '--d': '0.1s' } as React.CSSProperties}>
-            Za sedm let jsme se naučili jednu věc: dobrý web vzniká z <strong>dobrého vztahu
-            s klientem</strong>, ne ze zadání v tabulce. Proto s vámi mluvíme přímo, a hlavně
-            musíme váš biznis pochopit od první schůzky po spuštění.
+            {rich(t.text)}
           </p>
           <div className="reveal" style={{ '--d': '0.2s' } as React.CSSProperties}>
             <a href="#about" className="btn btn-outline">
-              Zjistit více o nosleephouse
+              {t.cta}
               <ArrowRight size={10} />
             </a>
           </div>
@@ -31,7 +28,7 @@ export default function About() {
           <div className="about-photo">
             <Image
               src="/assets/about/team.jpg"
-              alt="Tým nosleephouse"
+              alt={t.imageAlt}
               width={920}
               height={614}
               loading="lazy"

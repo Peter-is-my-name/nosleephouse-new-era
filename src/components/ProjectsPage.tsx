@@ -3,108 +3,56 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from './icons';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { rich } from '@/lib/rich';
+import { caseHref, contactHref, homeHref, CASE_SLUGS } from '@/lib/routes';
+import { PROJECT_MEDIA } from '@/lib/content/projectMedia';
 import './ProjectsPage.css';
 
-type Project = {
-  id: string;
-  brand: string;
-  title: string;
-  category: string;
-  tags: string[];
-  img: string;
-  year: string;
-  href?: string;
-};
-
-const PROJECTS: Project[] = [
-  {
-    id: 'reality-expo',
-    brand: 'Reality Expo',
-    title: 'Reality EXPO: Branding, Web a kampaň, které rozjely celý veletrh',
-    category: 'Branding',
-    tags: ['Branding', 'Web'],
-    img: '/assets/reklama/why-4.jpg',
-    year: '2025',
-    href: '/projekty/reality-expo',
-  },
-  {
-    id: 'aparsia',
-    brand: 'Aparsia',
-    title: 'Aparsia: Vícejazyčný web, který otevírá realitní trh světu',
-    category: 'Web',
-    tags: ['Web', 'UX/UI'],
-    img: '/assets/reklama/aparsia.png',
-    year: '2025',
-    href: '/projekty/aparsia',
-  },
-  {
-    id: 'duopet',
-    brand: 'DUOPET',
-    title: 'DUOPET: Čistý web, který vyzdvihl recyklaci plastů',
-    category: 'Web',
-    tags: ['Web'],
-    img: '/assets/reklama/duopetcz.jpeg',
-    year: '2024',
-    href: '/projekty/duopet',
-  },
-  {
-    id: 'jun-matcha',
-    brand: 'JUN',
-    title: 'JUN Matcha: Čistá vizuální identita, která od nuly postavila silnou značku prémiové matchy',
-    category: 'Identita',
-    tags: ['Identita', 'Branding'],
-    img: '/assets/reklama/junmatcha.png',
-    year: '2025',
-    href: '/projekty/jun-matcha',
-  },
-];
-
-const FILTERS = ['Vše', 'Web', 'Branding', 'Identita', 'UX/UI'] as const;
-type Filter = (typeof FILTERS)[number];
-
-export default function ProjectsPage() {
-  const [active, setActive] = useState<Filter>('Vše');
+export default function ProjectsPage({ locale }: { locale: Locale }) {
+  const d = getDictionary(locale);
+  const t = d.projectsPage;
+  const FILTERS = [t.filterAll, ...t.filters];
+  const [active, setActive] = useState(t.filterAll);
   const gridRef = useRef<HTMLDivElement>(null);
 
+  const items = CASE_SLUGS.map((slug) => ({
+    slug,
+    ...PROJECT_MEDIA[slug],
+    ...d.projects[slug],
+  }));
   const filtered =
-    active === 'Vše' ? PROJECTS : PROJECTS.filter((p) => p.tags.includes(active));
+    active === t.filterAll ? items : items.filter((p) => p.tags.includes(active));
 
   useEffect(() => {
     if (!gridRef.current) return;
-    const items = gridRef.current.querySelectorAll<HTMLElement>('.prj-item');
+    const els = gridRef.current.querySelectorAll<HTMLElement>('.prj-item');
     const vh = window.innerHeight;
     requestAnimationFrame(() => {
-      items.forEach((el) => {
+      els.forEach((el) => {
         const r = el.getBoundingClientRect();
         if (r.top < vh && r.bottom > 0) el.classList.add('is-visible');
       });
     });
   }, [active]);
 
-  const isFeatured = (i: number) => active === 'Vše' && i === 0;
+  const isFeatured = (i: number) => active === t.filterAll && i === 0;
 
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="prj-hero">
         <div className="container">
-          <p className="prj-label">Naše projekty</p>
-          <h1 className="prj-hero-heading">
-            Přes 80 projektů.
-            <br />
-            Každý s{' '}
-            <span className="accent">příběhem.</span>
-          </h1>
-          <p className="prj-hero-sub">
-            Od startupů po etablované firmy. Weby, e-shopy, brandingy a vizuální identity,
-            které skutečně fungují.
-          </p>
+          <p className="prj-label">{t.label}</p>
+          <h1 className="prj-hero-heading">{rich(t.heading)}</h1>
+          <p className="prj-hero-sub">{t.sub}</p>
         </div>
         <div className="prj-hero-rule" aria-hidden="true" />
       </section>
 
       {/* ── Filter bar ───────────────────────────────────── */}
-      <div className="prj-filters" role="navigation" aria-label="Filtr projektů">
+      <div className="prj-filters" role="navigation" aria-label={t.filtersAria}>
         <div className="container">
           <div className="prj-filters-inner">
             {FILTERS.map((f) => (
@@ -126,19 +74,17 @@ export default function ProjectsPage() {
       <section className="prj-body">
         <div className="container">
           <div className="prj-grid" ref={gridRef}>
-            {filtered.length === 0 && (
-              <p className="prj-empty">Žádné projekty v této kategorii.</p>
-            )}
+            {filtered.length === 0 && <p className="prj-empty">{t.empty}</p>}
 
             {filtered.map((p, i) => {
               const feat = isFeatured(i);
               return (
                 <div
-                  key={`${active}-${p.id}`}
+                  key={`${active}-${p.slug}`}
                   className={`prj-item reveal-scale${feat ? ' is-featured' : ''}`}
                   style={{ '--d': `${i * 0.06}s` } as React.CSSProperties}
                 >
-                  <a href={p.href ?? '#contact'} className="prj-card" aria-label={p.title}>
+                  <a href={caseHref(locale, p.slug)} className="prj-card" aria-label={p.title}>
                     {feat ? (
                       /* Featured: image left panel + info right panel */
                       <>
@@ -157,13 +103,13 @@ export default function ProjectsPage() {
                             <span className="prj-year">{p.year}</span>
                           </div>
                           <div className="prj-tags">
-                            {p.tags.map((t) => (
-                              <span key={t} className="prj-tag">{t}</span>
+                            {p.tags.map((tag) => (
+                              <span key={tag} className="prj-tag">{tag}</span>
                             ))}
                           </div>
                           <h2 className="prj-feat-title">{p.title}</h2>
                           <span className="prj-feat-cta" aria-hidden="true">
-                            Případová studie
+                            {d.common.caseStudy}
                             <ArrowRight size={14} />
                           </span>
                         </div>
@@ -179,7 +125,7 @@ export default function ProjectsPage() {
                             loading="lazy"
                             sizes="(max-width: 760px) 100vw, 50vw"
                           />
-                          <span className="prj-badge">Případová studie</span>
+                          <span className="prj-badge">{d.common.caseStudy}</span>
                         </div>
                         <div className="prj-info">
                           <div className="prj-meta">
@@ -187,8 +133,8 @@ export default function ProjectsPage() {
                             <span className="prj-year">{p.year}</span>
                           </div>
                           <div className="prj-tags">
-                            {p.tags.map((t) => (
-                              <span key={t} className="prj-tag">{t}</span>
+                            {p.tags.map((tag) => (
+                              <span key={tag} className="prj-tag">{tag}</span>
                             ))}
                           </div>
                           <p className="prj-title">
@@ -210,23 +156,17 @@ export default function ProjectsPage() {
       <section className="prj-cta">
         <div className="container prj-cta-inner">
           <div className="prj-cta-text">
-            <p className="prj-cta-label">Pojďme spolupracovat</p>
-            <h2 className="prj-cta-heading">
-              Máte projekt
-              <br />
-              na <span className="accent">mysli?</span>
-            </h2>
-            <p className="prj-cta-sub">
-              Ozvěte se. Pobavíme se o tom, jak váš web posunout na další úroveň.
-            </p>
+            <p className="prj-cta-label">{t.ctaLabel}</p>
+            <h2 className="prj-cta-heading">{rich(t.ctaHeading)}</h2>
+            <p className="prj-cta-sub">{t.ctaSub}</p>
           </div>
           <div className="prj-cta-actions">
-            <Link href="/#contact" className="btn btn-primary">
-              Domluvit schůzku zdarma
+            <Link href={contactHref(locale)} className="btn btn-primary">
+              {d.common.bookCall}
               <ArrowRight size={10} />
             </Link>
-            <Link href="/" className="btn btn-outline">
-              Zpět na hlavní stránku
+            <Link href={homeHref(locale)} className="btn btn-outline">
+              {d.common.backHome}
             </Link>
           </div>
         </div>

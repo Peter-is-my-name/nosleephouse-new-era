@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from '../icons'
+import type { Locale } from '@/lib/i18n'
+import { getDictionary } from '@/lib/dictionaries'
+import { rich } from '@/lib/rich'
+import { blogHref, caseHref, contactHref, homeHref, postHref } from '@/lib/routes'
 import type { BlogPost, Block } from '@/lib/blog'
 import { getAllPosts } from '@/lib/blog'
 import './blog-pages.css'
@@ -60,8 +64,10 @@ function renderBlock(block: Block, i: number) {
   }
 }
 
-export default function BlogArticle({ post }: { post: BlogPost }) {
-  const related = getAllPosts()
+export default function BlogArticle({ post, locale }: { post: BlogPost; locale: Locale }) {
+  const d = getDictionary(locale)
+  const t = d.blog
+  const related = getAllPosts(locale)
     .filter((p) => p.slug !== post.slug)
     .slice(0, 2)
 
@@ -69,16 +75,16 @@ export default function BlogArticle({ post }: { post: BlogPost }) {
     <>
       <article className="ba">
         <div className="container ba-head">
-          <nav className="ba-crumbs" aria-label="Drobečková navigace">
-            <Link href="/">Domů</Link>
+          <nav className="ba-crumbs" aria-label={t.crumbsAria}>
+            <Link href={homeHref(locale)}>{t.crumbHome}</Link>
             <span aria-hidden="true">/</span>
-            <Link href="/blog">Blog</Link>
+            <Link href={blogHref(locale)}>{t.label}</Link>
           </nav>
 
           <div className="ba-tags">
-            {post.tags.map((t) => (
-              <span className="ba-tag" key={t}>
-                {t}
+            {post.tags.map((tag) => (
+              <span className="ba-tag" key={tag}>
+                {tag}
               </span>
             ))}
           </div>
@@ -90,7 +96,9 @@ export default function BlogArticle({ post }: { post: BlogPost }) {
             <span className="ba-meta-dot" aria-hidden="true" />
             <time dateTime={post.date}>{post.dateLabel}</time>
             <span className="ba-meta-dot" aria-hidden="true" />
-            <span>{post.readingMinutes} min čtení</span>
+            <span>
+              {post.readingMinutes} {t.readingSuffix}
+            </span>
           </div>
         </div>
 
@@ -107,21 +115,17 @@ export default function BlogArticle({ post }: { post: BlogPost }) {
       <section className="ba-cta">
         <div className="container ba-cta-inner">
           <div>
-            <p className="ba-cta-label">Pojďme spolupracovat</p>
-            <h2 className="ba-cta-heading">
-              Chcete i vy výsledky,<br />ne jen <span className="accent">sliby?</span>
-            </h2>
-            <p className="ba-cta-sub">
-              Napište nám a uděláme z vašeho projektu něco, o čem se bude mluvit.
-            </p>
+            <p className="ba-cta-label">{t.ctaLabel}</p>
+            <h2 className="ba-cta-heading">{rich(t.ctaHeading)}</h2>
+            <p className="ba-cta-sub">{t.ctaSub}</p>
           </div>
           <div className="ba-cta-actions">
-            <Link href="/#contact" className="btn btn-primary">
-              Domluvit schůzku zdarma
+            <Link href={contactHref(locale)} className="btn btn-primary">
+              {d.common.bookCall}
               <ArrowRight size={10} />
             </Link>
-            <Link href="/projekty/reality-expo" className="btn btn-outline">
-              Zobrazit případovou studii
+            <Link href={caseHref(locale, 'reality-expo')} className="btn btn-outline">
+              {d.common.viewCaseStudy}
             </Link>
           </div>
         </div>
@@ -131,17 +135,17 @@ export default function BlogArticle({ post }: { post: BlogPost }) {
       {related.length > 0 && (
         <section className="ba-related">
           <div className="container">
-            <p className="cs-section-label">Další z blogu</p>
+            <p className="cs-section-label">{t.relatedLabel}</p>
             <div className="ba-related-grid">
               {related.map((p) => (
-                <Link key={p.slug} href={`/blog/${p.slug}`} className="ba-related-card">
+                <Link key={p.slug} href={postHref(locale, p.slug)} className="ba-related-card">
                   <div className="ba-related-media">
                     <Image src={p.cover} alt={p.coverAlt} fill loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" />
                   </div>
                   <div className="ba-related-body">
                     <h3 className="ba-related-title">{p.title}</h3>
                     <span className="ba-related-cta">
-                      Číst článek
+                      {t.readArticle}
                       <ArrowRight size={12} />
                     </span>
                   </div>

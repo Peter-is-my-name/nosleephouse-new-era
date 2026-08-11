@@ -3,42 +3,32 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { ArrowRight, ChevronDown, Logo } from './icons';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/dictionaries';
+import { homeAnchor, homeHref } from '@/lib/routes';
 import './Header.css';
 
-type NavItem = { label: string; hash: string; page: string; dropdown?: true; hide?: true };
+type NavKey = 'home' | 'projects' | 'services' | 'about' | 'blog';
+type NavItem = { key: NavKey; hash: string; hide?: true; dropdown?: true };
+
 // `hide: true` items are temporarily hidden — remove the flag to show them again.
 const NAV: NavItem[] = [
-  { label: 'Domů',       hash: '#top',       page: '/',           hide: true },
-  { label: 'Naše projekty', hash: '#portfolio', page: '/#portfolio', hide: true },
-  { label: 'Služby',     hash: '#services',  page: '/#services',  dropdown: true },
-  { label: 'O nás',      hash: '#about',     page: '/#about'      },
-  { label: 'Blog',       hash: '#',          page: '#'            },
+  { key: 'home',     hash: '#top',       hide: true },
+  { key: 'projects', hash: '#portfolio', hide: true },
+  { key: 'services', hash: '#services',  dropdown: true },
+  { key: 'about',    hash: '#about'      },
+  { key: 'blog',     hash: '#'           },
 ];
 
-const SERVICES = [
-  { label: 'Tvorba webů & vývoj',           href: '/#services' },
-  { label: 'Grafický Design',                href: '/#services' },
-  { label: 'Vizuální Identita',              href: '/#services' },
-  { label: 'Marketing & Růst',               href: '/#services' },
-  { label: 'AI Automatizace & AI Kreativy',  href: '/#services' },
-];
-
-const SECTORS = [
-  {
-    label: 'Reality & Nemovitosti',
-    sub:   'Weby pro makléře, realitní kanceláře a developerské projekty',
-  },
-  {
-    label: 'Developerské projekty',
-    sub:   'Digitální prezentace bytových i komerčních výstaveb',
-  },
-  {
-    label: 'Konference, Veletrhy & Akce',
-    sub:   'Registrační weby a digitální identity pro živé události',
-  },
-];
-
-export default function Header() {
+export default function Header({
+  locale,
+  /** same page in the other locale — drives the language switcher */
+  altHref,
+}: {
+  locale: Locale;
+  altHref: string;
+}) {
+  const t = getDictionary(locale);
   const [scrolled, setScrolled]         = useState(false);
   const [open, setOpen]                 = useState(false);
   const [mounted, setMounted]           = useState(false);
@@ -47,8 +37,13 @@ export default function Header() {
   const sluzbyRef                       = useRef<HTMLLIElement>(null);
   const hoverTimer                      = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
-  const isHome   = pathname === '/';
-  const nh = (item: NavItem) => isHome ? item.hash : item.page;
+  const home     = homeHref(locale);
+  const isHome   = pathname === home;
+  // On the homepage the nav scrolls to anchors; elsewhere it navigates home first.
+  const nh = (item: NavItem) =>
+    item.key === 'blog' ? '#' : isHome ? item.hash : homeAnchor(locale, item.hash.slice(1));
+  const portfolioHref = isHome ? '#portfolio' : homeAnchor(locale, 'portfolio');
+  const servicesLinkHref = isHome ? '#services' : homeAnchor(locale, 'services');
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -77,7 +72,7 @@ export default function Header() {
     return () => document.removeEventListener('keydown', onKey);
   }, [servicesOpen]);
 
-  /* Measure SLUŽBY li center to position dropdown precisely underneath */
+  /* Measure the services li center to position dropdown precisely underneath */
   useEffect(() => {
     const calc = () => {
       if (sluzbyRef.current) {
@@ -103,27 +98,38 @@ export default function Header() {
       <button
         className="mobile-menu-close"
         type="button"
-        aria-label="Zavřít menu"
+        aria-label={t.header.closeMenuAria}
         onClick={() => setOpen(false)}
       >
         <span />
         <span />
       </button>
-      <nav aria-label="Mobilní navigace">
+      <nav aria-label={t.header.mobileNavAria}>
         <ul>
           {NAV.filter((it) => !it.hide).map((item, i) => (
-            <li key={item.label} style={{ '--i': i } as React.CSSProperties}>
+            <li key={item.key} style={{ '--i': i } as React.CSSProperties}>
               <a href={nh(item)} onClick={() => setOpen(false)}>
-                {item.label}
+                {t.header.nav[item.key]}
               </a>
             </li>
           ))}
         </ul>
       </nav>
-      <a href={isHome ? '#portfolio' : '/#portfolio'} className="btn btn-primary mobile-menu-cta" onClick={() => setOpen(false)}>
-        Naše projekty
-        <ArrowRight size={14} />
-      </a>
+      <div className="mobile-menu-actions">
+        <a href={portfolioHref} className="btn btn-primary mobile-menu-cta" onClick={() => setOpen(false)}>
+          {t.header.cta}
+          <ArrowRight size={14} />
+        </a>
+        <a
+          href={altHref}
+          className="lang lang-mobile"
+          hrefLang={locale === 'cs' ? 'en' : 'cs'}
+          aria-label={t.langSwitch.label}
+          onClick={() => setOpen(false)}
+        >
+          {t.langSwitch.to}
+        </a>
+      </div>
     </div>,
     document.body
   );
@@ -132,39 +138,49 @@ export default function Header() {
     <>
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
         <div className="container header-inner">
-          <a href={isHome ? '#top' : '/'} className="logo" aria-label="nosleephouse — domů">
+          <a href={isHome ? '#top' : home} className="logo" aria-label={t.header.homeAria}>
             <Logo height={44} />
           </a>
 
           <div className="nav-cluster">
-            <nav className="nav-desktop" aria-label="Hlavní navigace">
+            <nav className="nav-desktop" aria-label={t.header.mainNavAria}>
               <ul>
                 {NAV.filter((i) => !i.hide).map((item) =>
                   item.dropdown ? (
                     <li
-                      key={item.label}
+                      key={item.key}
                       ref={sluzbyRef}
                       className={`has-dropdown${servicesOpen ? ' is-open' : ''}`}
                       onMouseEnter={openDropdown}
                       onMouseLeave={closeDropdown}
                     >
                       <a href={nh(item)} aria-haspopup="true" aria-expanded={servicesOpen}>
-                        <span>{item.label}</span>
+                        <span>{t.header.nav[item.key]}</span>
                         <ChevronDown size={12} />
                       </a>
                     </li>
                   ) : (
-                    <li key={item.label}>
+                    <li key={item.key}>
                       <a href={nh(item)} onClick={() => setServicesOpen(false)}>
-                        <span>{item.label}</span>
+                        <span>{t.header.nav[item.key]}</span>
                       </a>
                     </li>
                   )
                 )}
               </ul>
             </nav>
-            <a href={isHome ? '#portfolio' : '/#portfolio'} className="btn btn-primary header-cta" onClick={() => setServicesOpen(false)}>
-              Naše projekty
+            <a
+              href={altHref}
+              className="lang"
+              hrefLang={locale === 'cs' ? 'en' : 'cs'}
+              aria-label={t.langSwitch.label}
+              title={t.langSwitch.toName}
+              onClick={() => setServicesOpen(false)}
+            >
+              {t.langSwitch.to}
+            </a>
+            <a href={portfolioHref} className="btn btn-primary header-cta" onClick={() => setServicesOpen(false)}>
+              {t.header.cta}
               <ArrowRight size={9} />
             </a>
           </div>
@@ -172,7 +188,7 @@ export default function Header() {
           <button
             className={`burger${open ? ' is-open' : ''}`}
             type="button"
-            aria-label="Menu"
+            aria-label={t.header.menuAria}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
@@ -187,24 +203,24 @@ export default function Header() {
           style={{ left: `${dropLeft}px` }}
           aria-hidden={!servicesOpen}
           role="region"
-          aria-label="Naše služby"
+          aria-label={t.header.dropdownAria}
           onMouseEnter={openDropdown}
           onMouseLeave={closeDropdown}
         >
           <div className="nav-dropdown-inner">
             {/* Left column — services */}
             <div className="nd-col">
-              <p className="nd-eyebrow">Naše služby</p>
+              <p className="nd-eyebrow">{t.header.servicesEyebrow}</p>
               <div className="nd-services-list">
-                {SERVICES.map((s, i) => (
+                {t.header.services.map((label, i) => (
                   <a
-                    key={s.label}
-                    href={s.href}
+                    key={label}
+                    href={servicesLinkHref}
                     className="nd-service-link"
                     style={{ '--nd-i': i } as React.CSSProperties}
                     onClick={() => setServicesOpen(false)}
                   >
-                    <span>{s.label}</span>
+                    <span>{label}</span>
                     <span className="nd-arrow"><ArrowRight size={14} /></span>
                   </a>
                 ))}
@@ -216,9 +232,9 @@ export default function Header() {
 
             {/* Right column — sectors */}
             <div className="nd-col nd-col--sectors">
-              <p className="nd-eyebrow">Specializujeme se na</p>
+              <p className="nd-eyebrow">{t.header.sectorsEyebrow}</p>
               <div className="nd-sectors-list">
-                {SECTORS.map((s, i) => (
+                {t.header.sectors.map((s, i) => (
                   <div
                     key={s.label}
                     className="nd-sector-item"
