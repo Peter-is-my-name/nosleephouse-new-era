@@ -28,6 +28,10 @@
 
 .contact-grid {
   display: grid;
+  /* Desktop keeps bare 1fr on purpose: the founder column may grow to fit the
+     longest e-mail on one line and the form column takes the rest. Below 1000px
+     the single column switches to minmax(0, 1fr) so it can never push the page
+     wider than the viewport. */
   grid-template-columns: 1fr 1fr;
   gap: clamp(40px, 6vw, 80px);
   align-items: start;
@@ -146,7 +150,7 @@
 /* ---------- extended fields (reklama flow, homepage look) ---------- */
 .contact-row2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
 }
 .field input.err {
@@ -462,9 +466,17 @@
   color: var(--green);
 }
 
-@media (max-width: 860px) {
+/* tablets and below: one column. Two columns under ~1000px squeezed the form
+   to <300px once the founder column claimed room for the e-mail address. */
+@media (max-width: 1000px) {
   .contact-grid {
-    grid-template-columns: 1fr;
+    /* a bare 1fr can't shrink below its min-content width, so the unbreakable
+       e-mail address used to widen the whole page and let iOS pan sideways */
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .founder-contact {
+    /* safety net only: an e-mail has no natural break points */
+    overflow-wrap: anywhere;
   }
   .contact-logo {
     display: none;
@@ -477,7 +489,32 @@
   }
   /* keep the short name + surname fields side by side on phones */
   .contact-row2.contact-names {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 12px;
+  }
+}
+
+/* phones: the side-by-side founder card leaves ~170px for the text column,
+   which can't hold an e-mail address. Stack it: photo on top, details below
+   at full width. */
+@media (max-width: 640px) {
+  .founders {
+    gap: 40px;
+  }
+  .founder {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .founder-photo {
+    width: 150px;
+    height: 174px;
+  }
+  .founder-info {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .founder-contact {
+    font-size: 18px;
   }
 }

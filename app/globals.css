@@ -52,6 +52,11 @@
 /* ---------- base ---------- */
 html {
   -webkit-text-size-adjust: 100%;
+  /* Root-level guard: iOS Safari ignores overflow-x on <body> alone and lets the
+     page pan sideways whenever something overflows. `clip` never creates a
+     scroll container, so it can't break position: sticky or scroll-snap. */
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -60,6 +65,7 @@ body {
   color: var(--white);
   line-height: 1.5;
   overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
