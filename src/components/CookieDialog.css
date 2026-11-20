@@ -302,3 +302,13 @@
     flex: 1;
   }
 }
+
+.cookie-more {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+.cookie-more:hover {
+  color: var(--green);
+}

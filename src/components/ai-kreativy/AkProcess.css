@@ -1,0 +1,9 @@
+.ak-process-note {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.ak-gets {
+  margin-top: clamp(72px, 9vw, 120px);
+}

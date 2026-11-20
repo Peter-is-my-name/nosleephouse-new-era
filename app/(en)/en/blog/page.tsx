@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import SiteShell from '@/components/SiteShell'
 import BlogListing from '@/components/blog/BlogListing'
 import { getAllPosts } from '@/lib/blog'
-import { blogHref } from '@/lib/routes'
+import { blogHref, pathsFor } from '@/lib/routes'
 import { buildBlogMetadata, buildBlogListingJsonLd } from '@/lib/siteMeta'
 
 export const metadata: Metadata = buildBlogMetadata('en')
@@ -12,7 +12,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <SiteShell locale="en" altHref={blogHref('cs')}>
+      <SiteShell locale="en" alternates={pathsFor(blogHref)}>
         <BlogListing locale="en" />
       </SiteShell>
       {jsonLd.map((ld, i) => (

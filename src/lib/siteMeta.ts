@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { OG_LOCALE, SCHEMA_LANG, SITE_URL, type Locale } from './i18n'
+import { OG_LOCALE, SCHEMA_LANG, SITE_URLS, type Locale } from './i18n'
 import { getDictionary } from './dictionaries'
 import {
   absolute,
@@ -8,24 +8,40 @@ import {
   gdprHref,
   homeHref,
   languageAlternates,
+  pathsFor,
   postHref,
   projectsHref,
   routeAlternates,
   type CaseSlug,
 } from './routes'
 import { CASE_METADATA } from './content/cases'
+import { PROJECT_MEDIA } from './content/projectMedia'
 import { getPost, getPostSlugs } from './blog'
 
+/* ── social share images (1200×630, generated in public/assets/og) ── */
+const OG_W = 1200
+const OG_H = 630
+export const OG_DEFAULT = '/assets/og/default.jpg'
+/** 1200×630 share image derived from a content image: /assets/x/name.ext → /assets/og/name.jpg */
+export const ogImageFor = (src: string) => `/assets/og/${src.split('/').pop()!.replace(/\.[a-z]+$/i, '')}.jpg`
+const ogImages = (url: string, alt: string) => [{ url, width: OG_W, height: OG_H, alt }]
+const twitterCard = (title: string, description: string, image: string) => ({
+  card: 'summary_large_image' as const,
+  title,
+  description,
+  images: [image],
+})
+
 /**
- * Root metadata for a locale. Each locale has its own root layout (Czech at the
- * unprefixed URLs, English under /en), so each gets its own title template,
+ * Root metadata for a locale. Each locale has its own root layout and its own
+ * domain (.cz / .sk / .com), so each gets its own metadataBase, title template,
  * description and og:locale.
  */
 export function buildRootMetadata(locale: Locale): Metadata {
   const t = getDictionary(locale).meta
 
   return {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(SITE_URLS[locale]),
     title: {
       default: t.titleDefault,
       template: t.titleTemplate,
@@ -47,24 +63,17 @@ export function buildRootMetadata(locale: Locale): Metadata {
     openGraph: {
       type: 'website',
       locale: OG_LOCALE[locale],
-      url: `${SITE_URL}${homeHref(locale) === '/' ? '' : homeHref(locale)}`,
+      url: absolute(homeHref(locale), locale),
       siteName: 'nosleephouse™',
       title: t.titleDefault,
       description: t.siteDescription,
-      images: [
-        {
-          url: '/assets/hero.jpg',
-          width: 1200,
-          height: 630,
-          alt: t.ogImageAlt,
-        },
-      ],
+      images: ogImages(OG_DEFAULT, t.ogImageAlt),
     },
     twitter: {
       card: 'summary_large_image',
       title: t.titleDefault,
       description: t.siteDescriptionShort,
-      images: ['/assets/hero.jpg'],
+      images: [OG_DEFAULT],
     },
   }
 }
@@ -72,11 +81,14 @@ export function buildRootMetadata(locale: Locale): Metadata {
 /** Organization + WebSite JSON-LD emitted once per page by the root layout. */
 export function buildSiteJsonLd(locale: Locale) {
   const t = getDictionary(locale).meta
+  const SITE_URL = SITE_URLS[locale]
 
   return [
     {
       '@context': 'https://schema.org',
       '@type': 'Organization',
+      // One organisation behind all three domains: shared @id links them.
+      '@id': `${SITE_URLS.cs}/#organization`,
       name: 'nosleephouse™',
       alternateName: 'nosleephouse',
       url: SITE_URL,
@@ -90,6 +102,7 @@ export function buildSiteJsonLd(locale: Locale) {
         addressCountry: 'SK',
       },
       sameAs: [
+        ...Object.values(SITE_URLS).filter((u) => u !== SITE_URL),
         'https://www.instagram.com/nosleephouse/',
         'https://www.linkedin.com/company/nosleephouse',
         'https://www.facebook.com/profile.php?id=61581980980548',
@@ -99,9 +112,9 @@ export function buildSiteJsonLd(locale: Locale) {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'nosleephouse™',
-      url: `${SITE_URL}${homeHref(locale) === '/' ? '' : homeHref(locale)}`,
+      url: absolute(homeHref(locale), locale),
       inLanguage: SCHEMA_LANG[locale],
-      publisher: { '@type': 'Organization', name: 'nosleephouse™', url: SITE_URL },
+      publisher: { '@id': `${SITE_URLS.cs}/#organization` },
     },
   ]
 }
@@ -112,7 +125,7 @@ export function buildHomeMetadata(locale: Locale): Metadata {
   return {
     alternates: {
       canonical: homeHref(locale),
-      languages: languageAlternates({ cs: homeHref('cs'), en: homeHref('en') }),
+      languages: languageAlternates(pathsFor(homeHref)),
     },
   }
 }
@@ -129,10 +142,12 @@ export function buildProjectsMetadata(locale: Locale): Metadata {
     openGraph: {
       title: t.ogTitle,
       description: t.ogDescription,
-      url: absolute(projectsHref(locale)),
+      url: absolute(projectsHref(locale), locale),
       locale: OG_LOCALE[locale],
       type: 'website',
+      images: ogImages(OG_DEFAULT, t.ogTitle),
     },
+    twitter: twitterCard(t.ogTitle, t.ogDescription, OG_DEFAULT),
   }
 }
 
@@ -148,10 +163,12 @@ export function buildCaseMetadata(locale: Locale, slug: CaseSlug): Metadata {
     openGraph: {
       title: t.ogTitle,
       description: t.ogDescription,
-      url: absolute(caseHref(locale, slug)),
+      url: absolute(caseHref(locale, slug), locale),
       locale: OG_LOCALE[locale],
       type: 'article',
+      images: ogImages(ogImageFor(PROJECT_MEDIA[slug].img), t.ogTitle),
     },
+    twitter: twitterCard(t.ogTitle, t.ogDescription, ogImageFor(PROJECT_MEDIA[slug].img)),
   }
 }
 
@@ -167,10 +184,12 @@ export function buildBlogMetadata(locale: Locale): Metadata {
     openGraph: {
       title: t.ogTitle,
       description: t.ogDescription,
-      url: absolute(blogHref(locale)),
+      url: absolute(blogHref(locale), locale),
       locale: OG_LOCALE[locale],
       type: 'website',
+      images: ogImages(OG_DEFAULT, t.ogTitle),
     },
+    twitter: twitterCard(t.ogTitle, t.ogDescription, OG_DEFAULT),
   }
 }
 
@@ -180,34 +199,28 @@ export function buildPostMetadata(locale: Locale, slug: string): Metadata {
 
   const slugs = getPostSlugs(post.id)
   return {
-    title: post.title,
+    // Article titles are long already; the brand suffix would push them past
+    // ~60 characters and get truncated in search results.
+    title: { absolute: post.title },
     description: post.seoDescription,
     keywords: post.keywords,
     authors: [{ name: post.author }],
     alternates: {
       canonical: postHref(locale, post.slug),
-      languages: languageAlternates({
-        cs: postHref('cs', slugs.cs),
-        en: postHref('en', slugs.en),
-      }),
+      languages: languageAlternates(pathsFor((l) => postHref(l, slugs[l]))),
     },
     openGraph: {
       title: `${post.title} | nosleephouse™`,
       description: post.seoDescription,
-      url: absolute(postHref(locale, post.slug)),
+      url: absolute(postHref(locale, post.slug), locale),
       locale: OG_LOCALE[locale],
       type: 'article',
       publishedTime: post.date,
       modifiedTime: post.date,
       authors: [post.author],
-      images: [{ url: post.cover, alt: post.coverAlt }],
+      images: ogImages(ogImageFor(post.cover), post.coverAlt),
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.seoDescription,
-      images: [post.cover],
-    },
+    twitter: twitterCard(post.title, post.seoDescription, ogImageFor(post.cover)),
   }
 }
 
@@ -220,6 +233,43 @@ export function buildGdprMetadata(locale: Locale): Metadata {
       canonical: gdprHref(locale),
       languages: routeAlternates('gdpr'),
     },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: absolute(gdprHref(locale), locale),
+      locale: OG_LOCALE[locale],
+      type: 'website',
+      images: ogImages(OG_DEFAULT, t.title),
+    },
+    twitter: twitterCard(t.title, t.description, OG_DEFAULT),
+  }
+}
+
+/**
+ * Paid landing pages and their thank-you pages: noindex, but with their own
+ * share preview (og:url must not point at the homepage, or Facebook counts
+ * shares of the ad page against the homepage).
+ */
+export function buildLandingMetadata(
+  locale: Locale,
+  path: string,
+  meta: { title: string; description: string },
+  image: string = OG_DEFAULT
+): Metadata {
+  return {
+    title: meta.title,
+    description: meta.description,
+    robots: { index: false, follow: false },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: absolute(path, locale),
+      locale: OG_LOCALE[locale],
+      type: 'website',
+      siteName: 'nosleephouse™',
+      images: ogImages(image, meta.title),
+    },
+    twitter: twitterCard(meta.title, meta.description, image),
   }
 }
 
@@ -227,18 +277,20 @@ export function buildGdprMetadata(locale: Locale): Metadata {
 
 export function buildBlogListingJsonLd(locale: Locale, posts: ReturnType<typeof getPost>[]) {
   const t = getDictionary(locale)
+  const SITE_URL = SITE_URLS[locale]
+  const abs = (p: string) => absolute(p, locale)
   return [
     {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: t.meta.blog.blogName,
-      url: absolute(blogHref(locale)),
+      url: abs(blogHref(locale)),
       inLanguage: SCHEMA_LANG[locale],
       publisher: { '@type': 'Organization', name: 'nosleephouse', url: SITE_URL },
       blogPost: posts.filter(Boolean).map((p) => ({
         '@type': 'BlogPosting',
         headline: p!.title,
-        url: absolute(postHref(locale, p!.slug)),
+        url: abs(postHref(locale, p!.slug)),
         datePublished: p!.date,
         dateModified: p!.date,
         author: { '@type': 'Person', name: p!.author },
@@ -250,8 +302,8 @@ export function buildBlogListingJsonLd(locale: Locale, posts: ReturnType<typeof 
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: t.blog.crumbHome, item: absolute(homeHref(locale)) },
-        { '@type': 'ListItem', position: 2, name: t.blog.label, item: absolute(blogHref(locale)) },
+        { '@type': 'ListItem', position: 1, name: t.blog.crumbHome, item: abs(homeHref(locale)) },
+        { '@type': 'ListItem', position: 2, name: t.blog.label, item: abs(blogHref(locale)) },
       ],
     },
   ]
@@ -261,6 +313,8 @@ export function buildPostJsonLd(locale: Locale, slug: string) {
   const post = getPost(locale, slug)
   if (!post) return []
   const t = getDictionary(locale)
+  const SITE_URL = SITE_URLS[locale]
+  const abs = (p: string) => absolute(p, locale)
 
   const wordCount = post.content.reduce((n, b) => {
     if (b.type === 'p' || b.type === 'h2') return n + b.text.split(/\s+/).length
@@ -289,19 +343,19 @@ export function buildPostJsonLd(locale: Locale, slug: string) {
         url: SITE_URL,
         logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon-nsh.png` },
       },
-      mainEntityOfPage: { '@type': 'WebPage', '@id': absolute(postHref(locale, post.slug)) },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': abs(postHref(locale, post.slug)) },
     },
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: t.blog.crumbHome, item: absolute(homeHref(locale)) },
-        { '@type': 'ListItem', position: 2, name: t.blog.label, item: absolute(blogHref(locale)) },
+        { '@type': 'ListItem', position: 1, name: t.blog.crumbHome, item: abs(homeHref(locale)) },
+        { '@type': 'ListItem', position: 2, name: t.blog.label, item: abs(blogHref(locale)) },
         {
           '@type': 'ListItem',
           position: 3,
           name: post.title,
-          item: absolute(postHref(locale, post.slug)),
+          item: abs(postHref(locale, post.slug)),
         },
       ],
     },

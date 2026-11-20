@@ -11,6 +11,7 @@
  */
 
 import { LOCALES, type Locale } from './i18n'
+import { POSTS_SK } from './blog-sk'
 
 export type Block =
   | { type: 'p'; text: string }
@@ -193,7 +194,7 @@ const POSTS_CS: BlogPost[] = [
   {
     id: 'losing-customers',
     slug: '7-znaku-ze-vas-web-ztraci-zakazniky',
-    title: '7 znaků, že váš web ztrácí zákazníky (a jak to spravit)',
+    title: '7 znaků, že váš web ztrácí zákazníky (a jak to napravit)',
     excerpt:
       'Web může vypadat hezky a přesto tiše odhánět zákazníky. Tady je 7 varovných signálů, na které si dát pozor, a jak každý z nich napravit.',
     seoDescription:
@@ -274,7 +275,7 @@ const POSTS_CS: BlogPost[] = [
     content: [
       {
         type: 'p',
-        text: 'Sedm dní od zadání po ostrý web zní jako marketingový slib. U nás je to reálný proces, který stojí na jasných krocích a nula zbytečném čekání. Takhle to probíhá.',
+        text: 'Sedm dní od zadání po ostrý web zní jako marketingový slib. U nás je to reálný proces, který stojí na jasných krocích, bez zbytečného čekání. Takhle to probíhá.',
       },
       { type: 'h2', text: 'Den 1: Konzultace a cíl' },
       {
@@ -364,7 +365,7 @@ const POSTS_CS: BlogPost[] = [
       },
       {
         type: 'p',
-        text: 'Chcete web, který vás v hledání posune nahoru? Postavíme ho tak od základu. Ozvěte se.',
+        text: 'Chcete web, který vás ve vyhledávání posune nahoru? Postavíme ho tak od základu. Ozvěte se.',
       },
     ],
   },
@@ -389,7 +390,7 @@ const POSTS_CS: BlogPost[] = [
     content: [
       {
         type: 'p',
-        text: 'Zeptejte se dvou majitelů firem na web a dostanete dvě odpovědi. Jeden řeší, jak ho udělat co nejlevněji. Druhý řeší, kolik mu web přinese. Ten druhý skoro vždycky vyhraje. Tady je proč.',
+        text: 'Zeptejte se dvou majitelů firem na web a dostanete dvě odpovědi. Jeden řeší, jak ho udělat co nejlevněji. Druhý řeší, kolik mu web přinese. Ten druhý skoro vždycky vyhraje. A tady je důvod.',
       },
       { type: 'h2', text: 'Náklad se škrtá, investice se rozvíjí' },
       {
@@ -430,10 +431,10 @@ const POSTS_EN: BlogPost[] = [
     excerpt:
       'We are in our second year with Reality EXPO. What started as graphic design grew into a complete partnership, from digital all the way to physical production.',
     seoDescription:
-      'The Reality EXPO 2025 case: how nosleephouse covered the full service, from PPC campaigns and the website to motion design on screens across Bratislava.',
+      'Reality EXPO 2025 case study: how nosleephouse delivered a full service, from PPC campaigns and the website to motion design on screens across Bratislava.',
     keywords: [
       'Reality EXPO 2025',
-      'full service marketing',
+      'full-service marketing',
       'PPC campaigns',
       'event marketing',
       'nosleephouse',
@@ -454,14 +455,14 @@ const POSTS_EN: BlogPost[] = [
       },
       {
         type: 'p',
-        text: 'Reality EXPO is the largest real-estate event of its kind in Bratislava. Every year the iconic Stará tržnica market hall brings together thousands of people looking for a home and the leading experts in the field. For the second edition we got a clear brief: take care of the entire digital and visual experience so that it works as one coherent whole.',
+        text: 'Reality EXPO is the largest real-estate event of its kind in Bratislava. Every year, the iconic Stará tržnica market hall brings together thousands of people looking for a home and the leading experts in the field. For the second edition, we were given a clear brief: take care of the entire digital and visual experience so that it works as one coherent whole.',
       },
       { type: 'h2', text: 'What we delivered for Reality EXPO 2025' },
       {
         type: 'list',
         items: [
-          'PPC campaigns on Google Ads and Meta Ads with precise targeting of attendees.',
-          'Continuous development and optimisation of the website throughout the run-up.',
+          'PPC campaigns on Google Ads and Meta Ads, precisely targeted at potential attendees.',
+          'Continuous development and optimisation of the website throughout the run-up to the event.',
           'All print materials and graphic output for the event.',
           'Advertising in Forbes magazine.',
           'A motion design campaign on screens across Bratislava.',
@@ -486,7 +487,7 @@ const POSTS_EN: BlogPost[] = [
       },
       {
         type: 'p',
-        text: 'Do you want results too, not just promises? Write to us and we will turn your project into something people talk about.',
+        text: 'Want results too, not just promises? Get in touch and we will turn your project into something people talk about.',
       },
     ],
   },
@@ -496,9 +497,9 @@ const POSTS_EN: BlogPost[] = [
     slug: 'how-much-does-a-custom-website-cost-2026',
     title: 'How much does a custom website cost in 2026? A complete overview',
     excerpt:
-      'Website prices run into the tens of thousands and the differences are enormous. We explain what drives the price, what you will really pay and how to tell the investment will pay off.',
+      'Website prices range from a few hundred to several thousand euros, and the differences are enormous. We explain what drives the price, what you will really pay and how to tell whether the investment will pay off.',
     seoDescription:
-      'How much does a custom website cost in 2026? An overview of prices by website type, what affects the price and how to tell the investment will pay off.',
+      'How much does a custom website cost in 2026? An overview of prices by website type, what affects the price and how to tell whether the investment will pay off.',
     keywords: [
       'how much does a website cost',
       'website price',
@@ -517,7 +518,7 @@ const POSTS_EN: BlogPost[] = [
     content: [
       {
         type: 'p',
-        text: 'How much does a website cost? It is the question we get most often. It is also the trickiest, because the honest answer is: it depends. The gap between a cheap template and a custom website that genuinely earns money for a company is enormous. Let us break it down straight.',
+        text: 'How much does a website cost? It is the question we get most often. It is also the trickiest, because the honest answer is: it depends. The gap between a cheap template and a custom website that genuinely earns money for a company is enormous. Here is a straight breakdown.',
       },
       { type: 'h2', text: 'What drives the price of a website' },
       {
@@ -534,14 +535,14 @@ const POSTS_EN: BlogPost[] = [
       { type: 'h2', text: 'Indicative prices by website type' },
       {
         type: 'p',
-        text: 'Treat the following numbers as a guide, not a fixed price list. Every project is different, but this is roughly the range on the Czech market.',
+        text: 'Treat the following numbers as a guide, not a fixed price list. Every project is different, but this is roughly the range on the Czech and Slovak market (prices converted to euros).',
       },
       {
         type: 'list',
         items: [
-          'A single-page presentation site: from around CZK 15,000.',
-          'A custom multi-page company website: roughly CZK 30,000 to 80,000.',
-          'An e-shop or a site with advanced features: from CZK 80,000 upwards.',
+          'A single-page website: from around €620.',
+          'A custom multi-page company website: roughly €1,250 to €3,300.',
+          'An online shop or a site with advanced features: from €3,300 upwards.',
         ],
       },
       { type: 'h2', text: 'Why the cheapest option usually ends up the most expensive' },
@@ -607,12 +608,12 @@ const POSTS_EN: BlogPost[] = [
       { type: 'h2', text: '3. It is unusable on mobile' },
       {
         type: 'p',
-        text: 'Most people arrive on a phone. If the text breaks out of the layout and the buttons are hard to tap, you are losing the majority of your customers.',
+        text: 'Most people arrive on a phone. If the text spills out of the layout and the buttons are hard to tap, you are losing the majority of your customers.',
       },
       { type: 'h2', text: '4. The site does not inspire trust' },
       {
         type: 'p',
-        text: 'No testimonials, no numbers, no real photos, no contact details. Without trust nobody will order from you, however good the offer is.',
+        text: 'No testimonials, no numbers, no real photos, no contact details. Without trust, nobody will order from you, however good the offer is.',
       },
       { type: 'h2', text: '5. The copy talks about you, not the customer' },
       {
@@ -624,14 +625,14 @@ const POSTS_EN: BlogPost[] = [
         type: 'p',
         text: 'A beautiful website without SEO is a billboard in a forest. If neither Google nor the AI search engines know you exist, traffic will not arrive on its own.',
       },
-      { type: 'h2', text: '7. Nothing has happened to it for years' },
+      { type: 'h2', text: '7. It has not been updated in years' },
       {
         type: 'p',
         text: 'A website is not a sculpture. The market changes, technology changes, and a site that has not been touched for years holds you back more than it helps.',
       },
       {
         type: 'p',
-        text: 'Recognise your website in two or more of these? Most of them can be fixed faster than you would expect. Get in touch and we will go through it together.',
+        text: 'Do you recognise your website in two or more of these? Most of them can be fixed faster than you would expect. Get in touch and we will go through it together.',
       },
     ],
   },
@@ -641,7 +642,7 @@ const POSTS_EN: BlogPost[] = [
     slug: 'website-in-7-days-our-process',
     title: 'A website in 7 days: how our process works from design to launch',
     excerpt:
-      'Launching a website in seven days is not magic, it is discipline. Here is our process step by step, from the first call to a live site that brings in enquiries.',
+      'Launching a website in seven days is not magic; it is discipline. Here is our process step by step, from the first call to a live site that brings in enquiries.',
     seoDescription:
       'How we launch a website in 7 days: our process step by step, from the first consultation through design and development to launch and optimisation.',
     keywords: [
@@ -662,29 +663,29 @@ const POSTS_EN: BlogPost[] = [
     content: [
       {
         type: 'p',
-        text: 'Seven days from brief to a live website sounds like a marketing promise. For us it is a real process built on clear steps and zero pointless waiting. Here is how it goes.',
+        text: 'Seven days from brief to a live website sounds like a marketing promise. For us, it is a real process built on clear steps and zero pointless waiting. Here is how it goes.',
       },
-      { type: 'h2', text: 'Day 1: Consultation and goal' },
+      { type: 'h2', text: 'Day 1: consultation and goal' },
       {
         type: 'p',
         text: 'We start with a conversation, not a questionnaire. We need to understand your business, your customers and the single goal the website has to achieve. Without that, even a beautiful website is useless.',
       },
-      { type: 'h2', text: 'Days 2 to 3: Design and structure' },
+      { type: 'h2', text: 'Days 2 to 3: design and structure' },
       {
         type: 'p',
         text: 'We prepare a custom structure and visual design. No template, no compromises. Every section has a job and leads the visitor towards action.',
       },
-      { type: 'h2', text: 'Days 4 to 5: Development' },
+      { type: 'h2', text: 'Days 4 to 5: development' },
       {
         type: 'p',
         text: 'We turn the design into a fast, cleanly coded website. We write the code ourselves, so we have full control over both speed and the end result.',
       },
-      { type: 'h2', text: 'Day 6: Content and SEO' },
+      { type: 'h2', text: 'Day 6: content and SEO' },
       {
         type: 'p',
-        text: 'We add copy that sells and prepare the site for search engines. Speed, meta descriptions, structure — so that people and AI alike can find you.',
+        text: 'We add copy that sells and prepare the site for search engines: speed, meta descriptions and structure, so that people and AI alike can find you.',
       },
-      { type: 'h2', text: 'Day 7: Launch' },
+      { type: 'h2', text: 'Day 7: launch' },
       {
         type: 'p',
         text: 'The website goes live. And that is not the end. We watch the numbers and keep tuning, because launch is the beginning, not the finish line.',
@@ -730,12 +731,12 @@ const POSTS_EN: BlogPost[] = [
     content: [
       {
         type: 'p',
-        text: 'SEO sounds like a field for insiders. In reality it comes down to something simple: helping search engines understand what you do, and convincing them you are trustworthy. Here are the basics, without the filler.',
+        text: 'SEO sounds like a field for insiders. In reality, it comes down to something simple: helping search engines understand what you do, and convincing them you are trustworthy. Here are the basics, without the filler.',
       },
       { type: 'h2', text: 'How search engines think' },
       {
         type: 'p',
-        text: 'Google and the newer AI search engines are both looking for the best answer to a query. They reward sites that are fast, clear, well structured and carry content you can trust.',
+        text: 'Google and the newer AI search engines are both looking for the best answer to a query. They reward sites that are fast, clear and well structured, with content you can trust.',
       },
       { type: 'h2', text: 'The three pillars it rests on' },
       {
@@ -749,7 +750,7 @@ const POSTS_EN: BlogPost[] = [
       { type: 'h2', text: 'The new player: AI search' },
       {
         type: 'p',
-        text: 'Customers increasingly ask ChatGPT or Perplexity directly. Those tools cite websites that are clearly written and carry structured data. Whoever thinks about it today gets a head start.',
+        text: 'Customers increasingly ask ChatGPT or Perplexity directly. Those tools cite websites that are clearly written and carry structured data. Those who think about it today get a head start.',
       },
       { type: 'h2', text: 'Where to start' },
       {
@@ -766,9 +767,9 @@ const POSTS_EN: BlogPost[] = [
   {
     id: 'investment-not-cost',
     slug: 'a-website-is-an-investment-not-a-cost',
-    title: 'A website is an investment, not a cost. Why that changes your decisions',
+    title: 'A website is an investment, not a cost: why that changes your decisions',
     excerpt:
-      'As long as you see your website as a necessary expense, you will save in the wrong place. Here is why it pays to flip the perspective, and what it does to your business.',
+      'As long as you see your website as a necessary expense, you will cut costs in the wrong places. Here is why it pays to flip the perspective, and what it does to your business.',
     seoDescription:
       'Why you should treat a website as an investment rather than a cost. How the right decisions about your website affect company growth and overall return.',
     keywords: [
@@ -791,7 +792,7 @@ const POSTS_EN: BlogPost[] = [
         type: 'p',
         text: 'Ask two business owners about their website and you will get two answers. One is working out how to do it as cheaply as possible. The other is working out how much it will bring in. The second one almost always wins. Here is why.',
       },
-      { type: 'h2', text: 'Costs get cut, investments get developed' },
+      { type: 'h2', text: 'Costs get cut, investments get nurtured' },
       {
         type: 'p',
         text: 'When you treat a website as a cost, you look for places to save. A cheaper template, no SEO, no upkeep. The result is a website that does nothing. When you treat it as an investment, you ask what it will return, and you decide completely differently.',
@@ -799,7 +800,7 @@ const POSTS_EN: BlogPost[] = [
       { type: 'h2', text: 'A website works while you sleep' },
       {
         type: 'p',
-        text: 'A good website is the best salesperson in the company. It does not sleep, it does not take holidays, and it reaches people exactly when they are looking for your service. Costs do not do that.',
+        text: 'A good website is the best salesperson in the company. It does not sleep, it does not take holidays, and it reaches people exactly when they are looking for your service. A cost does not do that.',
       },
       {
         type: 'quote',
@@ -820,7 +821,7 @@ const POSTS_EN: BlogPost[] = [
   },
 ]
 
-const POSTS: Record<Locale, BlogPost[]> = { cs: POSTS_CS, en: POSTS_EN }
+const POSTS: Record<Locale, BlogPost[]> = { cs: POSTS_CS, sk: POSTS_SK, en: POSTS_EN }
 
 export function getAllPosts(locale: Locale): BlogPost[] {
   return [...POSTS[locale]].sort((a, b) => (a.date < b.date ? 1 : -1))

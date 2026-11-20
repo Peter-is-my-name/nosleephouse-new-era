@@ -1,7 +1,9 @@
 /**
  * Meta Pixel helpers — shared by the /reklama funnel.
  *
- * The base Pixel is injected once by <MetaPixel/> (in the reklama layout).
+ * The base Pixel is injected by <MetaPixel/> (landing layouts) only after
+ * marketing-cookie consent; without it fbqTrack() is a no-op and only the
+ * server-side CAPI event is sent.
  * These helpers fire events from the browser and read the Meta click/browser
  * cookies so the server-side Conversions API (/api/meta-capi) can be
  * deduplicated against the browser event via a shared eventID.
@@ -43,7 +45,15 @@ export function getFbp(): string | undefined {
   return readCookie('_fbp');
 }
 
-/** Meta click id cookie (set when arriving from an ad) — improves attribution. */
+/**
+ * Meta click id (improves attribution of server-side conversions). Read from
+ * the _fbc cookie when the Pixel runs (marketing consent); otherwise built in
+ * memory from the ?fbclid= of the ad click, without storing anything.
+ */
 export function getFbc(): string | undefined {
-  return readCookie('_fbc');
+  const cookie = readCookie('_fbc');
+  if (cookie) return cookie;
+  if (typeof window === 'undefined') return undefined;
+  const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+  return fbclid ? `fb.1.${Date.now()}.${fbclid}` : undefined;
 }

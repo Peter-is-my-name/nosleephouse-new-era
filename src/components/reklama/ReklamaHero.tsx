@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import type { CSSProperties } from 'react'
 import { ArrowRight, Star, GoogleLogo } from '../icons'
+import { rich } from '@/lib/rich'
+import type { WebCopy } from '@/lib/funnel/types'
 import '../Hero.css'
 import './ReklamaHero.css'
 
@@ -13,7 +15,7 @@ const HERO_SHAPE_PATH =
 const HERO_CLIP_PATH =
   'M1 0.98204C1 0.99196 0.99249 1 0.98322 1L0.01678 1C0.00751 1 0 0.99196 0 0.98204L0 0.72931C0 0.72274 0.00336 0.71669 0.00875 0.71354L0.56771 0.38749C0.5731 0.38434 0.57646 0.37829 0.57646 0.37172L0.57646 0.24466C0.57646 0.23808 0.57982 0.23202 0.58522 0.22888L0.97521 0.0022C0.98639 -0.0043 1 0.00437 1 0.01798L1 0.98204Z'
 
-export default function ReklamaHero() {
+export default function ReklamaHero({ c }: { c: WebCopy['hero'] }) {
   const toForm = (e: React.MouseEvent) => {
     e.preventDefault()
     document.getElementById('konzultace')?.scrollIntoView({ behavior: 'smooth' })
@@ -25,11 +27,11 @@ export default function ReklamaHero() {
         <div className="hero-copy">
           <div className="reviews reveal" style={{ '--d': '0.05s' } as CSSProperties}>
             <div className="reviews-left">
-              <span className="partner">Hodnocení na</span>
+              <span className="partner">{c.ratingOn}</span>
               <GoogleLogo height={24} white />
             </div>
             <div className="reviews-right">
-              <div className="stars" aria-label="Hodnocení 5 z 5">
+              <div className="stars" aria-label={c.ratingAria}>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={15} />
                 ))}
@@ -39,17 +41,16 @@ export default function ReklamaHero() {
           </div>
 
           <h1 className="hero-title rk-hero-title reveal" style={{ '--d': '0.15s' } as CSSProperties}>
-            Získejte nárůst poptávek díky modernímu webu již <span className="accent">za 7 dní</span> díky
-            našemu efektivnímu procesu od návrhu po spuštění.
+            {rich(c.title)}
           </h1>
 
           <p className="hero-sub reveal" style={{ '--d': '0.32s' } as CSSProperties}>
-            Bez komplikací a zbytečných starostí.
+            {c.sub}
           </p>
 
           <div className="rk-hero-actions reveal" style={{ '--d': '0.44s' } as CSSProperties}>
             <a href="#konzultace" onClick={toForm} className="btn btn-primary hero-btn rk-btn">
-              Chci více poptávek
+              {c.cta}
               <ArrowRight size={10} />
             </a>
           </div>
@@ -79,7 +80,7 @@ export default function ReklamaHero() {
               <div className="hero-img-wrap">
                 <Image
                   src={heroVisual}
-                  alt="Tým nosleephouse na veletrhu"
+                  alt={c.imgAlt}
                   fill
                   priority
                   className="hero-img"
@@ -99,13 +100,13 @@ export default function ReklamaHero() {
             className="hero-badge badge-projects reveal"
             style={{ '--d': '0.7s' } as CSSProperties}
           >
-            <strong>150+</strong>&nbsp;realizovaných projektů od roku 2019
+            <span>{rich(c.badges[0])}</span>
           </span>
           <span
             className="hero-badge badge-team reveal"
             style={{ '--d': '0.8s' } as CSSProperties}
           >
-            <strong>8</strong>&nbsp;seniorních odborníků v týmu
+            <span>{rich(c.badges[1])}</span>
           </span>
         </div>
       </div>

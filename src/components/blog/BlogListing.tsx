@@ -26,14 +26,16 @@ export default function BlogListing({ locale }: { locale: Locale }) {
       <section className="bl-body">
         <div className="container">
           <div className="bl-grid">
-            {posts.map((post) => (
+            {posts.map((post, i) => (
               <Link key={post.slug} href={postHref(locale, post.slug)} className="bl-card">
                 <div className="bl-card-media">
                   <Image
                     src={post.cover}
                     alt={post.coverAlt}
                     fill
-                    loading="lazy"
+                    // the first card is the LCP image on phones
+                    priority={i === 0}
+                    loading={i === 0 ? undefined : 'lazy'}
                     sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw"
                   />
                   <span className="bl-card-badge" aria-hidden="true">

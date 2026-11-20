@@ -9,10 +9,11 @@ import ContactCTA from './ContactCTA'
 import BlogSection from './BlogSection'
 import SiteShell from './SiteShell'
 import type { Locale } from '@/lib/i18n'
+import { homeHref, pathsFor } from '@/lib/routes'
 import { getAllPosts } from '@/lib/blog'
 
-/** The homepage, shared by both locales. */
-export default function HomePage({ locale, altHref }: { locale: Locale; altHref: string }) {
+/** The homepage, shared by every locale. */
+export default function HomePage({ locale }: { locale: Locale }) {
   // Narrowed here so the full blog content never crosses into the client bundle
   // via the BlogSection carousel.
   const posts = getAllPosts(locale).map((p) => ({
@@ -27,7 +28,7 @@ export default function HomePage({ locale, altHref }: { locale: Locale; altHref:
   }))
 
   return (
-    <SiteShell locale={locale} altHref={altHref}>
+    <SiteShell locale={locale} alternates={pathsFor(homeHref)}>
       <Hero locale={locale} />
       <LogosMarquee locale={locale} />
       <Services locale={locale} />

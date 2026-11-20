@@ -25,6 +25,7 @@ interface CapiPayload {
   last_name?: string
   fbp?: string
   fbc?: string
+  content_category?: string
 }
 
 function sha256(value: string): string {
@@ -86,6 +87,11 @@ export async function POST(req: NextRequest) {
           event_source_url: body.event_source_url,
           action_source: 'website',
           user_data: userData,
+          // Which funnel the conversion came from (web / AI kreativy / AI
+          // automatizace). Mirrors the browser Pixel params.
+          ...(body.content_category
+            ? { custom_data: { content_category: body.content_category } }
+            : {}),
         },
       ],
     }

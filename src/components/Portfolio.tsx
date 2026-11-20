@@ -42,10 +42,10 @@ export default function Portfolio({ locale }: { locale: Locale }) {
                   <span className="pf-brand">{p.brand}</span>
                   <span className="pf-badge">{d.common.caseStudy}</span>
                 </div>
-                <h4 className="pf-title">
+                <h3 className="pf-title">
                   {p.title}
                   <ArrowRight size={16} />
-                </h4>
+                </h3>
               </a>
             );
           })}

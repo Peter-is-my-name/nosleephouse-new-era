@@ -518,3 +518,10 @@
     font-size: 18px;
   }
 }
+
+.contact .gdpr a,
+.gdpr a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

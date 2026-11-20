@@ -1,0 +1,179 @@
+.aa-hero {
+  padding-bottom: clamp(56px, 7vw, 96px);
+  overflow: hidden;
+}
+.aa-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(32px, 4.5vw, 64px);
+  align-items: center;
+}
+.aa-pre {
+  font-size: clamp(15px, 1.15vw, 18px);
+  color: var(--green);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  max-width: 34rem;
+}
+.aa-title {
+  max-width: 17ch;
+}
+.aa-sub {
+  max-width: 34rem;
+}
+.aa-hero-note {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* real-client proof under the CTA */
+.aa-usedby {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 34rem;
+}
+.aa-usedby-l {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.aa-usedby-names {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--white);
+  transition: color 0.25s var(--ease-out);
+}
+.aa-usedby-names strong {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.aa-usedby-logo {
+  /* deltaplus.svg is 361×53 with width="100%": pin both dimensions */
+  height: 20px;
+  width: 136px;
+  filter: grayscale(1) brightness(1.6);
+  opacity: 0.9;
+}
+.aa-usedby-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.aa-usedby:hover .aa-usedby-names {
+  color: var(--green);
+}
+
+.aa-hero-visual {
+  position: relative;
+  padding-bottom: 44px;
+}
+
+/* floating AI invoice card */
+.aa-ai-card {
+  position: absolute;
+  left: -28px;
+  bottom: 0;
+  width: 236px;
+  padding: 14px 16px 12px;
+  border-radius: 6px;
+  background: var(--teal);
+  border: 1px solid rgba(178, 251, 88, 0.45);
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.85);
+  animation: aa-float 5s ease-in-out infinite;
+}
+.aa-ai-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.aa-ai-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--green);
+  color: var(--teal);
+}
+.aa-ai-ok {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aa-ai-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  margin: 0;
+}
+.aa-ai-fields dt {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.aa-ai-fields dd {
+  margin: 1px 0 0;
+  font-size: 12.5px;
+  color: var(--white);
+}
+.aa-ai-time {
+  display: block;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  color: var(--green);
+}
+@keyframes aa-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 980px) {
+  .aa-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .aa-ai-card {
+    left: 12px;
+  }
+}
+@media (max-width: 520px) {
+  /* phones: card sits under the dashboard, only overlapping its bottom edge */
+  .aa-hero-visual {
+    padding-bottom: 0;
+  }
+  .aa-ai-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin: -36px auto 0;
+    animation: none;
+    width: min(280px, 90%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aa-ai-card {
+    animation: none;
+  }
+}

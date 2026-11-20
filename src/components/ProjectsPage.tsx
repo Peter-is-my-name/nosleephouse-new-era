@@ -25,16 +25,29 @@ export default function ProjectsPage({ locale }: { locale: Locale }) {
   const filtered =
     active === t.filterAll ? items : items.filter((p) => p.tags.includes(active));
 
+  // Items remount on every filter change (their key includes the filter), so
+  // the page-wide reveal observer never sees them. Observe the fresh items
+  // here: visible ones reveal now, the rest as they scroll into view.
   useEffect(() => {
     if (!gridRef.current) return;
     const els = gridRef.current.querySelectorAll<HTMLElement>('.prj-item');
-    const vh = window.innerHeight;
-    requestAnimationFrame(() => {
-      els.forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top < vh && r.bottom > 0) el.classList.add('is-visible');
-      });
-    });
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px' }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
   }, [active]);
 
   const isFeatured = (i: number) => active === t.filterAll && i === 0;

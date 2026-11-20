@@ -24,7 +24,7 @@ export const en: Dictionary = {
 
   /* ── header ─────────────────────────────────────────────── */
   header: {
-    homeAria: 'nosleephouse — home',
+    homeAria: 'nosleephouse homepage',
     mainNavAria: 'Main navigation',
     mobileNavAria: 'Mobile navigation',
     menuAria: 'Menu',
@@ -145,7 +145,7 @@ export const en: Dictionary = {
   /* ── portfolio (homepage) ───────────────────────────────── */
   portfolio: {
     heading: 'Selected projects\nfrom our [[portfolio.]]',
-    lead: 'We have **150+ projects across a range of industries** behind us and we still love it. So you do not spend all day here, these are the most recent ones.',
+    lead: 'We have **150+ projects across a range of industries** under our belt, and we still love what we do. To save you scrolling all day, here are the most recent ones.',
     viewAll: 'View all projects',
   },
 
@@ -153,15 +153,15 @@ export const en: Dictionary = {
   features: {
     heading: 'How we\n[[work together]]',
     desc: [
-      'In 2026 a website alone will not get you results. Last year our solutions brought clients **hundreds of qualified enquiries** and **new customers**.',
-      'Thanks to those results and a tight team of specialists, **100+ clients** across the country have already trusted us to build their client-acquisition system.',
+      'In 2026, a website alone will not get you results. Last year, our solutions brought our clients **hundreds of qualified enquiries** and **new customers**.',
+      'Thanks to those results and a tight team of specialists, **87+ clients** across the country have already trusted us to build their client-acquisition system.',
     ],
     steps: [
       {
         title: 'Strategy call',
         heading: 'The consultation is the first step towards results',
         body: [
-          '**We go through your business, your goals and the options** – and see whether we can genuinely help you.',
+          '**We go through your business, your goals and your options**, and see whether we can genuinely help you.',
           'We value **your time as much as our own**. Our capacity is limited, so we pick projects where we can deliver **maximum value** and **results**.',
         ],
       },
@@ -177,24 +177,24 @@ export const en: Dictionary = {
         title: 'Building the website',
         heading: 'The path to a profitable click',
         body: [
-          'Every section and every detail has a purpose. We never build a website in isolation, but as part of **a complete system that leads the user to act**.',
-          'The result is not only a representative design, but a predictable tool for **winning new clients**.',
+          'Every section and every detail has a purpose. We never build a website in isolation; we build it as part of **a complete system that leads the user to act**.',
+          'The result is not just an impressive design, but a predictable tool for **winning new clients**.',
         ],
       },
       {
         title: 'Acquisition & performance',
         heading: 'The path to return on investment',
         body: [
-          'We turn your website into a predictable, profitable client-acquisition system – making sure **your investment in digital pays for itself**.',
-          'This approach is why we keep **our partners satisfied long term** and help them take over their market.',
+          'We turn your website into a predictable, profitable client-acquisition system, making sure **your investment in digital pays for itself**.',
+          'This approach is why we keep **our partners satisfied long term** and help them lead their market.',
         ],
       },
       {
         title: 'Growth & optimisation',
         heading: 'Your growth is our priority',
         body: [
-          'We analyse the results **regularly** and roll out improvements that raise the conversion rate of the site and the efficiency of the campaigns.',
-          'This is not just "maintenance" — we actively propose **new ways to win clients** and expand your reach.',
+          'We analyse the results **regularly** and roll out improvements that raise the site\'s conversion rate and the efficiency of your campaigns.',
+          'This is not just "maintenance": we actively propose **new ways to win clients** and expand your reach.',
         ],
       },
     ],
@@ -215,7 +215,7 @@ export const en: Dictionary = {
         name: 'Dominika Donovalová',
         role: 'Owner of a real-estate agency,',
         quote:
-          '“The guys were great from the very first contact. The whole process was fast, communication was effortless and the final website reflects my style exactly. What I liked most was that they were not just making a pretty website — they thought about what would actually bring us clients. The results proved them right.”',
+          '“The guys were great from the very first contact. The whole process was fast, communication was effortless and the final website reflects my style exactly. What I liked most was that they were not just making a pretty website; they thought about what would actually bring us clients. The results proved them right.”',
       },
       {
         name: 'Jakub Haidari',
@@ -230,16 +230,10 @@ export const en: Dictionary = {
           '“A professional approach, a fast launch and above all a website that genuinely brings in new clients. Organic traffic doubled within 3 months. I appreciate that they did not stop at launch but keep optimising.”',
       },
       {
-        name: 'Filip Polanský',
-        role: 'Company owner,',
-        quote:
-          '“We were looking for a team that understands technology and design at the same time. nosleephouse is exactly that. They delivered the full design and development of our dashboard, including AI web apps that sped up our processes. The collaboration was efficient and the result impressed even our investors.”',
-      },
-      {
         name: 'Jonathan Hill',
         role: 'Chef & entrepreneur,',
         quote:
-          '“Leo designed a beautiful brand identity for us — logo, menu and social media visuals. Our customers love it. The website is beautifully done too. I can only recommend them.”',
+          '“Leo designed a beautiful brand identity for us: logo, menu and social media visuals. Our customers love it. The website is beautifully done too. I can only recommend them.”',
       },
     ],
   },
@@ -247,7 +241,7 @@ export const en: Dictionary = {
   /* ── about ──────────────────────────────────────────────── */
   about: {
     heading: 'We have been a digital\npartner to businesses for\n[[over 7 years]]',
-    text: 'Seven years taught us one thing: a good website comes out of **a good relationship with the client**, not out of a brief in a spreadsheet. That is why we talk to you directly — and why we have to understand your business, from the first meeting through to launch.',
+    text: 'Seven years taught us one thing: a good website comes out of **a good relationship with the client**, not out of a brief in a spreadsheet. That is why we talk to you directly, and why we make a point of understanding your business, from the first meeting through to launch.',
     cta: 'Learn more about nosleephouse',
     imageAlt: 'The nosleephouse team',
   },
@@ -263,20 +257,21 @@ export const en: Dictionary = {
     emailPlaceholder: 'you@email.com',
     phone: 'Phone *',
     phonePlaceholder: '608 123 456',
-    prefixAria: 'Dialling code',
+    prefixAria: 'Country code',
     messageLabel: 'What can we help you with?',
     messagePlaceholder:
       'A few sentences about your project or goal is enough. We reply within 24 hours.',
-    gdpr: 'By submitting you agree to your personal data being processed so we can get in touch.',
+    gdpr: 'We use your details only to handle your enquiry. We save your email as soon as you enter it, so we can get back to you even if you do not finish the form. Full details are in our',
+    gdprLink: 'privacy policy',
     submit: 'I want more enquiries',
     submitting: 'Sending…',
     errors: {
       firstName: 'Please enter your first name.',
       lastName: 'Please enter your last name.',
-      email: 'Please enter a valid email.',
-      phone: 'Please enter a valid number (9 digits).',
+      email: 'Please enter a valid email address.',
+      phone: 'Please enter a valid phone number.',
     },
-    sideTitle: 'In a hurry? Call or write.',
+    sideTitle: 'In a hurry? Call or email us.',
     founders: [
       {
         role: 'Founder & sales',
@@ -292,7 +287,7 @@ export const en: Dictionary = {
   /* ── blog carousel on the homepage ──────────────────────── */
   blogSection: {
     heading: 'Read our [[blog]]',
-    readAll: 'Read everything',
+    readAll: 'Read all articles',
     prevAria: 'Previous articles',
     nextAria: 'Next articles',
   },
@@ -311,7 +306,7 @@ export const en: Dictionary = {
   cookies: {
     dialogAria: 'Cookie information',
     title: 'Cookie information',
-    text: 'To provide the best possible service we use cookies to store and access device information. Your consent allows us to process data such as browsing behaviour on this site.',
+    text: 'To provide the best possible service, we use cookies to store and access device information. Your consent allows us to process data such as browsing behaviour on this site.',
     details: 'Show details',
     decline: 'Decline',
     acceptAll: 'Accept all',
@@ -328,7 +323,7 @@ export const en: Dictionary = {
       },
       preferences: {
         label: 'Preferences',
-        desc: 'Preference cookies allow the website to remember information that changes how it behaves or looks — your preferred language, for example.',
+        desc: 'Preference cookies allow the website to remember information that changes how it behaves or looks, such as your preferred language.',
       },
       statistics: {
         label: 'Statistics',
@@ -344,8 +339,8 @@ export const en: Dictionary = {
   /* ── projects listing page ──────────────────────────────── */
   projectsPage: {
     label: 'Our work',
-    heading: 'Over 80 projects.\nEvery one with a [[story.]]',
-    sub: 'From startups to established companies. Websites, e-shops, branding and visual identities that genuinely work.',
+    heading: 'Over 150 projects.\nEvery one with a [[story.]]',
+    sub: 'From startups to established companies. Websites, online shops, branding and visual identities that genuinely work.',
     filtersAria: 'Project filter',
     filterAll: 'All',
     filters: ['Web', 'Branding', 'Identity', 'UX/UI'],
@@ -359,13 +354,13 @@ export const en: Dictionary = {
   blog: {
     label: 'Blog',
     heading: 'News, tips and\n[[stories from practice]]',
-    sub: 'How we build websites, run campaigns and help companies grow. No fluff, with real results from real clients.',
+    sub: 'How we build websites, run campaigns and help companies grow. No fluff, just real results from real clients.',
     readingSuffix: 'min read',
     crumbsAria: 'Breadcrumb',
     crumbHome: 'Home',
     ctaLabel: "Let's work together",
     ctaHeading: 'Want results too,\nnot just [[promises?]]',
-    ctaSub: 'Write to us and we will turn your project into something people talk about.',
+    ctaSub: 'Get in touch and we will turn your project into something people talk about.',
     relatedLabel: 'More from the blog',
     readArticle: 'Read article',
   },
@@ -373,8 +368,8 @@ export const en: Dictionary = {
   /* ── thank-you page ─────────────────────────────────────── */
   thankYou: {
     heading: 'Book your consultation slot below 👇',
-    sub: 'Please take it as seriously as you can. We only hold a few meetings a day and we genuinely want to give you value, so pick a slot when you have 100 % time.',
-    noSlot: 'If none of the slots suit you, we will reach out ourselves.',
+    sub: 'Please treat it as a priority. We only hold a few meetings a day and we genuinely want to give you value, so pick a slot when you can give it your full attention.',
+    noSlot: 'If none of the slots suits you, we will get in touch with you.',
     back: '← Back to homepage',
   },
 
@@ -401,14 +396,14 @@ export const en: Dictionary = {
     solution: 'Solution',
     whatWeMade: 'What we made',
     results: 'Results',
-    resultsHeading: 'Numbers\nthat [[speak.]]',
+    resultsHeading: 'Numbers that\n[[speak for themselves.]]',
     testimonial: 'Testimonial',
     nextProject: 'Next project',
     ctaLabel: "Let's work together",
     ctaHeading: 'Got a similar\nproject [[coming up?]]',
     ctaSub: 'No obligation. No slide deck. Just a conversation about your goals.',
     placeholder: 'Placeholder',
-    clientCameWith: 'What the client came with',
+    clientCameWith: 'What the client came to us with',
     problemsLabel: 'The problems we solved',
     consequence: 'Consequence',
     goal: 'Goal',
@@ -417,20 +412,20 @@ export const en: Dictionary = {
 
   /* ── page metadata ──────────────────────────────────────── */
   meta: {
-    titleDefault: 'nosleephouse™ — Digital agency',
+    titleDefault: 'nosleephouse™ | Digital agency',
     titleTemplate: '%s | nosleephouse™',
     siteDescription:
       'A digital agency operating at the highest level. Custom code, original design, AI solutions and branding. Launched in 7 days.',
     siteDescriptionShort:
       'A digital agency operating at the highest level. Custom code, original design, AI solutions and branding.',
-    ogImageAlt: 'nosleephouse™ — the team at a trade fair',
+    ogImageAlt: 'The nosleephouse™ team at a trade fair',
     projects: {
       title: 'Our work',
       description:
-        'Over 80 projects across a range of industries — websites, e-shops, branding and visual identities. See what we can do.',
+        'Over 150 projects across a range of industries: websites, online shops, branding and visual identities. See what we can do.',
       ogTitle: 'Our work | nosleephouse™',
       ogDescription:
-        'Over 80 projects across a range of industries — websites, e-shops, branding and visual identities.',
+        'Over 150 projects across a range of industries: websites, online shops, branding and visual identities.',
     },
     blog: {
       title: 'Blog',
@@ -448,7 +443,7 @@ export const en: Dictionary = {
         'How nosleephouse s.r.o. collects, uses and protects your personal data in line with the GDPR and Act No. 18/2018 Coll.',
     },
     thankYou: {
-      title: 'Thank you for your enquiry — book your consultation slot',
+      title: 'Thank you for your enquiry: book your consultation slot',
     },
   },
 }

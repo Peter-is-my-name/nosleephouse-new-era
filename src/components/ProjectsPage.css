@@ -391,3 +391,12 @@
     align-items: flex-start;
   }
 }
+
+/* phones: the filter row scrolls sideways; fade the right edge as a hint */
+@media (max-width: 640px) {
+  .prj-filters-inner {
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+    mask-image: linear-gradient(to right, #000 85%, transparent);
+    padding-right: 32px;
+  }
+}

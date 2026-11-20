@@ -2,7 +2,11 @@
 import { useEffect, useState } from 'react';
 import type { Locale } from '@/lib/i18n';
 import { getDictionary } from '@/lib/dictionaries';
+import { gdprHref } from '@/lib/routes';
+import { OPEN_SETTINGS_EVENT, readConsent, writeConsent } from '@/lib/consent';
 import './CookieDialog.css';
+
+const MORE = { cs: 'Více o ochraně údajů', sk: 'Viac o ochrane údajov', en: 'More about privacy' };
 
 interface CookiePrefs {
   necessary: boolean;
@@ -25,9 +29,24 @@ export default function CookieDialog({ locale }: { locale: Locale }) {
   });
 
   useEffect(() => {
-    if (localStorage.getItem('nsh-cookies')) return;
+    const stored = readConsent();
+    if (stored) {
+      setPrefs(stored);
+      return;
+    }
     const t = setTimeout(() => setVisible(true), 900);
     return () => clearTimeout(t);
+  }, []);
+
+  // footer "Cookie settings" link: reopen with the current choice preselected
+  useEffect(() => {
+    const open = () => {
+      const stored = readConsent();
+      if (stored) setPrefs(stored);
+      setDetailsOpen(true);
+    };
+    window.addEventListener(OPEN_SETTINGS_EVENT, open);
+    return () => window.removeEventListener(OPEN_SETTINGS_EVENT, open);
   }, []);
 
   useEffect(() => {
@@ -41,15 +60,16 @@ export default function CookieDialog({ locale }: { locale: Locale }) {
     };
   }, [detailsOpen]);
 
-  const save = (value: string) => {
-    localStorage.setItem('nsh-cookies', value);
+  const save = (p: Omit<CookiePrefs, 'necessary'>) => {
+    writeConsent(p);
+    setPrefs({ necessary: true, ...p });
     setVisible(false);
     setDetailsOpen(false);
   };
 
-  const acceptAll    = () => save(JSON.stringify({ necessary: true, preferences: true, statistics: true, marketing: true }));
-  const declineAll   = () => save('declined');
-  const acceptCustom = () => save(JSON.stringify(prefs));
+  const acceptAll    = () => save({ preferences: true, statistics: true, marketing: true });
+  const declineAll   = () => save({ preferences: false, statistics: false, marketing: false });
+  const acceptCustom = () => save({ preferences: prefs.preferences, statistics: prefs.statistics, marketing: prefs.marketing });
 
   const toggle = (key: keyof Omit<CookiePrefs, 'necessary'>) =>
     setPrefs(p => ({ ...p, [key]: !p[key] }));
@@ -60,7 +80,9 @@ export default function CookieDialog({ locale }: { locale: Locale }) {
         <div className="cookie-inner">
           <div className="cookie-text">
             <h2>{t.title}</h2>
-            <p>{t.text}</p>
+            <p>
+              {t.text} <a className="cookie-more" href={gdprHref(locale)}>{MORE[locale]}</a>
+            </p>
           </div>
           <div className="cookie-actions">
             <button type="button" className="cookie-details-btn" onClick={() => setDetailsOpen(true)}>
@@ -95,7 +117,9 @@ export default function CookieDialog({ locale }: { locale: Locale }) {
             </div>
 
             <div className="ck-modal-body">
-              <p className="ck-intro">{t.intro}</p>
+              <p className="ck-intro">
+                {t.intro} <a className="cookie-more" href={gdprHref(locale)}>{MORE[locale]}</a>
+              </p>
 
               {CATEGORY_KEYS.map((key) => {
                 const { label, desc } = t.categories[key];

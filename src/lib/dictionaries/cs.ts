@@ -33,7 +33,7 @@ export const cs = {
 
   /* ── header ─────────────────────────────────────────────── */
   header: {
-    homeAria: 'nosleephouse — domů',
+    homeAria: 'nosleephouse: domů',
     mainNavAria: 'Hlavní navigace',
     mobileNavAria: 'Mobilní navigace',
     menuAria: 'Menu',
@@ -51,14 +51,14 @@ export const cs = {
     sectorsEyebrow: 'Specializujeme se na',
     services: [
       'Tvorba webů & vývoj',
-      'Grafický Design',
-      'Vizuální Identita',
-      'Marketing & Růst',
-      'AI Automatizace & AI Kreativy',
+      'Grafický design',
+      'Vizuální identita',
+      'Marketing & růst',
+      'AI automatizace & AI kreativy',
     ],
     sectors: [
       {
-        label: 'Reality & Nemovitosti',
+        label: 'Reality & nemovitosti',
         sub: 'Weby pro makléře, realitní kanceláře a developerské projekty',
       },
       {
@@ -66,7 +66,7 @@ export const cs = {
         sub: 'Digitální prezentace bytových i komerčních výstaveb',
       },
       {
-        label: 'Konference, Veletrhy & Akce',
+        label: 'Konference, veletrhy & akce',
         sub: 'Registrační weby a digitální identity pro živé události',
       },
     ],
@@ -100,24 +100,24 @@ export const cs = {
         tags: ['Firemní web', 'E-shop', 'Landing page'],
       },
       {
-        title: 'Marketing & Růst',
+        title: 'Marketing & růst',
         desc: 'Cílené kampaně zaměřené na stabilní přísun poptávek a maximalizaci zisku.',
-        tags: ['Google ADS', 'Meta ADS', 'SEO'],
+        tags: ['Google Ads', 'Meta Ads', 'SEO'],
       },
       {
-        title: 'Grafický Design',
+        title: 'Grafický design',
         desc: 'Ostrý vizuální obsah, díky kterému vaše značka okamžitě vystoupí z davu.',
         tags: ['Logo', 'Print', 'Prezentace'],
       },
       {
-        title: 'Vizuální Identita',
+        title: 'Vizuální identita',
         desc: 'Komplexní vizuální identita, která vaší značce dá jasný, konzistentní a zapamatovatelný charakter.',
         tags: ['Brand Identity', 'Vizuální styl', 'Reklama'],
       },
       {
-        title: 'AI Automatizace & AI Kreativy',
+        title: 'AI automatizace & AI kreativy',
         desc: 'Propojíme vaše systémy a zbavíme vás rutiny, abyste se mohli soustředit na to, co vás baví.',
-        tags: ['Zapier', 'n8n', 'Make', 'AI Kreativa'],
+        tags: ['Zapier', 'n8n', 'Make', 'AI kreativa'],
       },
     ],
   },
@@ -126,7 +126,7 @@ export const cs = {
   projects: {
     'reality-expo': {
       brand: 'Reality Expo',
-      title: 'Reality EXPO: Branding, Web a kampaň, které rozjely celý veletrh',
+      title: 'Reality EXPO: Branding, web a kampaň, které rozjely celý veletrh',
       category: 'Branding',
       tags: ['Branding', 'Web'],
     },
@@ -163,14 +163,14 @@ export const cs = {
     heading: 'Jak probíhá\n[[spolupráce?]]',
     desc: [
       'V roce 2026 vám web sám o sobě výsledky nezaručí. Naše řešení jen loni přivedla klientům **stovky kvalifikovaných poptávek** a **klientů**.',
-      'Díky výsledkům a práci úzkého týmu specialistů nám vybudování funkčního akvizičního systému svěřilo již přes **100+ klientů** po celé ČR.',
+      'Díky výsledkům a práci úzkého týmu specialistů nám vybudování funkčního akvizičního systému svěřilo již **87+ klientů** po celé ČR.',
     ],
     steps: [
       {
         title: 'Strategický hovor',
         heading: 'Konzultace je prvním krokem k výsledkům',
         body: [
-          '**Probereme vaše podnikání, cíle a možnosti** – a uvidíme, zda vám dokážeme reálně pomoci.',
+          '**Probereme vaše podnikání, cíle a možnosti** a uvidíme, zda vám dokážeme reálně pomoci.',
           'Vážíme si **vašeho času stejně jako svého**. Naše kapacity jsou omezené, proto si vybíráme projekty, kterým dokážeme doručit **maximální hodnotu** a **výsledky**.',
         ],
       },
@@ -179,7 +179,7 @@ export const cs = {
         heading: 'Vytvořit předvídatelný systém pro získávání klientů není otázkou loterie',
         body: [
           'Stabilní výsledky nejsou otázkou štěstí, ale **strategie, znalostí** a **ověřeného systému**.',
-          'Prostudujeme si vaši cílovou skupinu, zmapujeme konkurenci a odhalíme vzorce chování, které se opakují. Cíl není vytvořit jen hezký web, ale řešení, které vám spolehlivě zajistí výsledky.',
+          'Prostudujeme si vaši cílovou skupinu, zmapujeme konkurenci a odhalíme vzorce chování, které se opakují. Cílem není vytvořit jen hezký web, ale řešení, které vám spolehlivě zajistí výsledky.',
         ],
       },
       {
@@ -187,14 +187,14 @@ export const cs = {
         heading: 'Cesta k ziskovému kliknutí',
         body: [
           'Každá sekce i detail má svůj účel. Web netvoříme izolovaně, ale jako součást **celkového systému vedoucího uživatele k akci**.',
-          'Výsledkem je nejen reprezentativní design, ale předvídatelný nástroj pro **získávání nových klientů**.',
+          'Výsledkem je nejen reprezentativní design, ale i předvídatelný nástroj pro **získávání nových klientů**.',
         ],
       },
       {
         title: 'Akvizice a výkon',
         heading: 'Cesta k návratnosti',
         body: [
-          'Proměníme váš web v předvídatelný ziskový systém pro získávání klientů – zajistíme, aby se vám **investice do digitálního zázemí vrátila**.',
+          'Proměníme váš web v předvídatelný ziskový systém pro získávání klientů a zajistíme, aby se vám **investice do digitálního zázemí vrátila**.',
           'Díky tomuto přístupu držíme dlouhodobě **maximální spokojenost našich partnerů** a pomáháme jim ovládnout jejich trh.',
         ],
       },
@@ -202,8 +202,8 @@ export const cs = {
         title: 'Růst a optimalizace',
         heading: 'Váš růst je naše priorita',
         body: [
-          '**Pravidelně** analyzujeme výsledky a implementujeme vylepšení, které zvyšují konverzní poměr webu a efektivitu kampaní.',
-          'Neřešíme jen „správu", ale aktivně navrhujeme **nové cesty k získávání klientů** a rozšiřování vašeho vlivu.',
+          '**Pravidelně** analyzujeme výsledky a implementujeme vylepšení, která zvyšují konverzní poměr webu a efektivitu kampaní.',
+          'Neřešíme jen „správu“, ale aktivně navrhujeme **nové cesty k získávání klientů** a rozšiřování vašeho vlivu.',
         ],
       },
     ],
@@ -228,7 +228,7 @@ export const cs = {
       },
       {
         name: 'Jakub Haidari',
-        role: 'Marketing nehnuteľností,',
+        role: 'Marketing nemovitostí,',
         quote:
           '„S Petrem a Martinem spolupracujeme přes 2 roky. Přístup k projektu byl od začátku profesionální: jasná komunikace, výsledky, které překonaly očekávání. Web spustili přesně v termínu a běží bezchybně. Doporučuji každému, kdo hledá agenturní výsledky s lidským přístupem.“',
       },
@@ -237,12 +237,6 @@ export const cs = {
         role: 'Majitel recyklační firmy,',
         quote:
           '„Profesionální přístup, rychlé spuštění a hlavně web, který skutečně přivádí nové klienty. Organická návštěvnost se do 3 měsíců zdvojnásobila. Oceňuji, že neskončili spuštěním, ale průběžně optimalizují.“',
-      },
-      {
-        name: 'Filip Polanský',
-        role: 'Majitel firmy,',
-        quote:
-          '„Hledali jsme partu, která rozumí technologii i designu zároveň. nosleephouse je přesně to. Dodali komplexní design i vývoj dashboardu, včetně AI web appek pro urychlení našich procesů. Spolupráce byla efektivní a výsledek překvapil i naše investory.“',
       },
       {
         name: 'Jonathan Hill',
@@ -256,7 +250,7 @@ export const cs = {
   /* ── about ──────────────────────────────────────────────── */
   about: {
     heading: 'Digitálními partnery\npro firmy jsme už\n[[přes 7 let]]',
-    text: 'Za sedm let jsme se naučili jednu věc: dobrý web vzniká z **dobrého vztahu s klientem**, ne ze zadání v tabulce. Proto s vámi mluvíme přímo, a hlavně musíme váš biznis pochopit od první schůzky po spuštění.',
+    text: 'Za sedm let jsme se naučili jednu věc: dobrý web vzniká z **dobrého vztahu s klientem**, ne ze zadání v tabulce. Proto s vámi mluvíme napřímo a hlavně se snažíme váš biznis pochopit, od první schůzky až po spuštění.',
     cta: 'Zjistit více o nosleephouse',
     imageAlt: 'Tým nosleephouse',
   },
@@ -276,24 +270,25 @@ export const cs = {
     messageLabel: 'S čím vám můžeme pomoci?',
     messagePlaceholder:
       'Stačí pár vět o vašem projektu nebo cíli. Ozveme se do 24 hodin.',
-    gdpr: 'Odesláním souhlasíte se zpracováním osobních údajů za účelem kontaktování.',
+    gdpr: 'Údaje použijeme jen k vyřízení vaší poptávky. E-mail si uložíme hned po vyplnění, abychom se vám mohli ozvat, i když formulář nedokončíte. Podrobnosti najdete v',
+    gdprLink: 'zásadách ochrany osobních údajů',
     submit: 'Chci více poptávek',
     submitting: 'Odesílám…',
     errors: {
       firstName: 'Vyplňte jméno.',
       lastName: 'Vyplňte příjmení.',
       email: 'Zadejte platný e-mail.',
-      phone: 'Zadejte platné číslo (9 číslic).',
+      phone: 'Zadejte platné telefonní číslo.',
     },
     sideTitle: 'Spěchá to? Volejte nebo pište.',
     founders: [
       {
         role: 'Zakladatel & prodejce',
-        reason: 'Kvůli stavu projektu a dalších otázek:',
+        reason: 'Ohledně stavu projektu a dalších otázek:',
       },
       {
-        role: 'Zakladatel & grafický dizajnér',
-        reason: 'Kvůli grafickýmu dizajnu:',
+        role: 'Zakladatel & grafický designér',
+        reason: 'Ohledně grafického designu:',
       },
     ],
   },
@@ -333,19 +328,19 @@ export const cs = {
     categories: {
       necessary: {
         label: 'Nutné',
-        desc: 'Nutné cookies pomáhají, aby byla stránka použitelná tak, že umožní základní funkce jako navigace stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
+        desc: 'Nutné cookies pomáhají zajistit použitelnost webu tím, že umožňují základní funkce, jako je navigace po stránce. Bez těchto cookies nemůže webová stránka správně fungovat.',
       },
       preferences: {
         label: 'Preferenční',
-        desc: 'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk.',
+        desc: 'Preferenční cookies umožňují webové stránce zapamatovat si informace, které ovlivňují, jak se chová nebo jak vypadá, například preferovaný jazyk.',
       },
       statistics: {
         label: 'Statistické',
-        desc: 'Statistické cookies nám pomáhají, abychom porozuměli, jak návštěvníci používají naše webové stránky. Anonymně sbírají a sdílují informace.',
+        desc: 'Statistické cookies nám pomáhají porozumět tomu, jak návštěvníci používají naše webové stránky. Informace sbírají a sdílejí anonymně.',
       },
       marketing: {
         label: 'Marketingové',
-        desc: 'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele.',
+        desc: 'Marketingové cookies slouží ke sledování návštěvníků na webových stránkách. Záměrem je zobrazovat reklamu, která je relevantní a zajímavá pro jednotlivého uživatele.',
       },
     },
   },
@@ -353,7 +348,7 @@ export const cs = {
   /* ── projects listing page ──────────────────────────────── */
   projectsPage: {
     label: 'Naše projekty',
-    heading: 'Přes 80 projektů.\nKaždý s [[příběhem.]]',
+    heading: 'Přes 150 projektů.\nKaždý s [[příběhem.]]',
     sub: 'Od startupů po etablované firmy. Weby, e-shopy, brandingy a vizuální identity, které skutečně fungují.',
     filtersAria: 'Filtr projektů',
     filterAll: 'Vše',
@@ -382,7 +377,7 @@ export const cs = {
   /* ── thank-you page ─────────────────────────────────────── */
   thankYou: {
     heading: 'Rezervujte si svůj termín konzultace níže 👇',
-    sub: 'Berte to vážně, jak je to jen možné. Každý den máme jen několik setkání a skutečně vám chceme předat hodnotu, takže si vyberte termín, kdy máte 100 % čas.',
+    sub: 'Berte to prosím co nejvážněji. Každý den máme jen několik setkání a skutečně vám chceme předat hodnotu, takže si vyberte termín, kdy máte stoprocentně čas.',
     noSlot: 'Pokud termín nevyhovuje, ozveme se vám sami.',
     back: '← Zpět na hlavní stránku',
   },
@@ -427,20 +422,20 @@ export const cs = {
 
   /* ── page metadata ──────────────────────────────────────── */
   meta: {
-    titleDefault: 'nosleephouse™ — Digitální agentura',
+    titleDefault: 'nosleephouse™ | Digitální agentura',
     titleTemplate: '%s | nosleephouse™',
     siteDescription:
       'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding. Spouštíme za 7 dní.',
     siteDescriptionShort:
       'Digitální agentura na nejvyšší úrovni. Vlastní kód, unikátní design, AI řešení a branding.',
-    ogImageAlt: 'nosleephouse™ — Tým na veletrhu',
+    ogImageAlt: 'nosleephouse™: tým na veletrhu',
     projects: {
       title: 'Naše projekty',
       description:
-        'Přes 80 projektů z různých odvětví — weby, e-shopy, branding a vizuální identity. Podívejte se, co umíme.',
+        'Přes 150 projektů z různých odvětví: weby, e-shopy, branding a vizuální identity. Podívejte se, co umíme.',
       ogTitle: 'Naše projekty | nosleephouse™',
       ogDescription:
-        'Přes 80 projektů z různých odvětví — weby, e-shopy, branding a vizuální identity.',
+        'Přes 150 projektů z různých odvětví: weby, e-shopy, branding a vizuální identity.',
     },
     blog: {
       title: 'Blog',
@@ -453,9 +448,9 @@ export const cs = {
       notFound: 'Článek nenalezen',
     },
     gdpr: {
-      title: 'Zásady ochrany osobných údajov',
+      title: 'Zásady ochrany osobních údajů',
       description:
-        'Ako nosleephouse s.r.o. zhromažďuje, používa a chráni vaše osobné údaje v súlade s GDPR a zákonom č. 18/2018 Z. z.',
+        'Jak nosleephouse s.r.o. shromažďuje, používá a chrání vaše osobní údaje v souladu s GDPR a slovenským zákonem č. 18/2018 Z. z.',
     },
     thankYou: {
       title: 'Děkujeme za poptávku, rezervujte si termín konzultace',

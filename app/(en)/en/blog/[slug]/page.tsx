@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import SiteShell from '@/components/SiteShell'
 import BlogArticle from '@/components/blog/BlogArticle'
 import { getAllPosts, getPost, getPostSlugs } from '@/lib/blog'
-import { postHref } from '@/lib/routes'
+import { pathsFor, postHref } from '@/lib/routes'
 import { buildPostMetadata, buildPostJsonLd } from '@/lib/siteMeta'
 
 export function generateStaticParams() {
@@ -29,11 +29,11 @@ export default async function BlogPostPage({
   if (!post) notFound()
 
   const jsonLd = buildPostJsonLd('en', slug)
-  const altSlug = getPostSlugs(post.id).cs
+  const slugs = getPostSlugs(post.id)
 
   return (
     <>
-      <SiteShell locale="en" altHref={postHref('cs', altSlug)}>
+      <SiteShell locale="en" alternates={pathsFor((l) => postHref(l, slugs[l]))}>
         <BlogArticle post={post} locale="en" />
       </SiteShell>
       {jsonLd.map((ld, i) => (
