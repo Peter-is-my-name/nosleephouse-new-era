@@ -280,3 +280,24 @@ video {
     transform: translateX(-50%);
   }
 }
+
+/* in-page anchors (/#services, /#contact, …) land below the fixed header */
+section[id],
+main[id] {
+  scroll-margin-top: 84px;
+}
+
+/* footer "cookie settings" button styled as a plain link */
+.cookie-settings-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.cookie-settings-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

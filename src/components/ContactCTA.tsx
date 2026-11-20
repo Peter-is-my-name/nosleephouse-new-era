@@ -1,4 +1,5 @@
 'use client'
+import { PHONE_COUNTRIES, isValidPhone } from '@/lib/phone'
 import { useState, useRef, useCallback, useEffect, type CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -6,24 +7,20 @@ import { ArrowRight, Logo } from './icons';
 import type { Locale } from '@/lib/i18n';
 import { getDictionary } from '@/lib/dictionaries';
 import { rich } from '@/lib/rich';
-import { thankYouHref } from '@/lib/routes';
+import { gdprHref, thankYouHref } from '@/lib/routes';
+import { MARTIN_PHONE, telHref } from '@/lib/contact';
 import './ContactCTA.css';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const isValidEmail = (v: string) => EMAIL_RE.test(v.trim())
-const isValidPhone = (v: string) => /^\d{9}$/.test(v.replace(/\s+/g, ''))
 
-const PHONE_COUNTRIES = [
-  { code: '+420', flag: '🇨🇿', label: 'CZ' },
-  { code: '+421', flag: '🇸🇰', label: 'SK' },
-] as const
 
 /* Locale-independent details; role + reason come from the dictionary. */
 const FOUNDERS = [
   {
     photo: '/assets/contact/martin.jpg',
     name: 'Martin Bujňák',
-    phone: '+420 734 565 323',
+    phone: null, // per locale, see MARTIN_PHONE
     email: 'martin@nosleephouse.com',
   },
   {
@@ -56,7 +53,10 @@ const EMPTY: FormData = {
 export default function ContactCTA({ locale }: { locale: Locale }) {
   const t = getDictionary(locale).contact
   const router = useRouter()
-  const [data, setData] = useState<FormData>(EMPTY)
+  const [data, setData] = useState<FormData>({
+    ...EMPTY,
+    phonePrefix: locale === 'sk' ? '+421' : '+420',
+  })
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitting, setSubmitting] = useState(false)
   const [prefixOpen, setPrefixOpen] = useState(false)
@@ -106,6 +106,7 @@ export default function ContactCTA({ locale }: { locale: Locale }) {
           phonePrefix: data.phonePrefix,
           partial: true,
           source: leadSource,
+          locale,
         }),
         keepalive: true,
       }).catch(() => {})
@@ -117,11 +118,12 @@ export default function ContactCTA({ locale }: { locale: Locale }) {
     if (!data.firstName.trim()) e.firstName = t.errors.firstName
     if (!data.lastName.trim()) e.lastName = t.errors.lastName
     if (!isValidEmail(data.email)) e.email = t.errors.email
-    if (!isValidPhone(data.phone)) e.phone = t.errors.phone
+    if (!isValidPhone(data.phonePrefix, data.phone)) e.phone = t.errors.phone
     return e
   }
 
   const handleSubmit = async () => {
+    if (submitting) return
     const errs = validate()
     if (Object.keys(errs).length) {
       setErrors(errs)
@@ -135,13 +137,14 @@ export default function ContactCTA({ locale }: { locale: Locale }) {
       await fetch('/api/formular', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, name, source: leadSource }),
+        body: JSON.stringify({ ...data, name, source: leadSource, locale }),
       })
     } catch {
       /* best-effort */
     }
 
-    setSubmitting(false)
+    // Keep the button disabled until the thank-you page replaces this one,
+    // so a slow navigation can't trigger a second lead / conversion.
     router.push(thankYouHref(locale))
   }
 
@@ -302,7 +305,9 @@ export default function ContactCTA({ locale }: { locale: Locale }) {
               />
             </div>
 
-            <p className="gdpr">{t.gdpr}</p>
+            <p className="gdpr">
+              {t.gdpr} <a href={gdprHref(locale)}>{t.gdprLink}</a>.
+            </p>
 
             <button
               type="button"
@@ -339,8 +344,8 @@ export default function ContactCTA({ locale }: { locale: Locale }) {
                     </div>
                     <div className="founder-bottom">
                       <span className="founder-reason">{t.founders[i].reason}</span>
-                      <a className="founder-contact" href={`tel:${f.phone.replace(/\s/g, '')}`}>
-                        {f.phone}
+                      <a className="founder-contact" href={telHref(f.phone ?? MARTIN_PHONE[locale])}>
+                        {f.phone ?? MARTIN_PHONE[locale]}
                       </a>
                       <a className="founder-contact" href={`mailto:${f.email}`}>
                         {f.email}

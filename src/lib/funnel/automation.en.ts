@@ -1,0 +1,337 @@
+import type { AutomationCopy } from './types'
+
+/**
+ * /ai-automatizace, English copy.
+ * Real, named proof (with the clients' consent): KWEKU s.r.o. (construction,
+ * job-profitability system) and Delta Plus (content approval portal).
+ * Every number inside the mock panels is invented; real data is never shown.
+ * Mock amounts are the Czech ones converted at 25 CZK/EUR.
+ */
+export const automationEn: AutomationCopy = {
+  meta: {
+    title: 'Custom business systems with AI: CRM, admin panels, automation',
+    description:
+      'Custom CRMs, admin panels and internal systems with AI. AI reads your invoices, your data connects and you see the numbers live. Free process analysis.',
+  },
+  header: { badge: 'Free process analysis', cta: 'Get my free analysis' },
+  hero: {
+    ratingOn: 'Rated on',
+    ratingAria: 'Rated 5 out of 5',
+    pre: 'No retyping invoices, no endless spreadsheets, no digging through emails.',
+    title: 'Keep your whole business [[under control]] with a custom system powered by AI.',
+    sub: 'We build your CRM, admin panel or internal system around exactly how your business works. AI reads invoices and documents for you, your data connects, and you see the numbers in real time.',
+    cta: 'Get my free analysis',
+    note: ['Free process analysis', "No commitment, we'll reply within a few hours"],
+    usedBy: 'Our systems are used every day by',
+    aiCard: {
+      title: 'Invoice recognised',
+      fields: [
+        ['Supplier', 'Concrete Works Ltd'],
+        ['Items', '4 lines'],
+        ['Total', '€5,076'],
+        ['Job', 'J-104'],
+      ],
+      foot: 'Just check and confirm',
+    },
+  },
+  mock: {
+    url: 'system.yourcompany.com',
+    logo: 'YC',
+    jobPrefix: 'J-',
+    nav: ['Overview', 'Invoices', 'Jobs', 'Suppliers', 'Budgets', 'Payroll', 'Reports'],
+    title: 'Overview',
+    subtitle: 'Construction Co. Ltd · jobs and costs',
+    kpis: [
+      { label: 'Total profit', value: '€51,384', note: 'Contracts minus costs', good: true },
+      { label: 'Average margin', value: '23.4%', note: '20% target met', good: true },
+      { label: 'Left to invoice', value: '€136,800', note: 'Across 9 active jobs' },
+      { label: 'Company overhead', value: '8.2%', note: 'Of all costs' },
+    ],
+    chartTitle: 'Margin by job',
+    target: 'target 20%',
+    invoicesTitle: 'Latest invoices',
+    invoices: [
+      ['Building Supplies Ltd', '€1,928'],
+      ['Concrete Works Ltd', '€5,076'],
+      ['Electrical Installations Ltd', '€1,298'],
+      ['Plant Hire Ltd', '€748'],
+    ],
+  },
+  pain: {
+    eyebrow: 'Sound familiar?',
+    title: 'Your business is growing, and the admin is [[growing with it]]',
+    lead: "Most businesses don't need more people in the office. They need a system that does the repetitive work for them.",
+    symptoms: [
+      'You retype supplier invoices by hand into Excel or your accounting software.',
+      'You only find out whether a job made money months later, from your accountant.',
+      'Your data lives in five spreadsheets and nobody knows which one is up to date.',
+      'Your sales team writes call notes in a notebook, or just tries to remember them.',
+      'Orders and bookings come in by phone, by email and through Messenger.',
+      'Every month you spend hours pulling together paperwork for your accountant.',
+    ],
+    punch: ['Every hour of manual work costs you money.', 'Every mistake in the numbers costs you even more.'],
+  },
+  calc: {
+    kicker: 'Do the maths',
+    title: 'How much is manual document processing costing you?',
+    docs: 'Invoices and documents per month',
+    minutes: 'Minutes of manual work per document',
+    rate: 'Hourly cost of labour (wages and employer contributions)',
+    unitPcs: 'docs',
+    unitMin: 'min',
+    currency: '€',
+    rateMin: 8,
+    rateMax: 60,
+    rateStep: 1,
+    rateDefault: 20,
+    outLabel: 'With AI, you save roughly',
+    hoursUnits: { one: 'hour a month', few: 'hours a month', other: 'hours a month' },
+    moneyLabel: 'saved per year',
+    daysUnits: { one: 'working day a year', few: 'working days a year', other: 'working days a year' },
+    cta: 'Get my free analysis',
+    note: "A rough estimate for document processing only. We assume that with AI, checking one document takes about a minute. In the analysis, we'll calculate the savings across all your processes.",
+    numberLocale: 'en-GB',
+  },
+  cases: {
+    eyebrow: 'Case studies',
+    title: 'Systems already [[working for our clients]]',
+    lead: 'No mock-ups gathering dust. We built these systems, and our clients use them every day.',
+    live: 'Live in production',
+    mockNote: "The screens are illustrative, and the numbers and names in the examples are invented. We never publish our clients' data.",
+    cta: 'I want a system like this',
+    ctaNote: "In the analysis, we'll find what would help your business most",
+    kweku: {
+      client: 'KWEKU s.r.o.',
+      industry: 'Construction company',
+      title: 'A P&L that shows [[where the business makes money]]',
+      story:
+        'KWEKU received supplier invoices by email and on paper, retyped them by hand and only saw the profit on each job after the fact. We built them a system that reads invoices with AI, assigns costs to jobs and tracks margins in real time.',
+      tabsAria: 'KWEKU system features',
+      tabs: [
+        {
+          tab: 'AI reads invoices',
+          title: 'Just snap a photo of the invoice',
+          text: 'Upload a PDF or a photo of an invoice, and AI pulls out the supplier, line items, amounts and due dates, then assigns it to the right job. You just check and confirm. No more retyping.',
+        },
+        {
+          tab: 'Profit on every job',
+          title: 'See profitability now, not months later',
+          text: 'For every job, the system calculates contract value, costs, profit and margin in real time. It watches your target margin and alerts you when a job starts running over.',
+        },
+        {
+          tab: 'Where money leaks',
+          title: 'Know exactly where your money goes',
+          text: 'A breakdown of costs into materials, subcontractors and wages, your most expensive suppliers and trends over time. The system even calculates how much more costs can rise while the job stays profitable.',
+        },
+        {
+          tab: 'Budget vs actual',
+          title: 'Plan and reality side by side',
+          text: 'Set a budget for each job and the system keeps comparing it with actual costs. You spot overruns before they become a problem.',
+        },
+        {
+          tab: 'Reports for your accountant',
+          title: 'Month-end close in one click',
+          text: 'Download the monthly P&L as a clear Excel file for your accountant. Prepare a bank payment file for unpaid invoices just as quickly. The system tracks due dates for you.',
+        },
+      ],
+      results: [
+        'No more retyping invoices',
+        'Real-time profit on every job',
+        'Accountant and bank paperwork in one click',
+      ],
+      invoice: {
+        file: 'invoice_photo.jpg',
+        fields: [
+          ['Supplier', 'Building Supplies Ltd'],
+          ['Invoice number', 'INV-2026-0418'],
+          ['Items', 'Bricks, mortar, anchors (4)'],
+          ['Excl. VAT / total', '€1,593 / €1,928'],
+          ['Due in', '14 days'],
+          ['Job and category', 'J-102 · Materials'],
+        ],
+        reject: 'Reject',
+        confirm: 'Confirm and save',
+      },
+      margin: {
+        cols: ['Job', 'Contract (€)', 'Margin'],
+        rows: [
+          ['J-101 School renovation', '99,200', '31%', 31],
+          ['J-102 Apartment block B2', '236,000', '24%', 24],
+          ['J-103 Logistics hall', '126,000', '12%', 12],
+          ['J-104 Family house FH-14', '65,600', '27%', 27],
+        ],
+        alert: 'J-103 is below the 20% target margin. See where the money is leaking.',
+      },
+      leak: {
+        alert: 'This job is on track for its 20% target margin. Costs can still rise by €7,456 and the margin will stay above target.',
+        costsTitle: 'Cost breakdown',
+        legend: ['Materials 58%', 'Subcontractors 27%', 'Wages 15%'],
+        suppliersTitle: 'Most expensive suppliers',
+        suppliers: [
+          ['Concrete Works Ltd', 72],
+          ['Building Supplies Ltd', 48],
+          ['Electrical Installations Ltd', 21],
+        ],
+      },
+      budget: {
+        title: 'Budget vs actual · J-102 (k€)',
+        rows: [
+          ['Materials', 48, 43],
+          ['Subcontractors', 24, 28],
+          ['Wages', 18, 16],
+        ],
+        legend: ['Plan', 'Actual', 'Over budget'],
+      },
+      report: {
+        file1: 'PnL_October.xlsx',
+        file1Note: 'For your accountant · download in one click',
+        sheets: ['Summary', 'Job P&L', 'Materials', 'Wages', 'Overhead', 'Advance payments'],
+        file2: 'Payment_order.xlsx',
+        file2Note: 'Unpaid invoices for the bank',
+        due: ['To pay', 'Overdue'],
+        dueValues: ['€16,516', '€0'],
+      },
+    },
+    delta: {
+      client: 'Delta Plus',
+      industry: 'Manufacturer of workwear and personal protective equipment (PPE)',
+      title: 'A portal where the client [[approves content in one click]]',
+      story:
+        'Social media posts for Delta Plus in the Czech Republic and Slovakia used to be approved through emails, screenshots and long messages like “second line on the third slide”. We built a portal where the client sees every post in one place, clicks straight into the graphic and leaves a comment exactly where it belongs.',
+      features: [
+        { t: 'Post statuses', d: "Drafts, with client, revisions, approved. Everyone can see who they're waiting on." },
+        { t: 'Comments right on the graphic', d: 'The client clicks anywhere on the image and their note is pinned to that exact spot.' },
+        { t: 'Versions and history', d: 'The revised version is uploaded next to the original, so nothing gets lost in emails.' },
+        { t: 'Content calendar', d: "A plan of what goes out and when. The client can see it, but can't change it." },
+      ],
+      results: [
+        'No more approvals by email and screenshot',
+        'Comments pinned to the exact spot in the graphic',
+        'The whole content plan in one place',
+      ],
+      mock: {
+        app: 'Content approval',
+        sub: 'Delta Plus CZ/SK · Instagram and Facebook',
+        columns: [
+          ['Drafts', 0],
+          ['With client', 1],
+          ['Revisions', 1],
+          ['Approved', 3],
+        ],
+        postTitle: 'New in the collection: breathable jacket',
+        postMeta: 'Carousel · 4 slides · version 2',
+        returned: 'Sent back for revisions by the client',
+        commentsTitle: 'Comments (2)',
+        comments: [
+          ['Delta Plus', 'Please make the logo colour darker.'],
+          ['nosleephouse', 'Fixed in version 2.'],
+        ],
+        pinHint: 'Click anywhere on the image to add a comment',
+        upload: 'Upload revised version',
+        progress: '3 of 4 approved',
+        calendarTitle: 'Content plan',
+        calendarNote: "The client can see the plan, but can't change it",
+      },
+    },
+  },
+  build: {
+    eyebrow: 'What we can build for you',
+    title: 'A custom system for [[anything]] that slows you down',
+    lead: 'From a simple CRM to a complete AI-powered business system. Always built around exactly how you work.',
+    items: [
+      { t: 'CRM and sales system', d: 'Companies, contacts and call outcomes in one place. Enter a phone number and instantly see the full communication history.' },
+      { t: 'Booking system', d: 'Online booking 24/7, a calendar, client management and automatic appointment reminders.' },
+      { t: 'AI document processing', d: 'Invoices, orders, delivery notes or contracts. AI reads them and stores the data where it belongs.' },
+      { t: 'Jobs and profitability', d: 'Costs, margins and budgets for every job in real time, including wages and subcontractors.' },
+      { t: 'Client portals and approvals', d: 'A space for clients and partners: content approval, documents, job status. Fewer emails and phone calls.' },
+      { t: 'Admin panel and internal tools', d: 'One place for orders, stock, tasks or approvals. Built exactly around your processes.' },
+      { t: 'Integrations and automation', d: 'We connect your system to invoicing, accounting, your bank, payment gateway, email and other services via API.' },
+      { t: 'AI assistant for your data', d: 'Ask in plain language, like how much you spent on materials for a job, and get an answer.' },
+    ],
+    compareTitle: 'Why not [[off-the-shelf software?]]',
+    compareAria: 'Off-the-shelf software vs a custom system',
+    colOld: 'Off-the-shelf software',
+    colNew: 'Custom system',
+    rows: [
+      ['Fit', 'You adapt to the software', 'The system adapts to your business'],
+      ['Features', "You pay for things you don't use", 'Only what you actually need'],
+      ['Data', 'Scattered across several apps', 'Connected in one place'],
+      ['Artificial intelligence', 'Missing, or costs extra', 'Built right into your processes'],
+      ['Support', 'A ticket and a wait', 'Direct contact with the team that built it'],
+    ],
+  },
+  process: {
+    eyebrow: 'How it works',
+    title: 'From analysis to a system that [[works for you]]',
+    lead: "We start with a free analysis. You pay nothing until you know exactly what you'll get and how much it will save you.",
+    steps: [
+      { when: 'Free', title: 'Process analysis', text: 'We look at how your admin works, find where the most time is lost and calculate the savings.' },
+      { when: 'Before development', title: 'Solution design', text: "We prepare the system structure and screen previews. Before we write any code, you know exactly what you'll get." },
+      { when: 'In stages', title: 'Development', text: 'We build in parts, so you see and test the first working version within a few weeks.' },
+      { when: 'Launch', title: 'Deployment and training', text: 'We test the system on your data, launch it and teach your whole team how to use it.' },
+      { when: 'Long term', title: 'Support and growth', text: 'We handle maintenance, monitoring and updates, and add new features as your business grows.' },
+    ],
+    ctaNote: "No commitment, we'll get back to you within a few hours",
+  },
+  form: {
+    badge: 'Capacity available this month',
+    heading: 'Find out how much time [[a system will save you]]',
+    sub: "Fill in the form and we'll arrange a free analysis of your processes. No commitment, we'll get back to you within a few hours.",
+    submit: 'Get my free analysis',
+    questions: [
+      {
+        label: 'What would you like to automate? *',
+        emailLabel: 'Area',
+        options: [
+          'Invoices and accounting documents',
+          'Jobs, costs and profitability',
+          'Sales and CRM',
+          'Bookings and orders',
+          'An internal system or admin panel',
+          "Something else, I'm happy to talk it through.",
+        ],
+        error: 'Please choose what you want to automate.',
+      },
+      {
+        label: 'How many people work in your company? *',
+        emailLabel: 'Company size',
+        options: ['1 to 5', '6 to 20', '21 to 50', 'More than 50'],
+        error: 'Please choose your company size.',
+      },
+    ],
+  },
+  faq: {
+    lead: "Didn't find your answer? Message us and we'll reply within a few hours.",
+    items: [
+      {
+        q: 'What exactly is the free analysis?',
+        a: 'A short online call where we look at how your admin works, where the most time is lost and what could be automated. You get specific recommendations and an estimate of the savings. You pay nothing and commit to nothing.',
+      },
+      {
+        q: 'How much does a custom system cost?',
+        a: 'It depends on the scope. After the analysis, you get a specific quote up front, with no hidden fees. You can also start with a smaller first version that solves what matters most, then expand the system step by step.',
+      },
+      {
+        q: 'How long does development take?',
+        a: 'We build in stages, so you usually see the first working version within a few weeks. You get an exact timeline after the analysis, before we start on anything.',
+      },
+      {
+        q: 'Can you connect the system to the software we already use?',
+        a: 'Yes. We can connect the system to invoicing and accounting software, your bank, payment gateways, email and other services via API. We check the specific integrations during the analysis.',
+      },
+      {
+        q: 'Do we need technical knowledge?',
+        a: 'No. We design the system so anyone in your company can use it, and we train the whole team after launch. We take care of the technical side.',
+      },
+      {
+        q: 'What if our processes change?',
+        a: 'The system grows with you. After launch, we provide maintenance and updates, and add new features step by step as you need them.',
+      },
+    ],
+  },
+  final: {
+    offer: 'Book your [[free analysis]]',
+    sub: "We'll show you where your business loses the most time and what can be automated.",
+    cta: 'Get my free analysis',
+  },
+}

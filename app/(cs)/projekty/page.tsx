@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 import SiteShell from '@/components/SiteShell'
 import ProjectsPage from '@/components/ProjectsPage'
-import { projectsHref } from '@/lib/routes'
+import { pathsFor, projectsHref } from '@/lib/routes'
 import { buildProjectsMetadata } from '@/lib/siteMeta'
 
 export const metadata: Metadata = buildProjectsMetadata('cs')
 
-export default function ProjektyPage() {
+export default function ProjectsListingPage() {
   return (
-    <SiteShell locale="cs" altHref={projectsHref('en')} mainId="top">
+    <SiteShell locale="cs" alternates={pathsFor(projectsHref)} mainId="top">
       <ProjectsPage locale="cs" />
     </SiteShell>
   )

@@ -1,0 +1,268 @@
+/* ============================================================
+   Shared building blocks for the service ad landing pages
+   (/ai-kreativy, /ai-automatizace). Same visual language as /reklama:
+   teal / ink sections, lime accent, sharp 2-4px corners, Inter.
+   ============================================================ */
+
+.fn-section {
+  padding-block: clamp(72px, 9vw, 128px);
+  background: var(--teal);
+  color: var(--white);
+}
+.fn-section.ink {
+  background: var(--ink);
+}
+
+/* section head */
+.fn-head {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.fn-head-left {
+  text-align: left;
+  align-items: flex-start;
+  margin-inline: 0;
+}
+.fn-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.75);
+}
+.fn-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.fn-heading {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(36px, 4.6vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  text-wrap: balance;
+}
+.fn-lead {
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 640px;
+  text-wrap: pretty;
+}
+
+/* centered CTA row under a section */
+.fn-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(40px, 5vw, 60px);
+}
+.fn-cta-note {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* generic card */
+.fn-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  transition: border-color 0.35s var(--ease-out), background 0.35s var(--ease-out);
+}
+.fn-card:hover {
+  border-color: rgba(178, 251, 88, 0.35);
+}
+
+/* numbered badge used in process steps / cards */
+.fn-num {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--green);
+}
+
+/* comparison table (old way vs our way) */
+.fn-compare {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.fn-c-row {
+  display: contents;
+}
+.fn-compare .fn-c-cell {
+  padding: 18px clamp(14px, 2vw, 26px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fn-c-row:last-child .fn-c-cell {
+  border-bottom: none;
+}
+.fn-compare .fn-c-head {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.03);
+}
+.fn-compare .fn-c-head.ours {
+  color: var(--teal);
+  background: var(--green);
+  font-weight: 600;
+}
+.fn-compare .fn-c-label {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+.fn-compare .fn-c-old {
+  color: rgba(255, 255, 255, 0.5);
+}
+.fn-compare .fn-c-new {
+  color: var(--white);
+  background: rgba(178, 251, 88, 0.06);
+}
+.fn-ico-x,
+.fn-ico-ok {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.fn-ico-x {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.55);
+}
+.fn-ico-ok {
+  background: var(--green);
+  color: var(--teal);
+}
+
+/* process timeline */
+.fn-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  counter-reset: step;
+}
+.fn-step {
+  padding: 26px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+.fn-step-when {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.fn-step h3 {
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.fn-step p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* check list */
+.fn-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.fn-check {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 22px 22px;
+}
+.fn-check strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.fn-check span.fn-check-text {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.65);
+}
+.fn-check .fn-ico-ok {
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+}
+
+@media (max-width: 1080px) {
+  .fn-steps {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  /* 3 + 2 layout: first row three cards, second row two wider cards */
+  .fn-step {
+    grid-column: span 2;
+  }
+  .fn-step:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+}
+@media (max-width: 720px) {
+  .fn-steps,
+  .fn-checks {
+    grid-template-columns: 1fr;
+  }
+  .fn-step,
+  .fn-step:nth-child(n + 4) {
+    grid-column: auto;
+  }
+  .fn-compare {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  /* on phones the row label becomes a full-width title above the two cells */
+  .fn-compare .fn-c-label {
+    grid-column: 1 / -1;
+    padding-bottom: 4px;
+    border-bottom: none;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .fn-compare .fn-c-head:first-child {
+    display: none;
+  }
+  .fn-compare .fn-c-old,
+  .fn-compare .fn-c-new {
+    padding-top: 8px;
+  }
+}

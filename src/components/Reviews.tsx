@@ -33,12 +33,6 @@ const REVIEW_META: {
     logo: { src: '/assets/testimonials/duopet-logo.png', alt: 'DUOPET' },
   },
   {
-    company: 'duopet.cz',
-    companyUrl: 'https://duopet.cz',
-    avatar: '/assets/testimonials/filip.jpg',
-    logo: { src: '/assets/testimonials/duopet-logo.png', alt: 'DUOPET' },
-  },
-  {
     company: 'socarratcatering.com',
     companyUrl: 'https://socarratcatering.com',
     avatar: '/assets/testimonials/jonathan.jpg',

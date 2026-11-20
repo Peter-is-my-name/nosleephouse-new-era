@@ -10,6 +10,7 @@
  */
 
 import type { Locale } from '../i18n'
+import { REALITY_EXPO_SK, APARSIA_SK, JUN_MATCHA_SK, DUOPET_SK, CASE_METADATA_SK } from './cases-sk'
 
 type Numbered = { num: string; title: string; body: string }
 type Result = { value: string; label: string }
@@ -60,7 +61,7 @@ export type DuopetCase = CaseMeta & {
 
 const REALITY_EXPO: Record<Locale, StandardCase> = {
   cs: {
-    heroHeading: 'Reality EXPO:\nBranding, Web\na [[kampaň.]]',
+    heroHeading: 'Reality EXPO:\nBranding, web\na [[kampaň.]]',
     heroDesc:
       'Organizátoři Reality Expo nás oslovili s výzvou, která spojila tři věci najednou: vizuální identitu eventu, funkční web a digitální kampaň, která přivedla rekordní návštěvnost. Vše spuštěno za čtyři týdny.',
     client: 'Reality Expo',
@@ -82,7 +83,7 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
       {
         num: '02',
         title: 'Web bez konverzí',
-        body: 'Návštěvníci si web prohlédli a odešli. Registrace byla schovaná, cesta k akci nejasná a nikdo ji nevedl k akci.',
+        body: 'Návštěvníci si web prohlédli a odešli. Registrace byla schovaná, cesta k ní nejasná a nic návštěvníky nevedlo k akci.',
       },
       {
         num: '03',
@@ -92,8 +93,8 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
     ],
     solutionHeading: 'Ne víc reklamy.\nSystém, který\n[[fungoval.]]',
     solutionBody: [
-      'Vytvořili jsme vlastní typografický systém a ikonografii, které daly Reality EXPO jasnou vizuální identitu. Nový web jsme postavili kolem jednoho cíle, registrace. Každý prvek stránky vedl k akci.',
-      'PPC kampaně jsme přestavěli od základu s přesnou segmentací publika, takže reklama cílila jen na lidi s reálným zájmem, ne na náhodné kliky.',
+      'Vytvořili jsme vlastní typografický systém a ikonografii, které daly Reality EXPO jasnou vizuální identitu. Nový web jsme postavili kolem jednoho cíle: registrace. Každý prvek stránky vedl k akci.',
+      'PPC kampaně jsme přestavěli od základu s přesnou segmentací publika, takže reklama cílila jen na lidi s reálným zájmem, ne na náhodná kliknutí.',
     ],
     gallery: ['Brand identita', 'Reality EXPO 2025 na místě'],
     deliverables: [
@@ -110,12 +111,12 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
       {
         num: '03',
         title: 'PPC kampaně',
-        body: 'Segmentované kampaně s přesným cílením, tedy méně plýtvání rozpočtem, víc kvalifikovaných registrací.',
+        body: 'Segmentované kampaně s přesným cílením, tedy méně plýtvání rozpočtem a víc kvalifikovaných registrací.',
       },
       {
         num: '04',
         title: 'Event materiály',
-        body: 'Vizuály pro tiskoviny, signage a prezentaci akce na místě, jednotný vizuální jazyk od webu až po vstupní bránu.',
+        body: 'Vizuály pro tiskoviny, signage a prezentaci akce na místě. Jednotný vizuální jazyk od webu až po vstupní bránu.',
       },
       {
         num: '05',
@@ -133,7 +134,7 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
       quote:
         '„S Petrem a Martinem spolupracujeme přes 2 roky. Přístup k projektu byl od začátku profesionální: jasná komunikace, výsledky, které překonaly očekávání. Web spustili přesně v termínu a běží bezchybně. Doporučuji každému, kdo hledá agenturní výsledky s lidským přístupem.“',
       name: 'Jakub Haidari',
-      role: 'Marketing nehnuteľností, Reality EXPO',
+      role: 'Marketing nemovitostí, Reality EXPO',
     },
   },
   en: {
@@ -146,7 +147,7 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
     services: ['Branding', 'Web design', 'Development', 'Campaign'],
     briefHeading: 'A fair that\nneeded a\n[[strong voice.]]',
     briefBody: [
-      'Reality Expo is a real-estate event in the heart of Bratislava. Every year the iconic Stará tržnica market hall brings together thousands of people looking for a home and the leading experts in the field. The organisers came to us with a clear brief: a complete digital transformation, from brand identity through the website to performance campaigns.',
+      'Reality Expo is a real-estate event in the heart of Bratislava. Every year, the iconic Stará tržnica market hall brings together thousands of people looking for a home and the leading experts in the field. The organisers came to us with a clear brief: a complete digital transformation, from brand identity through the website to performance campaigns.',
       'No compromises. No generic template. An identity, a website and campaigns built specifically for an event that deserves them.',
     ],
     challengeHeading: 'Three problems,\none [[solution.]]',
@@ -187,12 +188,12 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
       {
         num: '03',
         title: 'PPC campaigns',
-        body: 'Segmented campaigns with precise targeting — less budget wasted, more qualified registrations.',
+        body: 'Segmented campaigns with precise targeting: less budget wasted, more qualified registrations.',
       },
       {
         num: '04',
         title: 'Event materials',
-        body: 'Visuals for print, signage and the on-site presentation — one visual language from the website through to the entrance gate.',
+        body: 'Visuals for print, signage and the on-site presentation: one visual language, from the website through to the entrance gate.',
       },
       {
         num: '05',
@@ -201,9 +202,9 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
       },
     ],
     results: [
-      { value: '4200+', label: 'registered attendees' },
+      { value: '4,200+', label: 'registered attendees' },
       { value: '2.1×', label: 'higher website conversion rate' },
-      { value: '−38 %', label: 'lower cost per registration' },
+      { value: '−38%', label: 'lower cost per registration' },
       { value: '12×', label: 'return on investment' },
     ],
     testimonial: {
@@ -213,6 +214,7 @@ const REALITY_EXPO: Record<Locale, StandardCase> = {
       role: 'Real-estate marketing, Reality EXPO',
     },
   },
+  sk: REALITY_EXPO_SK,
 }
 
 /* ── Aparsia ───────────────────────────────────────────────── */
@@ -241,7 +243,7 @@ const APARSIA: Record<Locale, StandardCase> = {
       {
         num: '02',
         title: 'Dva typy uživatelů',
-        body: 'Web sloužil investorům hledajícím transparentnost i internímu týmu, který potřebuje efektivní nástroje. Dva odlišné světy v jednom systému.',
+        body: 'Web sloužil investorům hledajícím transparentnost i internímu týmu, který potřeboval efektivní nástroje. Dva odlišné světy v jednom systému.',
       },
       {
         num: '03',
@@ -251,7 +253,7 @@ const APARSIA: Record<Locale, StandardCase> = {
     ],
     solutionHeading: 'Dvě vrstvy,\njeden\n[[systém.]]',
     solutionBody: [
-      'Navrhli jsme dvouvrstvé řešení: veřejný web s důrazem na konverzi a důvěru, a soukromý admin portál s plnou kontrolou nad nemovitostmi, klienty i dokumentací. Celý systém stojí na Next.js s vlastním backendem.',
+      'Navrhli jsme dvouvrstvé řešení: veřejný web s důrazem na konverzi a důvěru a soukromý admin portál s plnou kontrolou nad nemovitostmi, klienty i dokumentací. Celý systém stojí na Next.js s vlastním backendem.',
       'Web jsme lokalizovali do několika jazyků, aby oslovil investory napříč trhy. Rychlý, přehledný a postavený tak, aby proměnil návštěvníka v reálnou poptávku.',
     ],
     gallery: ['Web Aparsia', 'Admin portál'],
@@ -290,7 +292,7 @@ const APARSIA: Record<Locale, StandardCase> = {
     ],
     testimonial: {
       quote:
-        '„Martin byl skvělý od prvého kontaktu. Celý proces byl rychlý, komunikace bezproblémová a výsledný web přesně odráží můj styl. Líbilo se mi, že nevytvářeli jen hezký web. Přemýšleli nad tím, co nám přinese klienty. Výsledky to potvrdily.“',
+        '„Martin byl skvělý od prvního kontaktu. Celý proces byl rychlý, komunikace bezproblémová a výsledný web přesně odráží můj styl. Líbilo se mi, že nevytvářeli jen hezký web. Přemýšleli nad tím, co nám přinese klienty. Výsledky to potvrdily.“',
       name: 'Dominika Donovalová',
       role: 'Podnikatelka, Aparsia',
     },
@@ -298,7 +300,7 @@ const APARSIA: Record<Locale, StandardCase> = {
   en: {
     heroHeading: 'Aparsia:\nWebsite, admin\nand [[CRM.]]',
     heroDesc:
-      'Aparsia brokers investments in Bulgarian property. They needed a complete digital solution: a representative website for investors, an admin portal and a CRM for the internal team. All custom-built and launched in six weeks.',
+      'Aparsia brokers investments in Bulgarian property. They needed a complete digital solution: a professional website for investors, an admin portal and a CRM for the internal team. All custom-built and launched in six weeks.',
     client: 'Aparsia s.r.o.',
     year: '2025',
     industry: 'Real estate · Investment',
@@ -318,7 +320,7 @@ const APARSIA: Record<Locale, StandardCase> = {
       {
         num: '02',
         title: 'Two kinds of user',
-        body: 'The site served investors looking for transparency and an internal team that needs efficient tools. Two different worlds in one system.',
+        body: 'The site had to serve investors looking for transparency and an internal team that needed efficient tools. Two different worlds in one system.',
       },
       {
         num: '03',
@@ -336,7 +338,7 @@ const APARSIA: Record<Locale, StandardCase> = {
       {
         num: '01',
         title: 'Company website',
-        body: 'A representative multilingual website focused on conversion and trust. A clear property catalogue and an obvious path to an enquiry.',
+        body: 'A professional multilingual website focused on conversion and trust. A clear property catalogue and an obvious path to an enquiry.',
       },
       {
         num: '02',
@@ -363,7 +365,7 @@ const APARSIA: Record<Locale, StandardCase> = {
       { value: '3×', label: 'more enquiries per month' },
       { value: '98', label: 'Lighthouse score' },
       { value: '4', label: 'language versions of the site' },
-      { value: '100 %', label: 'client satisfaction' },
+      { value: '100%', label: 'client satisfaction' },
     ],
     testimonial: {
       quote:
@@ -372,6 +374,7 @@ const APARSIA: Record<Locale, StandardCase> = {
       role: 'Entrepreneur, Aparsia',
     },
   },
+  sk: APARSIA_SK,
 }
 
 /* ── JUN Matcha ────────────────────────────────────────────── */
@@ -395,7 +398,7 @@ const JUN_MATCHA: Record<Locale, StandardCase> = {
       {
         num: '01',
         title: 'Přeplněná kategorie',
-        body: 'Matcha bary dnes rostou jako houby po dešti. Většina vypadá stejně, generická zeleň a asijská klišé. JUN musel na první pohled vyčnívat.',
+        body: 'Matcha bary dnes rostou jako houby po dešti. Většina vypadá stejně: generická zeleň a asijská klišé. JUN musel na první pohled vyčnívat.',
       },
       {
         num: '02',
@@ -442,7 +445,7 @@ const JUN_MATCHA: Record<Locale, StandardCase> = {
       },
     ],
     results: [
-      { value: '4,9★', label: 'hodnocení na Google' },
+      { value: '4,9★', label: 'hodnocení na Googlu' },
       { value: '2800+', label: 'sledujících za první měsíc' },
       { value: '3 týdny', label: 'od briefu po finální identitu' },
       { value: '1×', label: 'ucelený vizuální systém' },
@@ -466,7 +469,7 @@ const JUN_MATCHA: Record<Locale, StandardCase> = {
       {
         num: '01',
         title: 'A crowded category',
-        body: 'Matcha bars are popping up everywhere. Most of them look the same — generic green and Asian clichés. JUN had to stand out immediately.',
+        body: 'Matcha bars are popping up everywhere. Most of them look the same: generic green and Asian clichés. JUN had to stand out immediately.',
       },
       {
         num: '02',
@@ -482,7 +485,7 @@ const JUN_MATCHA: Record<Locale, StandardCase> = {
     solutionHeading: 'Minimalism\nwith [[character.]]',
     solutionBody: [
       'We designed a minimalist logo system inspired by Japanese calligraphy and geometry. The colour palette combines earthy tones with the soft green of matcha. Clean, premium and free of clichés.',
-      'We built the entire visual system so it scales across every channel. From the cup to Instagram it works as one consistent whole.',
+      'We built the entire visual system so it scales across every channel. From the cup to Instagram, it works as one consistent whole.',
     ],
     gallery: ['Logo system', 'Packaging & bar'],
     deliverables: [
@@ -514,11 +517,12 @@ const JUN_MATCHA: Record<Locale, StandardCase> = {
     ],
     results: [
       { value: '4.9★', label: 'rating on Google' },
-      { value: '2800+', label: 'followers in the first month' },
+      { value: '2,800+', label: 'followers in the first month' },
       { value: '3 weeks', label: 'from brief to final identity' },
       { value: '1×', label: 'coherent visual system' },
     ],
   },
+  sk: JUN_MATCHA_SK,
 }
 
 /* ── DUOPET (CaseStudyV2 layout) ───────────────────────────── */
@@ -536,7 +540,7 @@ const DUOPET: Record<Locale, DuopetCase> = {
     leadStatement: 'Velká firma. Web, který to [[neuměl říct.]]',
     leadBody: [
       'DUOPET je certifikovaný zpracovatel plastů. Regranulace, drcení, laboratorní analýzy a dodávky materiálů pro průmysl napříč celou Evropou. Za firmou stojí roky zkušeností a norma ISO 9001:2015.',
-      'Jejich původní web ale působil menší a méně důvěryhodně, než jaká DUOPET ve skutečnosti je. Přišli za námi s jasným zadáním: web, který získává zakázky, a interní nástroje, které zrychlí každodenní provoz.',
+      'Jejich původní web ale ukazoval DUOPET menší a méně důvěryhodnou, než ve skutečnosti je. Přišli za námi s jasným zadáním: web, který získává zakázky, a interní nástroje, které zrychlí každodenní provoz.',
     ],
     problemsHeading: 'Web, který [[nepracoval.]]',
     problems: [
@@ -555,7 +559,7 @@ const DUOPET: Record<Locale, DuopetCase> = {
       {
         num: '03',
         title: 'Ruční a zdlouhavé procesy',
-        body: 'Interní agenda běžela roztříštěně a mimo systém. Tým ztrácel čas na opakujících se úkonech, které šlo dávno zautomatizovat.',
+        body: 'Interní agenda běžela roztříštěně a mimo systém. Tým ztrácel čas opakujícími se úkony, které už dávno šlo automatizovat.',
         impact: 'Pomalý provoz',
       },
     ],
@@ -569,7 +573,7 @@ const DUOPET: Record<Locale, DuopetCase> = {
         body: 'Začali jsme analýzou. Kdo jsou zákazníci DUOPETu, co hledají a proč si vyberou právě je. Web jsme postavili kolem reálných zakázek, ne kolem dojmu.',
       },
       {
-        label: 'Web & Design',
+        label: 'Web & design',
         body: 'Čistý, sebevědomý web, který na první pohled ukáže rozsah a spolehlivost firmy. Přehledné služby, jasná cesta k poptávce a rychlé načítání.',
       },
       {
@@ -617,7 +621,7 @@ const DUOPET: Record<Locale, DuopetCase> = {
     chips: ['ISO 9001:2015', 'Delivery across Europe', 'PET · PP · PE · PS · ABS', 'B2B industry'],
     leadStatement: 'A big company. A website that [[could not say so.]]',
     leadBody: [
-      'DUOPET is a certified plastics processor. Regranulation, shredding, laboratory analysis and material supply for industry across Europe. Behind the company are years of experience and ISO 9001:2015 certification.',
+      'DUOPET is a certified plastics processor: regranulation, shredding, laboratory analysis and material supply for industry across Europe. Behind the company are years of experience and ISO 9001:2015 certification.',
       'Their original website, though, came across as smaller and less credible than DUOPET actually is. They came to us with a clear brief: a website that wins orders, and internal tools that speed up day-to-day operations.',
     ],
     problemsHeading: 'A website that [[did not work.]]',
@@ -631,24 +635,24 @@ const DUOPET: Record<Locale, DuopetCase> = {
       {
         num: '02',
         title: 'No steady flow of enquiries',
-        body: 'The website was built neither for conversion nor for search engines. Potential clients simply never found the company online, and enquiries did not come.',
+        body: 'The website was built neither for conversion nor for search engines. Potential clients simply never found the company online, so enquiries never came.',
         impact: 'Too few orders',
       },
       {
         num: '03',
         title: 'Manual, time-consuming processes',
-        body: 'Internal admin ran in fragments and outside any system. The team lost time on repetitive tasks that could have been automated long ago.',
+        body: 'Internal admin was fragmented and ran outside any system. The team lost time on repetitive tasks that could have been automated long ago.',
         impact: 'Slow operations',
       },
     ],
     goalStatement: 'A website that [[wins orders]], and a system that[[ saves time.]]',
     goalSub:
-      'Two things at once: a credible presentation outwards and efficient tools inside the company. Not just a nice website, but a genuine growth tool.',
+      'Two things at once: a credible face to the outside world and efficient tools inside the company. Not just a nice website, but a genuine growth tool.',
     approachHeading: 'Design and development\n[[under one roof.]]',
     steps: [
       {
         label: 'Strategy',
-        body: 'We started with analysis. Who DUOPET customers are, what they look for and why they would choose them. We built the website around real orders, not around impressions.',
+        body: 'We started with analysis: who DUOPET\'s customers are, what they look for and why they would choose them. We built the website around real orders, not around impressions.',
       },
       {
         label: 'Web & design',
@@ -671,7 +675,7 @@ const DUOPET: Record<Locale, DuopetCase> = {
       'SEO',
       'Continuous optimisation',
     ],
-    resultsHeading: 'Numbers [[that speak.]]',
+    resultsHeading: 'Numbers that [[speak for themselves.]]',
     heroResult: {
       value: '2×',
       label: 'higher organic traffic within three months of launch',
@@ -688,6 +692,7 @@ const DUOPET: Record<Locale, DuopetCase> = {
       role: 'Company owner, DUOPET',
     },
   },
+  sk: DUOPET_SK,
 }
 
 export const getRealityExpoCase = (locale: Locale) => REALITY_EXPO[locale]
@@ -766,4 +771,5 @@ export const CASE_METADATA: Record<Locale, Record<string, CaseMetaTags>> = {
         'A strong brand built from zero. Read how the JUN visual identity came about.',
     },
   },
+  sk: CASE_METADATA_SK,
 }

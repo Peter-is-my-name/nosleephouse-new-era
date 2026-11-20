@@ -1,0 +1,337 @@
+import type { AutomationCopy } from './types'
+
+/**
+ * /ai-automatizace, Slovak copy (nosleephouse.sk).
+ * Real, named proof (with the clients' consent): KWEKU s.r.o. (construction,
+ * job-profitability system) and Delta Plus (content approval portal).
+ * Every number inside the mock panels is invented; real data is never shown.
+ * Euro amounts are the Czech mock amounts at ~25 Kč/€, VAT at the Slovak 23 %.
+ */
+export const automationSk: AutomationCopy = {
+  meta: {
+    title: 'Firemný systém na mieru s AI: CRM, admin panely, automatizácia',
+    description:
+      'CRM, admin panel alebo interný systém na mieru s AI. Faktúry prečíta AI, dáta sa prepoja a čísla vidíte v reálnom čase. Analýza procesov zdarma.',
+  },
+  header: { badge: 'Analýza procesov zdarma', cta: 'Chcem analýzu zdarma' },
+  hero: {
+    ratingOn: 'Hodnotenie na',
+    ratingAria: 'Hodnotenie 5 z 5',
+    pre: 'Bez prepisovania faktúr, nekonečných tabuliek a hľadania v e-mailoch.',
+    title: 'Majte celú firmu [[pod kontrolou]] vďaka systému na mieru s umelou inteligenciou.',
+    sub: 'Postavíme vám CRM, admin panel alebo interný systém presne podľa toho, ako funguje vaša firma. AI za vás prečíta faktúry a dokumenty, dáta sa prepoja a vy vidíte čísla v reálnom čase.',
+    cta: 'Chcem analýzu zdarma',
+    note: ['Bezplatná analýza procesov', 'Bez záväzkov, ozveme sa do pár hodín'],
+    usedBy: 'Naše systémy denne používajú',
+    aiCard: {
+      title: 'Faktúra rozpoznaná',
+      fields: [
+        ['Dodávateľ', 'Betonáreň s.r.o.'],
+        ['Položky', '4 riadky'],
+        ['Spolu', '5 076 €'],
+        ['Zákazka', 'Z-104'],
+      ],
+      foot: 'Stačí skontrolovať a potvrdiť',
+    },
+  },
+  mock: {
+    url: 'system.vasafirma.sk',
+    logo: 'VF',
+    jobPrefix: 'Z-',
+    nav: ['Prehľad', 'Faktúry', 'Zákazky', 'Dodávatelia', 'Rozpočty', 'Mzdy', 'Reporty'],
+    title: 'Prehľad',
+    subtitle: 'Stavebná firma s.r.o. · zákazky a náklady',
+    kpis: [
+      { label: 'Celkový zisk', value: '51 380 €', note: 'Zmluvy mínus náklady', good: true },
+      { label: 'Priemerná marža', value: '23,4 %', note: 'Cieľ 20 % splnený', good: true },
+      { label: 'Zostáva vyfakturovať', value: '136 800 €', note: 'Z 9 aktívnych zákaziek' },
+      { label: 'Réžia firmy', value: '8,2 %', note: 'Zo všetkých nákladov' },
+    ],
+    chartTitle: 'Marža podľa zákazky',
+    target: 'cieľ 20 %',
+    invoicesTitle: 'Posledné faktúry',
+    invoices: [
+      ['Stavebniny s.r.o.', '1 968 €'],
+      ['Betonáreň s.r.o.', '5 076 €'],
+      ['Elektromontáže s.r.o.', '1 298 €'],
+      ['Požičovňa strojov s.r.o.', '748 €'],
+    ],
+  },
+  pain: {
+    eyebrow: 'Spoznávate sa?',
+    title: 'Firma rastie, ale administratíva [[rastie s ňou]]',
+    lead: 'Väčšina firiem nepotrebuje viac ľudí v kancelárii. Potrebuje, aby opakujúcu sa prácu robil za ňu systém.',
+    symptoms: [
+      'Faktúry od dodávateľov ručne prepisujete do Excelu alebo účtovného programu.',
+      'Či zákazka zarobila, zistíte od účtovníčky až po mesiacoch.',
+      'Dáta máte v piatich tabuľkách a nikto nevie, ktorá je aktuálna.',
+      'Obchodníci si poznámky z hovorov píšu do zošita alebo si ich pamätajú.',
+      'Objednávky a rezervácie chodia telefonicky, e-mailom aj cez Messenger.',
+      'Každý mesiac trávite hodiny skladaním podkladov pre účtovníčku.',
+    ],
+    punch: ['Každá hodina ručnej práce vás stojí peniaze.', 'Každá chyba v číslach ešte viac.'],
+  },
+  calc: {
+    kicker: 'Vypočítajte si to',
+    title: 'Koľko vás stojí ručné spracovanie dokladov?',
+    docs: 'Faktúr a dokladov mesačne',
+    minutes: 'Minút ručnej práce na jeden doklad',
+    rate: 'Cena hodiny práce (mzda a odvody)',
+    unitPcs: 'ks',
+    unitMin: 'min',
+    currency: '€',
+    rateMin: 8,
+    rateMax: 50,
+    rateStep: 1,
+    rateDefault: 16,
+    outLabel: 'S AI ušetríte približne',
+    hoursUnits: { one: 'hodina mesačne', few: 'hodiny mesačne', other: 'hodín mesačne' },
+    moneyLabel: 'ušetríte ročne',
+    daysUnits: { one: 'pracovný deň ročne', few: 'pracovné dni ročne', many: 'pracovného dňa ročne', other: 'pracovných dní ročne' },
+    cta: 'Chcem analýzu zdarma',
+    note: 'Orientačný výpočet iba pre spracovanie dokladov. Počítame s tým, že s AI zaberie kontrola jedného dokladu zhruba minútu. Pri analýze vypočítame úsporu pre všetky vaše procesy.',
+    numberLocale: 'sk-SK',
+  },
+  cases: {
+    eyebrow: 'Prípadové štúdie',
+    title: 'Systémy, ktoré už [[pracujú za našich klientov]]',
+    lead: 'Žiadne vizualizácie do šuflíka. Tieto systémy sme postavili a naši klienti s nimi pracujú každý deň.',
+    live: 'V ostrej prevádzke',
+    mockNote: 'Obrazovky sú ilustračné, čísla a názvy v ukážkach sú vymyslené. Dáta našich klientov nikdy nezverejňujeme.',
+    cta: 'Chcem podobný systém',
+    ctaNote: 'Pri analýze zistíme, čo by najviac pomohlo vašej firme',
+    kweku: {
+      client: 'KWEKU s.r.o.',
+      industry: 'Stavebná firma',
+      title: 'Výsledovka, ktorá ukazuje, [[kde firma zarába]]',
+      story:
+        'Firma KWEKU dostávala faktúry od dodávateľov e-mailom aj v papierovej podobe, ručne ich prepisovala a zisk jednotlivých zákaziek videla až spätne. Postavili sme jej systém, ktorý číta faktúry pomocou AI, priraďuje náklady k zákazkám a v reálnom čase stráži maržu.',
+      tabsAria: 'Funkcie systému KWEKU',
+      tabs: [
+        {
+          tab: 'AI číta faktúry',
+          title: 'Faktúru stačí odfotiť',
+          text: 'Nahráte PDF alebo fotku faktúry a AI z nej sama vytiahne dodávateľa, položky, sumy a dátumy splatnosti a priradí ju k správnej zákazke. Vy len skontrolujete a potvrdíte. Koniec ručného prepisovania.',
+        },
+        {
+          tab: 'Zisk každej zákazky',
+          title: 'Ziskovosť vidíte hneď, nie po mesiacoch',
+          text: 'Pri každej zákazke systém počíta hodnotu zmluvy, náklady, zisk a maržu v reálnom čase. Stráži cieľovú maržu a upozorní vás, keď sa zákazka začne predražovať.',
+        },
+        {
+          tab: 'Kde unikajú peniaze',
+          title: 'Viete presne, kam peniaze odchádzajú',
+          text: 'Rozdelenie nákladov na materiál, subdodávky a mzdy, najdrahší dodávatelia a vývoj v čase. Systém vám aj vypočíta, o koľko môžu náklady ešte narásť, aby zákazka zostala v zisku.',
+        },
+        {
+          tab: 'Rozpočet vs. skutočnosť',
+          title: 'Plán a realita vedľa seba',
+          text: 'Pre každú zákazku nastavíte rozpočet a systém ho priebežne porovnáva so skutočnými nákladmi. Prekročenie vidíte skôr, než sa z neho stane problém.',
+        },
+        {
+          tab: 'Podklady pre účtovníctvo',
+          title: 'Mesačná uzávierka jedným klikom',
+          text: 'Výsledovku za mesiac stiahnete ako prehľadný Excel pre účtovníčku. Podklad na úhradu nezaplatených faktúr pre banku pripravíte rovnako rýchlo. Splatnosti stráži systém za vás.',
+        },
+      ],
+      results: [
+        'Koniec ručného prepisovania faktúr',
+        'Zisk každej zákazky v reálnom čase',
+        'Podklady pre účtovníctvo a banku jedným klikom',
+      ],
+      invoice: {
+        file: 'foto_faktury.jpg',
+        fields: [
+          ['Dodávateľ', 'Stavebniny s.r.o.'],
+          ['Číslo faktúry', 'FV-2026-0418'],
+          ['Položky', 'Tehly, malta, kotvy (4)'],
+          ['Bez DPH / spolu', '1 600 € / 1 968 €'],
+          ['Splatnosť', '14 dní'],
+          ['Zákazka a kategória', 'Z-102 · Materiál'],
+        ],
+        reject: 'Zamietnuť',
+        confirm: 'Potvrdiť a uložiť',
+      },
+      margin: {
+        cols: ['Zákazka', 'Zmluva (€)', 'Marža'],
+        rows: [
+          ['Z-101 Rekonštrukcia školy', '99 200', '31 %', 31],
+          ['Z-102 Bytový dom B2', '236 000', '24 %', 24],
+          ['Z-103 Hala Logistika', '126 000', '12 %', 12],
+          ['Z-104 Rodinný dom RD-14', '65 600', '27 %', 27],
+        ],
+        alert: 'Z-103 je pod cieľovou maržou 20 %. Pozrite sa, kde unikajú peniaze.',
+      },
+      leak: {
+        alert: 'Zákazka plní cieľ 20 % marže. Náklady môžu ešte narásť o 7 460 € a marža zostane nad cieľom.',
+        costsTitle: 'Z čoho sa skladajú náklady',
+        legend: ['Materiál 58 %', 'Subdodávky 27 %', 'Mzdy 15 %'],
+        suppliersTitle: 'Najdrahší dodávatelia',
+        suppliers: [
+          ['Betonáreň s.r.o.', 72],
+          ['Stavebniny s.r.o.', 48],
+          ['Elektromontáže s.r.o.', 21],
+        ],
+      },
+      budget: {
+        title: 'Rozpočet vs. skutočnosť · Z-102 (tis. €)',
+        rows: [
+          ['Materiál', 48, 43],
+          ['Subdodávky', 24, 28],
+          ['Mzdy', 18, 16],
+        ],
+        legend: ['Plán', 'Skutočnosť', 'Prekročené'],
+      },
+      report: {
+        file1: 'Vysledovka_oktober.xlsx',
+        file1Note: 'Pre účtovníčku · stiahnuť jedným klikom',
+        sheets: ['Súhrn', 'Výsledovka zákaziek', 'Materiál', 'Mzdy', 'Réžia', 'Zálohy'],
+        file2: 'Prikaz_na_uhradu.xlsx',
+        file2Note: 'Nezaplatené faktúry pre banku',
+        due: ['Na úhradu', 'Po splatnosti'],
+        dueValues: ['16 516 €', '0 €'],
+      },
+    },
+    delta: {
+      client: 'Delta Plus',
+      industry: 'Výrobca osobných ochranných pracovných prostriedkov',
+      title: 'Portál, v ktorom klient [[schvaľuje obsah jedným klikom]]',
+      story:
+        'Príspevky na sociálne siete Delta Plus v Česku a na Slovensku sa predtým schvaľovali cez e-maily, screenshoty a dlhé správy typu „druhý riadok na treťom slajde“. Postavili sme portál, v ktorom klient vidí všetky príspevky na jednom mieste, klikne priamo do grafiky a napíše pripomienku presne k danému miestu.',
+      features: [
+        { t: 'Stavy príspevkov', d: 'Koncepty, u klienta, úpravy, schválené. Každý vie, na koho sa čaká.' },
+        { t: 'Pripomienky priamo do grafiky', d: 'Klient klikne kamkoľvek do obrázka a jeho poznámka sa pripne presne na to miesto.' },
+        { t: 'Verzie a história', d: 'Opravená verzia sa nahrá k pôvodnej, nič sa nestratí v e-mailoch.' },
+        { t: 'Obsahový kalendár', d: 'Plán, čo a kedy pôjde von. Klient ho vidí, ale nemôže ho meniť.' },
+      ],
+      results: [
+        'Koniec schvaľovania cez e-maily a screenshoty',
+        'Pripomienky presne k miestu v grafike',
+        'Celý obsahový plán na jednom mieste',
+      ],
+      mock: {
+        app: 'Schvaľovanie obsahu',
+        sub: 'Delta Plus CZ/SK · Instagram a Facebook',
+        columns: [
+          ['Koncepty', 0],
+          ['U klienta', 1],
+          ['Úpravy', 1],
+          ['Schválené', 3],
+        ],
+        postTitle: 'Novinka v kolekcii: priedušná bunda',
+        postMeta: 'Carousel · 4 snímky · verzia 2',
+        returned: 'Klient vrátil na úpravu',
+        commentsTitle: 'Pripomienky (2)',
+        comments: [
+          ['Delta Plus', 'Farbu loga prosím tmavšiu.'],
+          ['nosleephouse', 'Upravené vo verzii 2.'],
+        ],
+        pinHint: 'Kliknite kamkoľvek do obrázka a pridajte pripomienku',
+        upload: 'Nahrať opravenú verziu',
+        progress: '3 zo 4 schválené',
+        calendarTitle: 'Obsahový plán',
+        calendarNote: 'Klient plán vidí, ale nemôže ho meniť',
+      },
+    },
+  },
+  build: {
+    eyebrow: 'Čo vám vieme postaviť',
+    title: 'Systém na mieru [[na všetko]], čo vás zdržuje',
+    lead: 'Od jednoduchého CRM po kompletný firemný systém s umelou inteligenciou. Vždy presne podľa toho, ako pracujete vy.',
+    items: [
+      { t: 'CRM a obchodný systém', d: 'Evidencia firiem, kontaktov a výsledkov hovorov. Zadáte telefónne číslo a hneď vidíte celú históriu komunikácie.' },
+      { t: 'Rezervačný systém', d: 'Online rezervácie 24/7, kalendár, správa klientov a automatické pripomienky termínov.' },
+      { t: 'AI spracovanie dokumentov', d: 'Faktúry, objednávky, dodacie listy alebo zmluvy. AI ich prečíta a dáta uloží tam, kam patria.' },
+      { t: 'Zákazky a ziskovosť', d: 'Náklady, marže a rozpočty každej zákazky v reálnom čase, vrátane miezd a subdodávok.' },
+      { t: 'Klientske portály a schvaľovanie', d: 'Miesto pre klientov a partnerov: schvaľovanie obsahu, dokumenty, stav zákazky. Menej e-mailov a telefonátov.' },
+      { t: 'Admin panel a interné nástroje', d: 'Jedno miesto pre objednávky, sklad, úlohy alebo schvaľovanie. Presne podľa vašich procesov.' },
+      { t: 'Napojenia a automatizácia', d: 'Prepojíme systém s fakturáciou, účtovníctvom, bankou, platobnou bránou, e-mailom aj ďalšími službami cez API.' },
+      { t: 'AI asistent nad vašimi dátami', d: 'Opýtate sa bežnou vetou, napríklad koľko ste minuli na materiál na zákazke, a dostanete odpoveď.' },
+    ],
+    compareTitle: 'Prečo nie [[krabicový softvér?]]',
+    compareAria: 'Krabicový softvér a systém na mieru',
+    colOld: 'Krabicový softvér',
+    colNew: 'Systém na mieru',
+    rows: [
+      ['Prispôsobenie', 'Vy sa prispôsobujete programu', 'Systém sa prispôsobí vašej firme'],
+      ['Funkcie', 'Platíte aj za to, čo nepoužívate', 'Iba to, čo naozaj potrebujete'],
+      ['Dáta', 'Roztrúsené v niekoľkých aplikáciách', 'Prepojené na jednom mieste'],
+      ['Umelá inteligencia', 'Chýba alebo je za príplatok', 'Priamo vo vašich procesoch'],
+      ['Podpora', 'Tiket a čakanie', 'Priamy kontakt na tím, ktorý systém postavil'],
+    ],
+  },
+  process: {
+    eyebrow: 'Ako to prebieha',
+    title: 'Od analýzy k systému, ktorý [[pracuje za vás]]',
+    lead: 'Začíname bezplatnou analýzou. Nič neplatíte, kým presne neviete, čo dostanete a koľko vám to ušetrí.',
+    steps: [
+      { when: 'Zdarma', title: 'Analýza procesov', text: 'Zmapujeme, ako u vás funguje administratíva, nájdeme miesta, kde sa stráca najviac času, a vypočítame úsporu.' },
+      { when: 'Pred vývojom', title: 'Návrh riešenia', text: 'Pripravíme štruktúru systému a náhľad obrazoviek. Skôr než začneme programovať, budete presne vedieť, čo dostanete.' },
+      { when: 'Po etapách', title: 'Vývoj', text: 'Staviame po častiach, takže prvú funkčnú verziu vidíte a testujete už o pár týždňov.' },
+      { when: 'Spustenie', title: 'Nasadenie a zaškolenie', text: 'Systém otestujeme na vašich dátach, spustíme ho a celý tím naučíme s ním pracovať.' },
+      { when: 'Dlhodobo', title: 'Podpora a rozvoj', text: 'Staráme sa o údržbu, monitoring a aktualizácie. Nové funkcie pridávame podľa toho, ako firma rastie.' },
+    ],
+    ctaNote: 'Bez záväzkov, ozveme sa do pár hodín',
+  },
+  form: {
+    badge: 'Voľné kapacity tento mesiac',
+    heading: 'Zistite, koľko času vám [[systém ušetrí]]',
+    sub: 'Vyplňte formulár a dohodneme si bezplatnú analýzu vašich procesov. Bez záväzkov, ozveme sa do pár hodín.',
+    submit: 'Chcem analýzu zdarma',
+    questions: [
+      {
+        label: 'Čo by ste chceli automatizovať? *',
+        emailLabel: 'Oblasť',
+        options: [
+          'Faktúry a účtovné doklady',
+          'Zákazky, náklady a ziskovosť',
+          'Obchod a CRM',
+          'Rezervácie a objednávky',
+          'Interný systém alebo admin panel',
+          'Niečo iné, chcem to prebrať osobne.',
+        ],
+        error: 'Vyberte, čo chcete automatizovať.',
+      },
+      {
+        label: 'Koľko ľudí vo firme pracuje? *',
+        emailLabel: 'Veľkosť firmy',
+        options: ['1 až 5', '6 až 20', '21 až 50', 'Viac ako 50'],
+        error: 'Vyberte veľkosť firmy.',
+      },
+    ],
+  },
+  faq: {
+    lead: 'Nenašli ste odpoveď? Napíšte nám, odpovieme do pár hodín.',
+    items: [
+      {
+        q: 'Čo presne je bezplatná analýza?',
+        a: 'Krátky online hovor, na ktorom si prejdeme, ako u vás funguje administratíva, kde sa stráca najviac času a čo by sa dalo automatizovať. Dostanete konkrétne odporúčania a odhad úspory. Nič neplatíte a k ničomu sa nezaväzujete.',
+      },
+      {
+        q: 'Koľko stojí systém na mieru?',
+        a: 'Závisí od rozsahu. Po analýze dostanete konkrétnu ponuku vopred, bez skrytých poplatkov. Začať sa dá aj menšou prvou verziou, ktorá rieši to najdôležitejšie, a systém postupne rozširovať.',
+      },
+      {
+        q: 'Ako dlho trvá vývoj?',
+        a: 'Staviame po etapách, takže prvú funkčnú verziu zvyčajne vidíte v priebehu niekoľkých týždňov. Presný harmonogram dostanete po analýze, ešte predtým, ako sa do čohokoľvek pustíme.',
+      },
+      {
+        q: 'Napojíte systém na programy, ktoré už používame?',
+        a: 'Áno. Systém vieme prepojiť s fakturačnými a účtovnými programami, bankou, platobnými bránami, e-mailom a ďalšími službami cez API. Konkrétne napojenia overíme pri analýze.',
+      },
+      {
+        q: 'Potrebujeme technické znalosti?',
+        a: 'Nie. Systém navrhujeme tak, aby ho zvládol každý vo firme, a po spustení celý tím zaškolíme. O technickú stránku sa staráme my.',
+      },
+      {
+        q: 'Čo ak sa naše procesy zmenia?',
+        a: 'Systém rastie s vami. Po spustení zabezpečujeme údržbu a aktualizácie a nové funkcie pridávame postupne podľa toho, čo práve potrebujete.',
+      },
+    ],
+  },
+  final: {
+    offer: 'Dohodnite si [[analýzu zdarma]]',
+    sub: 'Ukážeme vám, kde sa vo firme stráca najviac času a čo sa dá automatizovať.',
+    cta: 'Chcem analýzu zdarma',
+  },
+}

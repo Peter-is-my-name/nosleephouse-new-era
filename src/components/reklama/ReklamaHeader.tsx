@@ -7,7 +7,10 @@ import './ReklamaHeader.css'
  * Minimal ad-landing header — no nav, so paid traffic stays on the conversion
  * path. Logo · phone · single CTA that scrolls to the lead form (#konzultace).
  */
-export default function ReklamaHeader() {
+export default function ReklamaHeader({
+  badge = 'Návrh webu zdarma',
+  ctaLabel = 'Chci více poptávek',
+}: { badge?: string; ctaLabel?: string } = {}) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -32,10 +35,10 @@ export default function ReklamaHeader() {
         <div className="rk-header-right">
           <span className="rk-badge">
             <span className="rk-dot" aria-hidden="true" />
-            Návrh webu zdarma
+            {badge}
           </span>
           <a href="#konzultace" onClick={toForm} className="btn btn-primary rk-cta">
-            Chci více poptávek
+            {ctaLabel}
             <ArrowRight size={9} />
           </a>
         </div>

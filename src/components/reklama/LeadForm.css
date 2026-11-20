@@ -356,3 +356,33 @@
     font-size: 16px;
   }
 }
+
+/* CTA jumps land below the fixed header, not under it */
+#konzultace {
+  scroll-margin-top: 88px;
+}
+#lf-q1,
+#lf-q2 {
+  scroll-margin-top: 110px;
+}
+.lf-send-error {
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 107, 107, 0.45);
+  border-radius: 2px;
+  background: rgba(255, 107, 107, 0.08);
+  line-height: 1.5;
+}
+/* iOS zooms into inputs below 16px: keep the phone prefix + inputs at 16px on phones */
+@media (max-width: 720px) {
+  .lf-prefix,
+  .lf-input,
+  .lf-phone-input {
+    font-size: 16px;
+  }
+}
+
+.lf-gdpr a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

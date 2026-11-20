@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { ArrowRight, ChevronDown, Logo } from './icons';
-import type { Locale } from '@/lib/i18n';
+import { LOCALES, LOCALE_LABEL, LOCALE_NAME, HREF_LANG, type Locale } from '@/lib/i18n';
 import { getDictionary } from '@/lib/dictionaries';
-import { homeAnchor, homeHref } from '@/lib/routes';
+import { blogHref, homeAnchor, homeHref, switchHref, type LocalePaths } from '@/lib/routes';
 import './Header.css';
 
 type NavKey = 'home' | 'projects' | 'services' | 'about' | 'blog';
@@ -22,11 +22,11 @@ const NAV: NavItem[] = [
 
 export default function Header({
   locale,
-  /** same page in the other locale — drives the language switcher */
-  altHref,
+  /** the same page in every locale — drives the language switcher */
+  alternates,
 }: {
   locale: Locale;
-  altHref: string;
+  alternates: LocalePaths;
 }) {
   const t = getDictionary(locale);
   const [scrolled, setScrolled]         = useState(false);
@@ -41,9 +41,27 @@ export default function Header({
   const isHome   = pathname === home;
   // On the homepage the nav scrolls to anchors; elsewhere it navigates home first.
   const nh = (item: NavItem) =>
-    item.key === 'blog' ? '#' : isHome ? item.hash : homeAnchor(locale, item.hash.slice(1));
+    item.key === 'blog' ? blogHref(locale) : isHome ? item.hash : homeAnchor(locale, item.hash.slice(1));
   const portfolioHref = isHome ? '#portfolio' : homeAnchor(locale, 'portfolio');
   const servicesLinkHref = isHome ? '#services' : homeAnchor(locale, 'services');
+
+  /* Language switcher: the two other locales. Each link carries an explicit
+     /{locale} prefix that middleware turns into that locale's own domain. */
+  const langLinks = (onClick: () => void) =>
+    LOCALES.filter((l) => l !== locale).map((l) => (
+      <a
+        key={l}
+        href={switchHref(l, alternates[l])}
+        className="lang"
+        hrefLang={HREF_LANG[l]}
+        lang={HREF_LANG[l]}
+        aria-label={LOCALE_NAME[l]}
+        title={LOCALE_NAME[l]}
+        onClick={onClick}
+      >
+        {LOCALE_LABEL[l]}
+      </a>
+    ));
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -120,15 +138,7 @@ export default function Header({
           {t.header.cta}
           <ArrowRight size={14} />
         </a>
-        <a
-          href={altHref}
-          className="lang lang-mobile"
-          hrefLang={locale === 'cs' ? 'en' : 'cs'}
-          aria-label={t.langSwitch.label}
-          onClick={() => setOpen(false)}
-        >
-          {t.langSwitch.to}
-        </a>
+        <span className="lang-group lang-mobile">{langLinks(() => setOpen(false))}</span>
       </div>
     </div>,
     document.body
@@ -169,16 +179,7 @@ export default function Header({
                 )}
               </ul>
             </nav>
-            <a
-              href={altHref}
-              className="lang"
-              hrefLang={locale === 'cs' ? 'en' : 'cs'}
-              aria-label={t.langSwitch.label}
-              title={t.langSwitch.toName}
-              onClick={() => setServicesOpen(false)}
-            >
-              {t.langSwitch.to}
-            </a>
+            <span className="lang-group">{langLinks(() => setServicesOpen(false))}</span>
             <a href={portfolioHref} className="btn btn-primary header-cta" onClick={() => setServicesOpen(false)}>
               {t.header.cta}
               <ArrowRight size={9} />

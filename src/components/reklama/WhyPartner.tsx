@@ -2,28 +2,18 @@
 import Image from 'next/image'
 import type { CSSProperties } from 'react'
 import { ArrowRight } from '../icons'
+import { rich } from '@/lib/rich'
+import type { WebCopy } from '@/lib/funnel/types'
 import './WhyPartner.css'
 
-const ITEMS = [
-  {
-    img: '/assets/reklama/why-1.jpg',
-    text: 'Postavíme pro vás funkční web podle vašich požadavků na moderních nástrojích a vlastních procesech, který vám ušetří čas i peníze.',
-  },
-  {
-    img: '/assets/reklama/why-2.jpg',
-    text: 'Pomohli jsme vytvořit web a kampaně pro Reality Expo, které nám už dva roky důvěřuje. Díky našim výstupům získali přes 30 vystavovatelů a tisíce registrací.',
-  },
-  {
-    img: '/assets/reklama/why-3.jpg',
-    text: 'Sledujeme trendy, testujeme nové technologické a marketingové řešení a proměňujeme je ve výsledky, které vám přivedou zákazníky.',
-  },
-  {
-    img: '/assets/reklama/why-4.jpg',
-    text: 'Budujeme dlouhodobá partnerství a provázíme vás i po spuštění webu. Od optimalizace až po reklamní kampaně a další rozvoj projektu.',
-  },
+const IMAGES = [
+  '/assets/reklama/why-1.jpg',
+  '/assets/reklama/why-2.jpg',
+  '/assets/reklama/why-3.jpg',
+  '/assets/reklama/why-4.jpg',
 ]
 
-export default function WhyPartner() {
+export default function WhyPartner({ c, cta }: { c: WebCopy['why']; cta: string }) {
   const toForm = (e: React.MouseEvent) => {
     e.preventDefault()
     document.getElementById('konzultace')?.scrollIntoView({ behavior: 'smooth' })
@@ -33,14 +23,14 @@ export default function WhyPartner() {
     <section className="wp">
       <div className="container">
         <div className="wp-head">
-          <span className="wp-eyebrow reveal">8 seniorních odborníků v týmu</span>
+          <span className="wp-eyebrow reveal">{c.eyebrow}</span>
           <h2 className="wp-heading reveal" style={{ '--d': '0.06s' } as CSSProperties}>
-            Proč spolupracovat <span className="accent">s námi?</span>
+            {rich(c.heading)}
           </h2>
         </div>
 
         <div className="wp-grid">
-          {ITEMS.map((it, i) => (
+          {IMAGES.map((img, i) => (
             <article
               className="wp-card reveal-scale"
               key={i}
@@ -48,7 +38,7 @@ export default function WhyPartner() {
             >
               <div className="wp-card-media">
                 <Image
-                  src={it.img}
+                  src={img}
                   alt=""
                   fill
                   sizes="(max-width: 760px) 100vw, 50vw"
@@ -57,14 +47,14 @@ export default function WhyPartner() {
                 />
                 <span className="wp-card-num">{String(i + 1).padStart(2, '0')}</span>
               </div>
-              <p className="wp-card-text">{it.text}</p>
+              <p className="wp-card-text">{c.items[i]}</p>
             </article>
           ))}
         </div>
 
         <div className="wp-cta reveal">
           <a href="#konzultace" onClick={toForm} className="btn btn-primary rk-btn">
-            Chci více poptávek
+            {cta}
             <ArrowRight size={10} />
           </a>
         </div>

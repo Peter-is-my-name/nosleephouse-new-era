@@ -13,19 +13,30 @@ import { Fragment, type ReactNode } from 'react'
 
 const TOKEN = /(\*\*[\s\S]+?\*\*|\[\[[\s\S]+?\]\])/g
 
+/**
+ * Czech/Slovak typography: a one-letter preposition or conjunction must not
+ * end a line ("s / námi"), and a number stays with its unit ("50 000 / Kč").
+ * Both are glued with a non-breaking space.
+ */
+export function tie(text: string): string {
+  return text
+    .replace(/(^|[\s(„])([ksvzouaiKSVZOUAI])\s+/g, '$1$2\u00A0')
+    .replace(/(\d)\s+(Kč|€|%|ks|min)(?=$|[\s.,;:!?)])/g, '$1\u00A0$2')
+}
+
 function renderLine(line: string, markClass: string): ReactNode[] {
   return line.split(TOKEN).map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) {
-      return <strong key={i}>{part.slice(2, -2)}</strong>
+      return <strong key={i}>{tie(part.slice(2, -2))}</strong>
     }
     if (part.startsWith('[[') && part.endsWith(']]')) {
       return (
         <span className={markClass} key={i}>
-          {part.slice(2, -2)}
+          {tie(part.slice(2, -2))}
         </span>
       )
     }
-    return <Fragment key={i}>{part}</Fragment>
+    return <Fragment key={i}>{tie(part)}</Fragment>
   })
 }
 

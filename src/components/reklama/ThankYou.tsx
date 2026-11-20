@@ -2,6 +2,8 @@
 import { useEffect } from 'react'
 import { Logo } from '../icons'
 import { fbqTrack } from '@/lib/metaPixel'
+import type { Locale } from '@/lib/i18n'
+import { FUNNEL_UI } from '@/lib/funnel/ui'
 import './ThankYou.css'
 
 const CALENDLY_URL =
@@ -34,7 +36,13 @@ function CalendlyEmbed() {
   )
 }
 
-export default function ThankYou() {
+/** backHref: the landing page this thank-you page belongs to (/reklama by default). */
+export default function ThankYou({
+  backHref = '/reklama',
+  locale = 'cs',
+  analysis = false,
+}: { backHref?: string; locale?: Locale; analysis?: boolean } = {}) {
+  const ui = FUNNEL_UI[locale].thanks
   // Fire the Lead conversion (Pixel + CAPI) once on arrival, reading the payload
   // the form stashed in sessionStorage just before redirecting here. Shared
   // event_id lets Meta deduplicate the browser + server events.
@@ -50,10 +58,15 @@ export default function ThankYou() {
         last_name?: string
         fbp?: string
         fbc?: string
+        content_category?: string
       }
       sessionStorage.removeItem('nsh_lead_event')
 
-      fbqTrack('Lead', {}, payload.event_id)
+      fbqTrack(
+        'Lead',
+        payload.content_category ? { content_category: payload.content_category } : {},
+        payload.event_id
+      )
 
       fetch('/api/meta-capi', {
         method: 'POST',
@@ -68,6 +81,7 @@ export default function ThankYou() {
           last_name: payload.last_name,
           fbp: payload.fbp,
           fbc: payload.fbc,
+          content_category: payload.content_category,
         }),
         keepalive: true,
       }).catch(() => {})
@@ -80,7 +94,7 @@ export default function ThankYou() {
     <div className="ty">
       <header className="ty-header">
         <div className="container ty-header-inner">
-          <a href="/reklama" aria-label="nosleephouse">
+          <a href={backHref} aria-label="nosleephouse">
             <Logo height={40} />
           </a>
         </div>
@@ -93,10 +107,10 @@ export default function ThankYou() {
           </svg>
         </div>
 
-        <h1 className="ty-heading">Rezervujte si svůj termín konzultace níže 👇</h1>
+        <p className="ty-received">{ui.received}</p>
+        <h1 className="ty-heading">{analysis ? ui.headingAnalysis : ui.heading}</h1>
         <p className="ty-sub">
-          Berte to vážně, jak je to jen možné. Každý den máme jen několik setkání a skutečně vám
-          chceme předat hodnotu, takže si vyberte termín, kdy máte 100&nbsp;% čas.
+          {ui.sub}
         </p>
 
         <div className="ty-calendly">
@@ -104,9 +118,9 @@ export default function ThankYou() {
         </div>
 
         <div className="ty-foot">
-          <p className="ty-noslot">Pokud termín nevyhovuje, ozveme se vám sami.</p>
-          <a href="/reklama" className="btn btn-outline ty-back">
-            ← Zpět na hlavní stránku
+          <p className="ty-noslot">{ui.noSlot}</p>
+          <a href={backHref} className="btn btn-outline ty-back">
+            {ui.back}
           </a>
         </div>
       </main>
